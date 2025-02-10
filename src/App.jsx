@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import portrait from '/portrait.jpg';
+import ProjectCard from './components/template_project';
 
 export default function App() {
   const [someState, setSomeState] = useState('');
@@ -23,18 +25,30 @@ export default function App() {
           <button>Linkedin</button>
         </div>
         <div className="top_right">
-          <img />
+          <img src={portrait} />
         </div>
       </div>
       <div className="projects">
         <h3>Projects</h3>
         <div className="projects_cards">
-          <div className="projects_card"></div>
-          <div className="projects_card"></div>
-          <div className="projects_card"></div>
-          <div className="projects_card"></div>
-          <div className="projects_card"></div>
-          <div className="projects_card"></div>
+          <div className="projects_card">
+            <ProjectCard />
+          </div>
+          <div className="projects_card">
+            <ProjectCard />
+          </div>
+          <div className="projects_card">
+            <ProjectCard />
+          </div>
+          <div className="projects_card">
+            <ProjectCard />
+          </div>
+          <div className="projects_card">
+            <ProjectCard />
+          </div>
+          <div className="projects_card">
+            <ProjectCard />
+          </div>
         </div>
       </div>
       <div className="bottom">
