@@ -1,32 +1,22 @@
 export default function ProjectCard() {
   return (
-    <div>
-      <h2>Social Media Platform</h2>
-      <p>
-        A full-stack web application with authentication, messaging, and content
-        management.
-      </p>
-      <h4>Features:</h4>
-      <ul>
-        <li>JWT-based authentication and user management</li>
-        <li>Profile pages with bios and images</li>
-        <li>Direct messaging and group chats</li>
-        <li>Posts with likes, comments, and notifications</li>
-      </ul>
-      <h4>Tech Stack:</h4>
-      <ul>
-        <li>Frontend: React, Styled-Components, Vite</li>
-        <li>
-          Backend: Node.js, Express, PostgreSQL, Prisma ORM, Passport, JWT
-        </li>
-      </ul>
-      <a
-        href="https://asseternity.github.io/messenger-frontend/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Live Demo
-      </a>
+    <div className="card_container">
+      <h2>Full-Stack Social Media Platform</h2>
+      <div className="card_inner">
+        <div className="card_para">
+          Overview: Full-stack app featuring JWT authentication, messaging, and
+          content management
+        </div>
+        <div className="card_para">
+          Key Features: User profiles, direct/group chats, posts with
+          likes/comments, and notifications
+        </div>
+        <div className="card_para">
+          Tech Stack: React, Styled-Components, Vite | Node.js, Express,
+          PostgreSQL, Prisma, Passport, JWT
+        </div>
+      </div>
+      <button>Access</button>
     </div>
   );
 }

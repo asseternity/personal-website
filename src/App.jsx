@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import portrait from '/portrait.jpg';
+import logo_gh from '/github-svgrepo-com.svg';
+import logo_li from '/linkedin-svgrepo-com.svg';
 import ProjectCard from './components/template_project';
 
 export default function App() {
@@ -21,8 +23,12 @@ export default function App() {
             analytical, project management, and problem-solving skills to
             full-stack development.
           </p>
-          <button>Github</button>
-          <button>Linkedin</button>
+          <button>
+            <img src={logo_gh} />
+          </button>
+          <button>
+            <img src={logo_li} />
+          </button>
         </div>
         <div className="top_right">
           <img src={portrait} />
@@ -55,8 +61,12 @@ export default function App() {
         <h3>Get in touch</h3>
         <p>email</p>
         <p>location</p>
-        <button>Github</button>
-        <button>Linkedin</button>
+        <button>
+          <img src={logo_gh} />
+        </button>
+        <button>
+          <img src={logo_li} />
+        </button>
       </div>
     </div>
   );
