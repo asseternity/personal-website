@@ -2,7 +2,10 @@ import { useState } from 'react';
 import portrait from '/portrait.jpg';
 import logo_gh from '/github-svgrepo-com.svg';
 import logo_li from '/linkedin-svgrepo-com.svg';
-import ProjectCard from './components/template_project';
+import Project1 from './components/project1';
+import Project2 from './components/project2';
+import Project3 from './components/project3';
+import Project4 from './components/project4';
 
 export default function App() {
   const [someState, setSomeState] = useState('');
@@ -18,9 +21,9 @@ export default function App() {
             ORM). IELTS 8.5.
           </p>
           <p>
-            After a successful 7+ year career as a Senior Legal Associate at a
-            top 10 global law firm, I transitioned into tech, applying my
-            analytical, project management, and problem-solving skills to
+            After 7+ years as a Senior Legal Associate at a top 10 global law
+            firm, I transitioned into tech, bringing my analytical mindset,
+            problem-solving ability, and project management experience to
             full-stack development.
           </p>
           <button>
@@ -38,29 +41,23 @@ export default function App() {
         <h3>Projects</h3>
         <div className="projects_cards">
           <div className="projects_card">
-            <ProjectCard />
+            <Project1 />
           </div>
           <div className="projects_card">
-            <ProjectCard />
+            <Project2 />
           </div>
           <div className="projects_card">
-            <ProjectCard />
+            <Project3 />
           </div>
           <div className="projects_card">
-            <ProjectCard />
-          </div>
-          <div className="projects_card">
-            <ProjectCard />
-          </div>
-          <div className="projects_card">
-            <ProjectCard />
+            <Project4 />
           </div>
         </div>
       </div>
       <div className="bottom">
-        <h3>Get in touch</h3>
-        <p>email</p>
-        <p>location</p>
+        <h3>Let’s Connect</h3>
+        <p>nakupovasset@gmail.com</p>
+        <p>Tbilisi, Georgia</p>
         <button>
           <img src={logo_gh} />
         </button>

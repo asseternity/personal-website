@@ -1,4 +1,4 @@
-export default function ProjectCard() {
+export default function ProjectCard1() {
   return (
     <div className="card_container">
       <h2>Full-Stack Social Media Platform</h2>
@@ -16,7 +16,7 @@ export default function ProjectCard() {
           PostgreSQL, Prisma, Passport, JWT
         </div>
       </div>
-      <button>Access</button>
+      <button>Live Demo</button>
     </div>
   );
 }
