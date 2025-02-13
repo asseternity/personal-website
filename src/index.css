@@ -11,6 +11,7 @@ body {
   width: 80%;
   max-width: 900px;
   margin: auto;
+  position: relative;
 }
 
 /* Top Section */
@@ -37,6 +38,8 @@ body {
 .top_left p {
   font-size: 1rem;
   line-height: 1.6;
+  text-align: justify;
+  margin-right: 20px;
 }
 
 .top_right img {
@@ -96,6 +99,7 @@ button img {
 
 /* Cards inside */
 .card_para {
+  text-align: justify;
   padding-bottom: 10px;
   border-bottom: 1px solid lightgray;
 }

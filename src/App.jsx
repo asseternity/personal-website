@@ -8,9 +8,74 @@ import Project3 from './components/project3';
 import Project4 from './components/project4';
 
 export default function App() {
-  const [someState, setSomeState] = useState('');
+  const [flameDivs, setFlameDivs] = useState([]);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleMouseDown = (event) => {
+    setIsDragging(true);
+    // Optionally, record the starting position
+    addFlame(event);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (event) => {
+    if (isDragging) {
+      addFlame(event);
+    }
+  };
+
+  const addFlame = (e) => {
+    const div = e.target;
+    // get the bounding box of the map
+    const rect = div.getBoundingClientRect();
+    // calculate coords
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const newFlame = (
+      <div
+        key={Date.now()}
+        className="flame"
+        style={{
+          position: 'absolute',
+          left: `${x}px`,
+          top: `${y}px`,
+          height: '2px',
+          width: '2px',
+          backgroundColor: 'red',
+          borderRadius: '50%',
+          pointerEvents: 'none',
+        }}
+      />
+    );
+
+    setFlameDivs((prevFlames) => [...prevFlames, newFlame]);
+  };
   return (
-    <div className="root">
+    <div
+      className="root"
+      onMouseDownCapture={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMove}
+    >
+      <div
+        className="parent_flames"
+        style={{
+          position: 'fixed', // Keeps the div fixed on the screen
+          top: 0,
+          left: 0,
+          width: '100vw', // Full viewport width
+          height: '100vh', // Full viewport height
+          zIndex: 9999, // Keeps it on top
+          background: 'transparent', // Invisible background
+          pointerEvents: 'auto', // Makes it clickable
+        }}
+      >
+        {flameDivs}
+      </div>
       <div className="top">
         <div className="top_left">
           <h1>Hi, I'm Asset</h1>
