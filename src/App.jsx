@@ -40,14 +40,8 @@ export default function App() {
         key={Date.now()}
         className="flame"
         style={{
-          position: 'absolute',
           left: `${x}px`,
           top: `${y}px`,
-          height: '2px',
-          width: '2px',
-          backgroundColor: 'red',
-          borderRadius: '50%',
-          pointerEvents: 'none',
         }}
       />
     );
@@ -55,27 +49,7 @@ export default function App() {
     setFlameDivs((prevFlames) => [...prevFlames, newFlame]);
   };
   return (
-    <div
-      className="root"
-      onMouseDownCapture={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseMove={handleMouseMove}
-    >
-      <div
-        className="parent_flames"
-        style={{
-          position: 'fixed', // Keeps the div fixed on the screen
-          top: 0,
-          left: 0,
-          width: '100vw', // Full viewport width
-          height: '100vh', // Full viewport height
-          zIndex: 9999, // Keeps it on top
-          background: 'transparent', // Invisible background
-          pointerEvents: 'auto', // Makes it clickable
-        }}
-      >
-        {flameDivs}
-      </div>
+    <div className="root">
       <div className="top">
         <div className="top_left">
           <h1>Hi, I'm Asset</h1>
@@ -98,8 +72,19 @@ export default function App() {
             <img src={logo_li} />
           </button>
         </div>
-        <div className="top_right">
-          <img src={portrait} />
+        <div
+          className="top_right"
+          onMouseDownCapture={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+          draggable="false"
+        >
+          <img
+            src={portrait}
+            draggable="false" // Extra protection against dragging
+            onContextMenu={(e) => e.preventDefault()} // Prevents long-press context menu on iOS
+          />
+          {flameDivs}
         </div>
       </div>
       <div className="projects">

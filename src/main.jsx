@@ -9,8 +9,11 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>
 );
 
-// [_] project templates
-// [_] layout
-// [_] projects
-// [_] favicon
+// [v] project templates
+// [v] layout
+// [v] projects
+// [_] drawing blocks buttons
 // [_] interactivity - some WHOA moving thing
+// [_] idea - buttons on top that switch design style to medieval / sci fi / corporate / clean etc
+// [_] better idea - on a transparent BG div that's fixed to the top of the screen make an autorunning platformer game that signifies my journey!
+// [_] favicon
