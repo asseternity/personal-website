@@ -6,26 +6,10 @@ import Project1 from './components/project1';
 import Project2 from './components/project2';
 import Project3 from './components/project3';
 import Project4 from './components/project4';
+import PhaserGame from './components/phaser';
 
 export default function App() {
   const [flameDivs, setFlameDivs] = useState([]);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const handleMouseDown = (event) => {
-    setIsDragging(true);
-    // Optionally, record the starting position
-    addFlame(event);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseMove = (event) => {
-    if (isDragging) {
-      addFlame(event);
-    }
-  };
 
   const addFlame = (e) => {
     const div = e.target;
@@ -50,6 +34,7 @@ export default function App() {
   };
   return (
     <div className="root">
+      <PhaserGame />
       <div className="top">
         <div className="top_left">
           <h1>Hi, I'm Asset</h1>
@@ -72,13 +57,7 @@ export default function App() {
             <img src={logo_li} />
           </button>
         </div>
-        <div
-          className="top_right"
-          onMouseDownCapture={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseMove={handleMouseMove}
-          draggable="false"
-        >
+        <div className="top_right" onClickCapture={addFlame} draggable="false">
           <img
             src={portrait}
             draggable="false" // Extra protection against dragging
