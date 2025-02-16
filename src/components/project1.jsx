@@ -16,7 +16,13 @@ export default function ProjectCard1() {
           PostgreSQL, Prisma, Passport, JWT
         </div>
       </div>
-      <button>Live Demo</button>
+      <a
+        href="https://asseternity.github.io/messenger-frontend/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button>Live Demo</button>
+      </a>
     </div>
   );
 }

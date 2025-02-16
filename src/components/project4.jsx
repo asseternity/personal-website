@@ -17,7 +17,13 @@ export default function ProjectCard4() {
           Express, PostgreSQL, Prisma, Passport, JWT, Bcrypt (Backend)
         </div>
       </div>
-      <button>Live Demo</button>
+      <a
+        href="https://asseternity.github.io/tagging-game/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button>Live Demo</button>
+      </a>
     </div>
   );
 }

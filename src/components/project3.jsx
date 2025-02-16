@@ -14,7 +14,13 @@ export default function ProjectCard3() {
         </div>
         <div className="card_para">Tech Stack: HTML, CSS, JavaScript</div>
       </div>
-      <button>Live Demo</button>
+      <a
+        href="https://asseternity.github.io/browser-text-rpg-wp/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button>Live Demo</button>
+      </a>
     </div>
   );
 }

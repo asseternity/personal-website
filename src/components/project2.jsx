@@ -16,7 +16,13 @@ export default function ProjectCard2() {
           PostgreSQL, Prisma, Passport
         </div>
       </div>
-      <button>Live Demo</button>
+      <a
+        href="https://asseternity.github.io/c5-personal-react/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button>Live Demo</button>
+      </a>
     </div>
   );
 }

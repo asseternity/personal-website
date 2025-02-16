@@ -13,8 +13,9 @@ createRoot(document.getElementById('root')).render(
 // [v] layout
 // [v] projects
 // [v] drawing blocks buttons
-// [_] drawing on image drags the image
-// [_] interactivity - some WHOA moving thing
-// [_] idea - buttons on top that switch design style to medieval / sci fi / corporate / clean etc
-// [_] better idea - on a transparent BG div that's fixed to the top of the screen make an autorunning platformer game that signifies my journey!
+// [v] drawing on image drags the image
+// [v] interactivity - some WHOA moving thing
+// [v] idea - on a transparent BG div that's fixed to the top of the screen make an autorunning platformer game that signifies my journey!
+// [v] rig the buttons
+// [_] make the platformer
 // [_] favicon

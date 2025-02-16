@@ -50,12 +50,24 @@ export default function App() {
             problem-solving ability, and project management experience to
             full-stack development.
           </p>
-          <button>
-            <img src={logo_gh} />
-          </button>
-          <button>
-            <img src={logo_li} />
-          </button>
+          <a
+            href="https://github.com/asseternity"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button>
+              <img src={logo_gh} />
+            </button>
+          </a>
+          <a
+            href="http://linkedin.com/in/asset-nakupov-b705bab7"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button>
+              <img src={logo_li} />
+            </button>
+          </a>
         </div>
         <div className="top_right" onClickCapture={addFlame} draggable="false">
           <img
@@ -87,12 +99,24 @@ export default function App() {
         <h3>Let’s Connect</h3>
         <p>nakupovasset@gmail.com</p>
         <p>Tbilisi, Georgia</p>
-        <button>
-          <img src={logo_gh} />
-        </button>
-        <button>
-          <img src={logo_li} />
-        </button>
+        <a
+          href="https://github.com/asseternity"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button>
+            <img src={logo_gh} />
+          </button>
+        </a>
+        <a
+          href="http://linkedin.com/in/asset-nakupov-b705bab7"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button>
+            <img src={logo_li} />
+          </button>
+        </a>
       </div>
     </div>
   );
