@@ -17,5 +17,5 @@ createRoot(document.getElementById('root')).render(
 // [v] interactivity - some WHOA moving thing
 // [v] idea - on a transparent BG div that's fixed to the top of the screen make an autorunning platformer game that signifies my journey!
 // [v] rig the buttons
+// [v] favicon
 // [_] make the platformer
-// [_] favicon
