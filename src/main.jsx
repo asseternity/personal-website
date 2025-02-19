@@ -18,4 +18,12 @@ createRoot(document.getElementById('root')).render(
 // [v] idea - on a transparent BG div that's fixed to the top of the screen make an autorunning platformer game that signifies my journey!
 // [v] rig the buttons
 // [v] favicon
-// [_] make the platformer
+// [v] make the platformer
+// [v] favicon to be the player character in the game!
+// [v] start game button, no auto start
+// [v] score text grey and centered
+// [_] bug: random fails
+// [_] responsive - make sure that it works on mobile
+// [_] not annoying fail screen, restart button
+// [_] score not updating for obstacle 1
+// [_] slightly faster obstacles, cloud size variation, smaller player model

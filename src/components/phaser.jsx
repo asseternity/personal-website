@@ -1,10 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Phaser from 'phaser';
 import bird from '/bird.png';
 import cloud from '/cloud.png';
 
 export default function PhaserGame() {
   const gameContainerRef = useRef(null);
+  const [gameStarted, setGameStarted] = useState(false);
+  // A ref to allow the Phaser scene to check the game start state
+  const gameStartedRef = useRef(false);
 
   let player;
   let score;
@@ -12,18 +15,24 @@ export default function PhaserGame() {
   let obstaclesQueue = [];
   let pastObstacles = [];
 
+  // Called when the start button is clicked.
+  const handleStart = () => {
+    gameStartedRef.current = true;
+    setGameStarted(true);
+  };
+
   useEffect(() => {
     const config = {
       type: Phaser.AUTO,
       scale: {
-        mode: Phaser.Scale.RESIZE, // The canvas will automatically resize to fill its container
+        mode: Phaser.Scale.RESIZE, // Automatically resize to fill container
         parent: gameContainerRef.current,
         autoCenter: Phaser.Scale.CENTER_BOTH,
       },
       render: {
-        transparent: true, // Ensures the canvas background is transparent
+        transparent: true, // Transparent canvas background
       },
-      backgroundColor: 'transparent', // Also set the background color to transparent
+      backgroundColor: 'transparent',
       physics: {
         default: 'arcade',
         arcade: {
@@ -47,42 +56,47 @@ export default function PhaserGame() {
     }
 
     function create() {
-      // Use the actual canvas dimensions instead of hardcoding 300x300
       const width = this.scale.width;
       const height = this.scale.height;
-      // Set the physics world bounds to match the current canvas size
+      // Set the physics world bounds to match the canvas size
       this.physics.world.setBounds(0, 0, width, height);
 
-      player = this.physics.add.image(50, 50, 'bird').setScale(0.6, 0.6);
+      player = this.physics.add.image(50, 50, 'bird').setScale(0.65);
       player.setCollideWorldBounds(true);
 
-      score = this.add.text(20, 20, `Score: 0`, {
+      // Center the score text at the top and set a soft grey color
+      score = this.add.text(width / 2, 20, 'Score: 0', {
         fontFamily: 'Arial',
-        fontSize: 24,
-        color: '#ffffff',
+        fontSize: '24px',
+        color: '#cccccc',
       });
-      // controls
+      score.setOrigin(0.5, 0);
+
+      // Set up controls
       this.cursors = this.input.keyboard.createCursorKeys();
       this.wKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
       this.sKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     }
 
     function update() {
-      // controls
+      // Only update game logic after the start button is pressed
+      if (!gameStartedRef.current) return;
+
+      // Handle player controls
       if (this.wKey.isDown) {
         player.setVelocityY(-230);
-      }
-      if (this.sKey.isDown) {
+      } else if (this.sKey.isDown) {
         player.setVelocityY(230);
       }
-      // spawn obstacles
-      if (framesSinceLastObstacle == 180) {
+      // Spawn obstacles (clouds) every 180 frames
+      if (framesSinceLastObstacle === 180) {
         obstaclesQueue.push(addObstacle(this));
         framesSinceLastObstacle = 0;
       } else {
         framesSinceLastObstacle += 1;
       }
-      // update text
+
+      // Update score text when passing an obstacle
       if (obstaclesQueue.length !== 0) {
         if (player.x >= obstaclesQueue[0].x) {
           score.setText('Score: ' + pastObstacles.length);
@@ -97,18 +111,21 @@ export default function PhaserGame() {
     };
   }, []);
 
+  // Function to add a new obstacle (cloud)
   const addObstacle = (scene) => {
     // Spawn the cloud just off the right edge of the canvas
     const x = scene.scale.width + 50;
-    // Random y position within the canvas height, adjusting for margins if needed
+    // Random y position within the canvas height (with some margin)
     const y = Phaser.Math.Between(20, scene.scale.height - 20);
-    let obstacle = scene.physics.add.sprite(x, y, 'cloud');
+    let obstacle = scene.physics.add
+      .sprite(x, y, 'cloud')
+      .setScale(Phaser.Math.Between(0.5, 1.8));
     obstacle.body.setImmovable(true);
-    // Adjust the hitbox size (e.g., 80% of the sprite's width and height)
-    const newWidth = obstacle.width * 0.8;
-    const newHeight = obstacle.height * 0.8;
+    // Adjust the hitbox (e.g., 80% of the sprite's dimensions)
+    const newWidth = obstacle.width * 0.5;
+    const newHeight = obstacle.height * 0.5;
     obstacle.body.setSize(newWidth, newHeight);
-    obstacle.setVelocityX(-300);
+    obstacle.setVelocityX(-400);
     scene.physics.add.collider(player, obstacle, () => {
       alert('Game Over!');
       location.reload(true);
@@ -124,11 +141,29 @@ export default function PhaserGame() {
         left: '0',
         top: '0',
         width: '100vw', // Full viewport width
-        height: '200px', // Fixed height of 200px
+        height: '200px', // Fixed height
         zIndex: 9999,
-        background: 'transparent', // Transparent container background
-        pointerEvents: 'none',
+        background: 'transparent',
       }}
-    />
+    >
+      {/* Render the start button only if the game hasn't started */}
+      {!gameStarted && (
+        <button
+          onClick={handleStart}
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 10000,
+            padding: '10px 20px',
+            fontSize: '16px',
+            cursor: 'pointer',
+          }}
+        >
+          Start Game
+        </button>
+      )}
+    </div>
   );
 }
