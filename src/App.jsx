@@ -9,29 +9,6 @@ import Project4 from './components/project4';
 import PhaserGame from './components/phaser';
 
 export default function App() {
-  const [flameDivs, setFlameDivs] = useState([]);
-
-  const addFlame = (e) => {
-    const div = e.target;
-    // get the bounding box of the map
-    const rect = div.getBoundingClientRect();
-    // calculate coords
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const newFlame = (
-      <div
-        key={Date.now()}
-        className="flame"
-        style={{
-          left: `${x}px`,
-          top: `${y}px`,
-        }}
-      />
-    );
-
-    setFlameDivs((prevFlames) => [...prevFlames, newFlame]);
-  };
   return (
     <div className="root">
       <PhaserGame />
@@ -69,13 +46,8 @@ export default function App() {
             </button>
           </a>
         </div>
-        <div className="top_right" onClickCapture={addFlame} draggable="false">
-          <img
-            src={portrait}
-            draggable="false" // Extra protection against dragging
-            onContextMenu={(e) => e.preventDefault()} // Prevents long-press context menu on iOS
-          />
-          {flameDivs}
+        <div className="top_right">
+          <img src={portrait} />
         </div>
       </div>
       <div className="projects">

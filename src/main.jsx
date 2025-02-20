@@ -22,8 +22,9 @@ createRoot(document.getElementById('root')).render(
 // [v] favicon to be the player character in the game!
 // [v] start game button, no auto start
 // [v] score text grey and centered
-// [_] bug: random fails
-// [_] responsive - make sure that it works on mobile
+// [v] slightly faster obstacles, cloud size variation, smaller player model
+// [v] responsive - make sure that it works on mobile
+// [v] bug: invisible clouds
+// [v] score not updating for obstacle 1
 // [_] not annoying fail screen, restart button
-// [_] score not updating for obstacle 1
-// [_] slightly faster obstacles, cloud size variation, smaller player model
+// [_] tool tips
