@@ -153,6 +153,7 @@ button img {
 /* Responsive Design */
 @media (max-width: 768px) {
   .top {
+    margin-top: 200px;
     flex-direction: column-reverse; /* This moves the image ABOVE the text */
     text-align: center;
   }
