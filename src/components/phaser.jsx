@@ -85,7 +85,9 @@ export default function PhaserGame() {
       // Add mobile (pointer/touch) controls:
       this.input.on('pointerdown', (pointer) => {
         if (!gameStartedRef.current) return;
-        if (pointer.y < player.y) {
+        // Use clientY which is viewport-relative rather than pointer.y (page-relative)
+        const pointerY = pointer.event.clientY;
+        if (pointerY < player.y) {
           player.setVelocityY(-230);
         } else {
           player.setVelocityY(230);

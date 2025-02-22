@@ -26,5 +26,7 @@ createRoot(document.getElementById('root')).render(
 // [v] responsive - make sure that it works on mobile
 // [v] bug: invisible clouds
 // [v] score not updating for obstacle 1
-// [_] not annoying fail screen, restart button
+// [v] not annoying fail screen, restart button
+// [v] bug: if you scroll down, touch controls no longer work
+// [_] bug: drop score to 0 on restart
 // [_] tool tips
