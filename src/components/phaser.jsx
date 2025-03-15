@@ -32,7 +32,7 @@ export default function PhaserGame() {
   };
 
   useEffect(() => {
-    // Use a flag to ensure tooltips are only shown on the very first game start (after the start button is pressed)
+    // This flag ensures that tooltips (and score fade in) run only on the very first game start.
     let firstGameStart = true;
 
     const config = {
@@ -77,13 +77,17 @@ export default function PhaserGame() {
       player = this.physics.add.image(50, 50, 'bird').setScale(0.65);
       player.setCollideWorldBounds(true);
 
-      // Create score text
+      // Create score text.
+      // On the very first game load, we start with the score hidden.
       score = this.add.text(width / 2, 20, 'Score: 0', {
         fontFamily: 'Arial',
         fontSize: '16px',
         color: '#cccccc',
       });
       score.setOrigin(0.5, 0);
+      if (firstGameStart) {
+        score.setAlpha(0);
+      }
 
       // Set up keyboard controls
       this.cursors = this.input.keyboard.createCursorKeys();
@@ -93,7 +97,7 @@ export default function PhaserGame() {
       // Store the scene reference for restarts
       phaserSceneRef.current = this;
 
-      // Only on the very first start (after pressing start) create tooltips.
+      // Only on the very first start, create stylish tooltips next to the bird.
       if (firstGameStart && gameStartedRef.current) {
         const tooltipStyle = {
           fontFamily: 'Arial',
@@ -120,7 +124,7 @@ export default function PhaserGame() {
         );
         tooltip2.setOrigin(0, 0.5);
 
-        // Animate the tooltips: float upward and fade out after 4 seconds
+        // Animate the tooltips: float upward and fade out after 4 seconds.
         this.tweens.add({
           targets: [tooltip1, tooltip2],
           alpha: 0,
@@ -131,16 +135,22 @@ export default function PhaserGame() {
           onComplete: () => {
             tooltip1.destroy();
             tooltip2.destroy();
+            // Fade in the score text after the tooltips fade out.
+            this.tweens.add({
+              targets: score,
+              alpha: 1,
+              duration: 1000,
+              ease: 'Linear',
+            });
           },
         });
 
         firstGameStart = false;
       }
 
-      // Add mobile (pointer/touch) controls:
+      // Add mobile (pointer/touch) controls using pointer.y for proper canvas coordinates.
       this.input.on('pointerdown', (pointer) => {
         if (!gameStartedRef.current) return;
-        // Use pointer.y which is in the game canvas coordinate system
         if (pointer.y < player.y) {
           player.setVelocityY(-230);
         } else {

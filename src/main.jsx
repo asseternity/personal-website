@@ -30,4 +30,4 @@ createRoot(document.getElementById('root')).render(
 // [v] bug: if you scroll down, touch controls no longer work
 // [v] bug: drop score to 0 on restart
 // [v] tool tips
-// [_] bug: bird doesn't move at all on mobile
+// [v] bug: bird doesn't move at all on mobile
