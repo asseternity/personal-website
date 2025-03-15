@@ -4,10 +4,11 @@ import bird from '/bird.png';
 import cloud from '/cloud.png';
 
 export default function PhaserGame() {
-  const gameContainerRef = useRef(null);
   const [gameStarted, setGameStarted] = useState(false);
-  const [finalScore, setFinalScore] = useState(0); // new state to hold final score
+  const [finalScore, setFinalScore] = useState(0);
+  const gameContainerRef = useRef(null);
   const gameStartedRef = useRef(false);
+  const phaserSceneRef = useRef(null);
 
   // Persistent game variables
   let scoreValue = 0;
@@ -18,7 +19,10 @@ export default function PhaserGame() {
 
   // Called when the start/restart button is clicked.
   const handleStart = () => {
-    // Reset game state variables
+    if (phaserSceneRef.current) {
+      // Restart the scene if it's already been initialized
+      phaserSceneRef.current.scene.restart();
+    }
     scoreValue = 0;
     framesSinceLastObstacle = 0;
     obstaclesQueue = [];
@@ -28,6 +32,9 @@ export default function PhaserGame() {
   };
 
   useEffect(() => {
+    // Use a flag to ensure tooltips are only shown on the very first game start (after the start button is pressed)
+    let firstGameStart = true;
+
     const config = {
       type: Phaser.AUTO,
       scale: {
@@ -66,6 +73,7 @@ export default function PhaserGame() {
       const height = this.scale.height;
       this.physics.world.setBounds(0, 0, width, height);
 
+      // Create the player (bird)
       player = this.physics.add.image(50, 50, 'bird').setScale(0.65);
       player.setCollideWorldBounds(true);
 
@@ -82,10 +90,57 @@ export default function PhaserGame() {
       this.wKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
       this.sKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 
+      // Store the scene reference for restarts
+      phaserSceneRef.current = this;
+
+      // Only on the very first start (after pressing start) create tooltips.
+      if (firstGameStart && gameStartedRef.current) {
+        const tooltipStyle = {
+          fontFamily: 'Arial',
+          fontSize: '12px',
+          fontStyle: 'italic',
+          color: '#ffffff',
+          stroke: '#000000',
+          strokeThickness: 2,
+        };
+
+        // Position tooltips near the bird (offset to the right)
+        const tooltip1 = this.add.text(
+          player.x + 60,
+          player.y - 20,
+          'Press W/S to fly up/down',
+          tooltipStyle
+        );
+        tooltip1.setOrigin(0, 0.5);
+        const tooltip2 = this.add.text(
+          player.x + 60,
+          player.y + 5,
+          'Tap above or below the bird to glide',
+          tooltipStyle
+        );
+        tooltip2.setOrigin(0, 0.5);
+
+        // Animate the tooltips: float upward and fade out after 4 seconds
+        this.tweens.add({
+          targets: [tooltip1, tooltip2],
+          alpha: 0,
+          y: '-=10',
+          ease: 'Cubic.easeOut',
+          delay: 4000,
+          duration: 1000,
+          onComplete: () => {
+            tooltip1.destroy();
+            tooltip2.destroy();
+          },
+        });
+
+        firstGameStart = false;
+      }
+
       // Add mobile (pointer/touch) controls:
       this.input.on('pointerdown', (pointer) => {
         if (!gameStartedRef.current) return;
-        // Use clientY which is viewport-relative rather than pointer.y (page-relative)
+        // Use clientY (viewport-relative) rather than pointer.y (page-relative)
         const pointerY = pointer.event.clientY;
         if (pointerY < player.y) {
           player.setVelocityY(-230);
@@ -131,33 +186,32 @@ export default function PhaserGame() {
       }
     }
 
+    // Function to add a new obstacle (cloud)
+    function addObstacle(scene) {
+      const x = scene.scale.width + 50;
+      const y = Phaser.Math.Between(20, scene.scale.height - 20);
+      let obstacle = scene.physics.add
+        .sprite(x, y, 'cloud')
+        .setScale(Phaser.Math.FloatBetween(0.5, 1.8));
+      obstacle.body.setImmovable(true);
+      const newWidth = obstacle.width * 0.5;
+      const newHeight = obstacle.height * 0.5;
+      obstacle.body.setSize(newWidth, newHeight);
+      obstacle.setVelocityX(-400);
+      scene.physics.add.collider(player, obstacle, () => {
+        // On collision (game over), update the final score and toggle the game state.
+        setFinalScore(scoreValue);
+        gameStartedRef.current = false;
+        setGameStarted(false);
+      });
+      return obstacle;
+    }
+
     // Clean up the Phaser game when the component unmounts
     return () => {
       game.destroy(true);
     };
   }, []);
-
-  // Function to add a new obstacle (cloud)
-  const addObstacle = (scene) => {
-    const x = scene.scale.width + 50;
-    const y = Phaser.Math.Between(20, scene.scale.height - 20);
-    // Use FloatBetween for a floating-point scale
-    let obstacle = scene.physics.add
-      .sprite(x, y, 'cloud')
-      .setScale(Phaser.Math.FloatBetween(0.5, 1.8));
-    obstacle.body.setImmovable(true);
-    const newWidth = obstacle.width * 0.5;
-    const newHeight = obstacle.height * 0.5;
-    obstacle.body.setSize(newWidth, newHeight);
-    obstacle.setVelocityX(-400);
-    scene.physics.add.collider(player, obstacle, () => {
-      // On collision (game over), update the final score and toggle the game state.
-      setFinalScore(scoreValue);
-      gameStartedRef.current = false;
-      setGameStarted(false);
-    });
-    return obstacle;
-  };
 
   return (
     <div
@@ -166,8 +220,8 @@ export default function PhaserGame() {
         position: 'fixed',
         left: '0',
         top: '0',
-        width: '100vw', // Full viewport width
-        height: '200px', // Fixed height
+        width: '100vw',
+        height: '200px',
         zIndex: 9999,
         background: 'transparent',
       }}

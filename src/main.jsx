@@ -28,5 +28,6 @@ createRoot(document.getElementById('root')).render(
 // [v] score not updating for obstacle 1
 // [v] not annoying fail screen, restart button
 // [v] bug: if you scroll down, touch controls no longer work
-// [_] bug: drop score to 0 on restart
-// [_] tool tips
+// [v] bug: drop score to 0 on restart
+// [v] tool tips
+// [_] bug: bird doesn't move at all on mobile
