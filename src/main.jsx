@@ -31,3 +31,7 @@ createRoot(document.getElementById('root')).render(
 // [v] bug: drop score to 0 on restart
 // [v] tool tips
 // [v] bug: bird doesn't move at all on mobile
+// [_] tagline
+// [_] timeline graphic
+// [_] tech stack section with icons
+// [_] high scores with backend for the game!

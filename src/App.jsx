@@ -7,11 +7,22 @@ import Project2 from './components/project2';
 import Project3 from './components/project3';
 import Project4 from './components/project4';
 import PhaserGame from './components/phaser';
+import Timeline from './components/timeline';
+import TechStack from './components/tech_stack';
+import { Time } from 'phaser';
 
 export default function App() {
   return (
     <div className="root">
       <PhaserGame />
+      <div className="tagline">
+        <h1 className="tagline_header">Asset Nakupov</h1>
+        <h3 className="tagline_title coding_text">Full-stack developer</h3>
+        <h3 className="tagline_title legal_text">
+          Former Senior Associate at a Top 10 Global Law Firm
+        </h3>
+        <p className="tagline_hint">Scroll down</p>
+      </div>
       <div className="top">
         <div className="top_left">
           <h1>Hi, I'm Asset</h1>
@@ -50,6 +61,8 @@ export default function App() {
           <img src={portrait} />
         </div>
       </div>
+      <TechStack />
+      <Timeline />
       <div className="projects">
         <h3>Projects</h3>
         <div className="projects_cards">
@@ -69,7 +82,7 @@ export default function App() {
       </div>
       <div className="bottom">
         <h3>Let’s Connect</h3>
-        <p>nakupovasset@gmail.com</p>
+        <p>nakupovasset@protonmail.com</p>
         <p>Tbilisi, Georgia</p>
         <a
           href="https://github.com/asseternity"

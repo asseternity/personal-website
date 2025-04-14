@@ -1,3 +1,18 @@
+/* Fonts */
+@font-face {
+  font-family: 'Legal';
+  src: url('/MarckScript-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Coding';
+  src: url('/FiraCode-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 /* General Styles */
 body {
   background-color: #0d0d0d;
@@ -11,6 +26,42 @@ body {
   width: 80%;
   max-width: 900px;
   margin: auto;
+}
+
+.legal_text {
+  font-family: 'Legal';
+  font-size: 160%;
+  color: #c1defb;
+}
+
+.coding_text {
+  font-family: 'Coding';
+  font-size: 180%;
+  color: #71cc74;
+}
+
+/* Tagline */
+.tagline {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.tagline_header {
+  font-size: 300%;
+}
+
+.tagline_title {
+  margin: 0;
+  max-width: 400px;
+}
+
+.tagline_hint {
+  margin-top: 100px;
+  color: #888888;
 }
 
 /* Top Section */
@@ -54,6 +105,23 @@ body {
   pointer-events: none; /* Makes it non-clickable */
   user-select: none; /* Prevents copying */
   -webkit-user-drag: none; /* Stops dragging on Safari */
+}
+
+/* Tech Stack Cards */
+.tech_stack_card {
+  height: 50px;
+  width: 100px;
+  border: 2px solid white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.tech_stack_card img {
+  max-height: 40px;
+  max-width: 40px;
 }
 
 /* Buttons */
