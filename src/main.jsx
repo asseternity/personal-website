@@ -31,7 +31,13 @@ createRoot(document.getElementById('root')).render(
 // [v] bug: drop score to 0 on restart
 // [v] tool tips
 // [v] bug: bird doesn't move at all on mobile
-// [_] tagline
-// [_] timeline graphic
-// [_] tech stack section with icons
+// [v] tagline
+// [v] timeline graphic
+// [v] tech stack section with icons
+// [_] top 10 -> top 5 EVERYWHERE, like EVERYWHERE!!!
+// [_] timeline: in transition, write: 'after a successful 7+ year career in law, did this and that in order to create'
+// [_] start timeline at the end
+// [_] add to the tagline, above the hint: "passionate to create and learn" blah blah to hook in
+// [_] move unity to the next row
+// [_] have the clouds spawn by default before game starts, but not kill the bird for visual interest
 // [_] high scores with backend for the game!

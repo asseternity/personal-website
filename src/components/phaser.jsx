@@ -4,6 +4,7 @@ import bird from '/bird.png';
 import cloud from '/cloud.png';
 
 export default function PhaserGame() {
+  const [gameHidden, setGameHidden] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
   const gameContainerRef = useRef(null);
@@ -223,39 +224,57 @@ export default function PhaserGame() {
   }, []);
 
   return (
-    <div
-      ref={gameContainerRef}
-      style={{
-        position: 'fixed',
-        left: '0',
-        top: '0',
-        width: '100vw',
-        height: '200px',
-        zIndex: 9999,
-        background: 'transparent',
-      }}
-    >
-      {/* Render the start/restart button only if the game hasn't started */}
-      {!gameStarted && (
-        <button
-          className="start_game_button"
-          onClick={handleStart}
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: 10000,
-            padding: '10px 20px',
-            fontSize: '16px',
-            cursor: 'pointer',
-          }}
-        >
-          {finalScore > 0
-            ? `Your score = ${finalScore}. Restart`
-            : 'Start Game'}
-        </button>
-      )}
-    </div>
+    !gameHidden && (
+      <div
+        ref={gameContainerRef}
+        style={{
+          position: 'fixed',
+          left: '0',
+          top: '0',
+          width: '100vw',
+          height: '200px',
+          zIndex: 9999,
+          background: 'transparent',
+        }}
+      >
+        {/* Render the start/restart button only if the game hasn't started */}
+        {!gameStarted && (
+          <div>
+            <button
+              className="start_game_button"
+              onClick={handleStart}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                zIndex: 10000,
+                padding: '10px 20px',
+                fontSize: '16px',
+                cursor: 'pointer',
+              }}
+            >
+              {finalScore > 0
+                ? `Your score = ${finalScore}. Restart`
+                : 'Start Game'}
+            </button>
+            <button
+              className="hide_game_button"
+              onClick={() => setGameHidden(true)}
+              style={{
+                position: 'absolute',
+                top: '73%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                zIndex: 10000,
+                cursor: 'pointer',
+              }}
+            >
+              Hide game
+            </button>
+          </div>
+        )}
+      </div>
+    )
   );
 }

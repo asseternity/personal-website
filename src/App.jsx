@@ -21,9 +21,11 @@ export default function App() {
         <h3 className="tagline_title legal_text">
           Former Senior Associate at a Top 10 Global Law Firm
         </h3>
-        <p className="tagline_hint">Scroll down</p>
+        <a href="#top" className="tagline_hint">
+          <p>Scroll down</p>
+        </a>
       </div>
-      <div className="top">
+      <div className="top" id="top">
         <div className="top_left">
           <h1>Hi, I'm Asset</h1>
           <p>

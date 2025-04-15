@@ -19,31 +19,28 @@ export default function TechStack() {
     <div>
       <h1>Tech Stack</h1>
       <h4>Frontend:</h4>
-      <ul>
+      <div className="tech_stack_grid">
         <TechStackCard image={html} text={'HTML'} />
         <TechStackCard image={css} text={'CSS'} />
         <TechStackCard image={js} text={'JavaScript'} />
         <TechStackCard image={jest} text={'Jest'} />
         <TechStackCard image={react} text={'React'} />
-        <li>JavaScript</li>
-        <li>Jest</li>
-        <li>React</li>
-      </ul>
+      </div>
       <h4>Backend:</h4>
-      <ul>
-        <li>Node.JS</li>
-        <li>Express.JS</li>
-        <li>Python</li>
-        <li>C#</li>
-        <li>Rest API</li>
-        <li>Unity</li>
-      </ul>
+      <div className="tech_stack_grid">
+        <TechStackCard image={node} text={'Node.JS'} />
+        <TechStackCard image={express} text={'Express.JS'} />
+        <TechStackCard image={python} text={'Python'} />
+        <TechStackCard image={csharp} text={'C#'} />
+        <TechStackCard image={restapi} text={'Rest API'} />
+        <TechStackCard image={unity} text={'Unity'} />
+      </div>
       <h4>Databases:</h4>
-      <ul>
-        <li>SQL</li>
-        <li>PostgreSQL</li>
-        <li>Prisma ORM</li>
-      </ul>
+      <div className="tech_stack_grid">
+        <TechStackCard image={sql} text={'SQL'} />
+        <TechStackCard image={postgresql} text={'PostgreSQL'} />
+        <TechStackCard image={prismaORM} text={'Prisma ORM'} />
+      </div>
     </div>
   );
 }

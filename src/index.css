@@ -14,6 +14,10 @@
 }
 
 /* General Styles */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #0d0d0d;
   color: #ffffff;
@@ -50,6 +54,10 @@ body {
   text-align: center;
 }
 
+.tagline a {
+  text-decoration: none;
+}
+
 .tagline_header {
   font-size: 300%;
 }
@@ -62,6 +70,10 @@ body {
 .tagline_hint {
   margin-top: 100px;
   color: #888888;
+}
+
+.tagline_hint:hover {
+  color: white;
 }
 
 /* Top Section */
@@ -108,20 +120,48 @@ body {
 }
 
 /* Tech Stack Cards */
+.tech_stack_grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 130px);
+  row-gap: 10px;
+  align-items: start;
+}
+
 .tech_stack_card {
-  height: 50px;
-  width: 100px;
+  height: 40px;
+  width: 120px;
   border: 2px solid white;
   border-radius: 12px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-size: 11px;
+  font-family: 'Coding';
 }
 
-.tech_stack_card img {
-  max-height: 40px;
-  max-width: 40px;
+.tech_stack_card_left {
+  height: 100%;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tech_stack_card_left img {
+  max-height: 25px;
+  max-width: 30px;
+}
+
+.tech_stack_card_right {
+  height: 100%;
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
 }
 
 /* Buttons */
@@ -216,6 +256,20 @@ button img {
   background-color: white;
   border: 3px solid white;
   color: #000000;
+}
+
+.hide_game_button {
+  background-color: transparent;
+  border: none;
+  color: #bbbbbb;
+  font-size: 11px;
+  padding: 5px;
+}
+
+.hide_game_button:hover {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
 }
 
 /* Responsive Design */
