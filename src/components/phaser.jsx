@@ -153,11 +153,18 @@ export default function PhaserGame() {
       this.input.on('pointerdown', (pointer) => {
         if (!gameStartedRef.current) return;
 
-        // Use clientY which is relative to the viewport on both mobile and desktop
-        const pointerYRelative = pointer.event.clientY;
-        console.log('Viewport Y:', pointerYRelative);
+        // Get the canvas's bounding rectangle in the viewport.
+        const canvasRect = this.game.canvas.getBoundingClientRect();
 
-        if (pointerYRelative < player.y) {
+        // Compute a scale factor if the canvas's drawing size differs from its displayed size.
+        // This is particularly useful on mobile where device pixel ratio might be applied.
+        const scaleY = this.game.canvas.height / canvasRect.height;
+
+        // Calculate the local Y coordinate: subtract the canvas top and apply the scale.
+        const localY = (pointer.event.clientY - canvasRect.top) * scaleY;
+        console.log('Local Y:', localY);
+
+        if (localY < player.y) {
           player.setVelocityY(-230);
         } else {
           player.setVelocityY(230);
