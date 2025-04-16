@@ -4,16 +4,19 @@ export default function ProjectCard2() {
       <h2>Blog / Newsletter</h2>
       <div className="card_inner">
         <div className="card_para">
-          Overview: Full-stack blog and newsletter platform featuring separate
-          frontends for public content display and admin content management
+          <span className="green_highlight">Overview:</span> Full-stack blog and
+          newsletter platform featuring separate frontends for public content
+          display and admin content management
         </div>
         <div className="card_para">
-          Key Features: User authentication, dynamic content management, dual
-          interface (public and admin), and database-driven post storage
+          <span className="green_highlight">Key Features:</span> User
+          authentication, dynamic content management, dual interface (public and
+          admin), and database-driven post storage
         </div>
         <div className="card_para">
-          Tech Stack: React, Styled-Components, Vite | Node.js, Express,
-          PostgreSQL, Prisma, Passport
+          <span className="green_highlight">Tech Stack:</span> React,
+          Styled-Components, Vite | Node.js, Express, PostgreSQL, Prisma,
+          Passport
         </div>
       </div>
       <a

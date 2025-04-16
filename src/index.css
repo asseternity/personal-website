@@ -19,11 +19,24 @@ html {
 }
 
 body {
-  background-color: #0d0d0d;
+  background-image: url('/pattern.png');
+  background-repeat: repeat;
+  background-size: auto;
   color: #ffffff;
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Adjust 0.5 for darkness */
+  z-index: -1; /* Push it behind content */
 }
 
 .root {
@@ -33,14 +46,20 @@ body {
 }
 
 .legal_text {
-  font-family: 'Legal';
-  font-size: 160%;
+  font-family: Garamond;
+  font-size: 20px;
   color: #c1defb;
 }
 
 .coding_text {
   font-family: 'Coding';
-  font-size: 180%;
+  font-size: 18px;
+  color: #71cc74;
+}
+
+.green_highlight {
+  font-family: 'Coding';
+  font-size: 18px;
   color: #71cc74;
 }
 
@@ -59,21 +78,39 @@ body {
 }
 
 .tagline_header {
+  margin-top: 100px;
   font-size: 300%;
 }
 
 .tagline_title {
   margin: 0;
-  max-width: 400px;
+  max-width: 250px;
+}
+
+.tagline_hook {
+  margin-top: 30px;
+  max-width: 500px;
+  color: #e0e0e0;
+  font-family: Verdana;
+  font-size: 15px;
 }
 
 .tagline_hint {
-  margin-top: 100px;
-  color: #888888;
+  margin-top: 60px;
+  color: #777777;
+  font-size: 20px;
+  border: 3px solid #777777;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
 }
 
 .tagline_hint:hover {
   color: white;
+  border: 3px solid white;
 }
 
 /* Top Section */
@@ -125,6 +162,7 @@ body {
   height: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, 130px);
+  max-width: calc(5 * 130px);
   row-gap: 10px;
   align-items: start;
 }
@@ -132,7 +170,7 @@ body {
 .tech_stack_card {
   height: 40px;
   width: 120px;
-  border: 2px solid white;
+  border: 2px solid #2bb0ff;
   border-radius: 12px;
   display: flex;
   flex-direction: row;
@@ -206,17 +244,17 @@ button img {
 }
 
 .projects_card {
-  background-color: #1a1a1a;
+  background-color: transparent;
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid #2bb0ff;
+  border: 2px solid #2bb0ff;
 }
 
 /* Cards inside */
 .card_para {
   text-align: justify;
   padding-bottom: 10px;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid #777777;
 }
 
 /* Apply padding-top: 10px to every .card_para except the first one */

@@ -19,10 +19,15 @@ export default function App() {
         <h1 className="tagline_header">Asset Nakupov</h1>
         <h3 className="tagline_title coding_text">Full-stack developer</h3>
         <h3 className="tagline_title legal_text">
-          Former Senior Associate at a Top 10 Global Law Firm
+          Former Senior Associate at a Top 5 Global Law Firm
         </h3>
+        <p className="tagline_hook">
+          I moved from law to development with a simple goal: to create, to keep
+          learning, and to work with people who care about what they build. If
+          any of this resonates, I’d love to hear from you.
+        </p>
         <a href="#top" className="tagline_hint">
-          <p>Scroll down</p>
+          Contact me
         </a>
       </div>
       <div className="top" id="top">
@@ -35,10 +40,14 @@ export default function App() {
             ORM). IELTS 8.5.
           </p>
           <p>
-            After 7+ years as a Senior Legal Associate at a top 10 global law
+            After 7+ years as a Senior Legal Associate at a top 5 global law
             firm, I transitioned into tech, bringing my analytical mindset,
             problem-solving ability, and project management experience to
             full-stack development.
+          </p>
+          <p>
+            Contact me at:{' '}
+            <span className="green_highlight">nakupovasset@protonmail.com</span>
           </p>
           <a
             href="https://github.com/asseternity"

@@ -152,7 +152,12 @@ export default function PhaserGame() {
       // Add mobile (pointer/touch) controls using pointer.y for proper canvas coordinates.
       this.input.on('pointerdown', (pointer) => {
         if (!gameStartedRef.current) return;
-        if (pointer.y < player.y) {
+
+        // Adjust the pointer's y coordinate by subtracting window.scrollY
+        const pointerYRelative = pointer.y - window.scrollY;
+        console.log('Adjusted Y:', pointerYRelative);
+
+        if (pointerYRelative < player.y) {
           player.setVelocityY(-230);
         } else {
           player.setVelocityY(230);
@@ -161,16 +166,6 @@ export default function PhaserGame() {
     }
 
     function update() {
-      // Only update game logic if the game has started
-      if (!gameStartedRef.current) return;
-
-      // Handle keyboard controls for player movement
-      if (this.wKey.isDown) {
-        player.setVelocityY(-230);
-      } else if (this.sKey.isDown) {
-        player.setVelocityY(230);
-      }
-
       // Spawn obstacles (clouds) every 180 frames
       if (framesSinceLastObstacle >= 180) {
         obstaclesQueue.push(addObstacle(this));
@@ -187,6 +182,16 @@ export default function PhaserGame() {
         }
         return true;
       });
+
+      // Enable controls and score if the game has started
+      if (!gameStartedRef.current) return;
+
+      // Handle keyboard controls for player movement
+      if (this.wKey.isDown) {
+        player.setVelocityY(-230);
+      } else if (this.sKey.isDown) {
+        player.setVelocityY(230);
+      }
 
       // Update score when passing obstacles.
       while (obstaclesQueue.length > 0 && player.x >= obstaclesQueue[0].x) {
@@ -208,12 +213,14 @@ export default function PhaserGame() {
       const newHeight = obstacle.height * 0.5;
       obstacle.body.setSize(newWidth, newHeight);
       obstacle.setVelocityX(-400);
-      scene.physics.add.collider(player, obstacle, () => {
-        // On collision (game over), update the final score and toggle the game state.
-        setFinalScore(scoreValue);
-        gameStartedRef.current = false;
-        setGameStarted(false);
-      });
+      if (gameStartedRef.current) {
+        scene.physics.add.collider(player, obstacle, () => {
+          // On collision (game over), update the final score and toggle the game state.
+          setFinalScore(scoreValue);
+          gameStartedRef.current = false;
+          setGameStarted(false);
+        });
+      }
       return obstacle;
     }
 
