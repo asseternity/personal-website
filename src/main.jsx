@@ -40,4 +40,5 @@ createRoot(document.getElementById('root')).render(
 // [v] move unity to the next row
 // [v] add to the tagline, above the hint: "passionate to create and learn" blah blah to hook in
 // [v have the clouds spawn by default before game starts, but not kill the bird for visual interest
+// [_] add a "loading" for the tagging game
 // [_] high scores with backend for the game!

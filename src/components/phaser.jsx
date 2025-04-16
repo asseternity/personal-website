@@ -153,9 +153,9 @@ export default function PhaserGame() {
       this.input.on('pointerdown', (pointer) => {
         if (!gameStartedRef.current) return;
 
-        // Adjust the pointer's y coordinate by subtracting window.scrollY
-        const pointerYRelative = pointer.y - window.scrollY;
-        console.log('Adjusted Y:', pointerYRelative);
+        // Use clientY which is relative to the viewport on both mobile and desktop
+        const pointerYRelative = pointer.event.clientY;
+        console.log('Viewport Y:', pointerYRelative);
 
         if (pointerYRelative < player.y) {
           player.setVelocityY(-230);
