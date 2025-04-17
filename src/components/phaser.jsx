@@ -149,22 +149,9 @@ export default function PhaserGame() {
         firstGameStart = false;
       }
 
-      // Add mobile (pointer/touch) controls using pointer.y for proper canvas coordinates.
       this.input.on('pointerdown', (pointer) => {
         if (!gameStartedRef.current) return;
-
-        // Get the canvas's bounding rectangle in the viewport.
-        const canvasRect = this.game.canvas.getBoundingClientRect();
-
-        // Compute a scale factor if the canvas's drawing size differs from its displayed size.
-        // This is particularly useful on mobile where device pixel ratio might be applied.
-        const scaleY = this.game.canvas.height / canvasRect.height;
-
-        // Calculate the local Y coordinate: subtract the canvas top and apply the scale.
-        const localY = (pointer.event.clientY - canvasRect.top) * scaleY;
-        console.log('Local Y:', localY);
-
-        if (localY < player.y) {
+        if (pointer.y < player.y) {
           player.setVelocityY(-230);
         } else {
           player.setVelocityY(230);
