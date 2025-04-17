@@ -35,9 +35,13 @@ export default function PhaserGame() {
   useEffect(() => {
     // This flag ensures that tooltips (and score fade in) run only on the very first game start.
     let firstGameStart = true;
+    // This resizes the container
+    const { width, height } = gameContainerRef.current.getBoundingClientRect();
 
     const config = {
       type: Phaser.AUTO,
+      width,
+      height,
       scale: {
         mode: Phaser.Scale.RESIZE, // Automatically resize to fill container
         parent: gameContainerRef.current,
