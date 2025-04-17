@@ -11,19 +11,18 @@ export default function PhaserGame() {
   const gameStartedRef = useRef(false);
   const phaserSceneRef = useRef(null);
 
-  // Persistent game variables
+  // Persistent game state
   let scoreValue = 0;
   let player;
-  let score;
+  let scoreText;
   let framesSinceLastObstacle = 0;
   let obstaclesQueue = [];
 
-  // Called when the start/restart button is clicked.
   const handleStart = () => {
     if (phaserSceneRef.current) {
-      // Restart the scene if it's already been initialized
       phaserSceneRef.current.scene.restart();
     }
+    // reset the Phaser closure state
     scoreValue = 0;
     framesSinceLastObstacle = 0;
     obstaclesQueue = [];
@@ -33,39 +32,24 @@ export default function PhaserGame() {
   };
 
   useEffect(() => {
-    // This flag ensures that tooltips (and score fade in) run only on the very first game start.
     let firstGameStart = true;
-    // This resizes the container
-    const { width, height } = gameContainerRef.current.getBoundingClientRect();
 
     const config = {
       type: Phaser.AUTO,
-      width,
-      height,
       scale: {
-        mode: Phaser.Scale.RESIZE, // Automatically resize to fill container
+        mode: Phaser.Scale.RESIZE,
         parent: gameContainerRef.current,
         autoCenter: Phaser.Scale.CENTER_BOTH,
       },
-      render: {
-        transparent: true, // Transparent canvas background
-      },
+      render: { transparent: true },
       backgroundColor: 'transparent',
       physics: {
         default: 'arcade',
-        arcade: {
-          gravity: { y: 0 },
-          debug: false,
-        },
+        arcade: { gravity: { y: 0 }, debug: false },
       },
-      scene: {
-        preload,
-        create,
-        update,
-      },
+      scene: { preload, create, update },
     };
 
-    // Initialize the Phaser game
     const game = new Phaser.Game(config);
 
     function preload() {
@@ -74,158 +58,143 @@ export default function PhaserGame() {
     }
 
     function create() {
+      // store scene ref
+      phaserSceneRef.current = this;
+
+      // initial resize to match container dimensions
+      const rect = gameContainerRef.current.getBoundingClientRect();
+      this.scale.resize(rect.width, rect.height);
+      this.physics.world.setBounds(0, 0, rect.width, rect.height);
+
+      // update on scroll to keep Phaser's input mapping in sync
+      const onScroll = () => {
+        const r = gameContainerRef.current.getBoundingClientRect();
+        this.scale.resize(r.width, r.height);
+        this.physics.world.setBounds(0, 0, r.width, r.height);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      this.events.once('shutdown', () => {
+        window.removeEventListener('scroll', onScroll);
+      });
+
+      // world bounds
       const width = this.scale.width;
       const height = this.scale.height;
       this.physics.world.setBounds(0, 0, width, height);
 
-      // Create the player (bird)
+      // player setup
       player = this.physics.add.image(50, 50, 'bird').setScale(0.65);
       player.setCollideWorldBounds(true);
 
-      // Create score text.
-      // On the very first game load, we start with the score hidden.
-      score = this.add.text(width / 2, 20, 'Score: 0', {
-        fontFamily: 'Arial',
-        fontSize: '16px',
-        color: '#cccccc',
-      });
-      score.setOrigin(0.5, 0);
-      if (firstGameStart) {
-        score.setAlpha(0);
-      }
+      // score text
+      scoreText = this.add
+        .text(width / 2, 20, 'Score: 0', {
+          fontFamily: 'Arial',
+          fontSize: '16px',
+          color: '#cccccc',
+        })
+        .setOrigin(0.5, 0);
+      if (firstGameStart) scoreText.setAlpha(0);
 
-      // Set up keyboard controls
-      this.cursors = this.input.keyboard.createCursorKeys();
+      // keyboard controls
       this.wKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
       this.sKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 
-      // Store the scene reference for restarts
-      phaserSceneRef.current = this;
-
-      // Only on the very first start, create stylish tooltips next to the bird.
+      // first-time tooltips
       if (firstGameStart && gameStartedRef.current) {
-        const tooltipStyle = {
+        const style = {
           fontFamily: 'Arial',
           fontSize: '12px',
           fontStyle: 'italic',
-          color: '#ffffff',
-          stroke: '#000000',
+          color: '#fff',
+          stroke: '#000',
           strokeThickness: 2,
         };
-
-        // Position tooltips near the bird (offset to the right)
-        const tooltip1 = this.add.text(
-          player.x + 60,
-          player.y - 20,
-          'Press W/S to fly up/down',
-          tooltipStyle
-        );
-        tooltip1.setOrigin(0, 0.5);
-        const tooltip2 = this.add.text(
-          player.x + 60,
-          player.y + 5,
-          'Tap above or below the bird to glide',
-          tooltipStyle
-        );
-        tooltip2.setOrigin(0, 0.5);
-
-        // Animate the tooltips: float upward and fade out after 4 seconds.
+        const t1 = this.add
+          .text(player.x + 60, player.y - 20, 'Press W/S to fly up/down', style)
+          .setOrigin(0, 0.5);
+        const t2 = this.add
+          .text(
+            player.x + 60,
+            player.y + 5,
+            'Tap above or below the bird to glide',
+            style
+          )
+          .setOrigin(0, 0.5);
         this.tweens.add({
-          targets: [tooltip1, tooltip2],
+          targets: [t1, t2],
           alpha: 0,
           y: '-=10',
           ease: 'Cubic.easeOut',
           delay: 4000,
           duration: 1000,
           onComplete: () => {
-            tooltip1.destroy();
-            tooltip2.destroy();
-            // Fade in the score text after the tooltips fade out.
-            this.tweens.add({
-              targets: score,
-              alpha: 1,
-              duration: 1000,
-              ease: 'Linear',
-            });
+            t1.destroy();
+            t2.destroy();
+            this.tweens.add({ targets: scoreText, alpha: 1, duration: 1000 });
           },
         });
-
         firstGameStart = false;
       }
 
+      // pointer controls
       this.input.on('pointerdown', (pointer) => {
         if (!gameStartedRef.current) return;
-        if (pointer.y < player.y) {
-          player.setVelocityY(-230);
-        } else {
-          player.setVelocityY(230);
-        }
+        if (pointer.y < player.y) player.setVelocityY(-230);
+        else player.setVelocityY(230);
       });
     }
 
     function update() {
-      // Spawn obstacles (clouds) every 180 frames
-      if (framesSinceLastObstacle >= 180) {
+      // obstacle spawning
+      if (framesSinceLastObstacle++ >= 180) {
         obstaclesQueue.push(addObstacle(this));
         framesSinceLastObstacle = 0;
-      } else {
-        framesSinceLastObstacle += 1;
       }
 
-      // Remove obstacles that have moved off-screen.
-      obstaclesQueue = obstaclesQueue.filter((obstacle) => {
-        if (obstacle.x + obstacle.displayWidth < 0) {
-          obstacle.destroy();
+      // cleanup off-screen
+      obstaclesQueue = obstaclesQueue.filter((obs) => {
+        if (obs.x + obs.displayWidth < 0) {
+          obs.destroy();
           return false;
         }
         return true;
       });
 
-      // Enable controls and score if the game has started
       if (!gameStartedRef.current) return;
 
-      // Handle keyboard controls for player movement
-      if (this.wKey.isDown) {
-        player.setVelocityY(-230);
-      } else if (this.sKey.isDown) {
-        player.setVelocityY(230);
-      }
+      // keyboard movement
+      if (this.wKey.isDown) player.setVelocityY(-230);
+      else if (this.sKey.isDown) player.setVelocityY(230);
 
-      // Update score when passing obstacles.
-      while (obstaclesQueue.length > 0 && player.x >= obstaclesQueue[0].x) {
+      // update score when passing obstacles
+      while (obstaclesQueue.length && player.x >= obstaclesQueue[0].x) {
         obstaclesQueue.shift();
         scoreValue++;
-        score.setText('Score: ' + scoreValue);
+        scoreText.setText(`Score: ${scoreValue}`);
       }
     }
 
-    // Function to add a new obstacle (cloud)
     function addObstacle(scene) {
       const x = scene.scale.width + 50;
       const y = Phaser.Math.Between(20, scene.scale.height - 20);
-      let obstacle = scene.physics.add
+      const obs = scene.physics.add
         .sprite(x, y, 'cloud')
         .setScale(Phaser.Math.FloatBetween(0.5, 1.8));
-      obstacle.body.setImmovable(true);
-      const newWidth = obstacle.width * 0.5;
-      const newHeight = obstacle.height * 0.5;
-      obstacle.body.setSize(newWidth, newHeight);
-      obstacle.setVelocityX(-400);
+      obs.body.setImmovable(true);
+      obs.body.setSize(obs.width * 0.5, obs.height * 0.5);
+      obs.setVelocityX(-400);
       if (gameStartedRef.current) {
-        scene.physics.add.collider(player, obstacle, () => {
-          // On collision (game over), update the final score and toggle the game state.
+        scene.physics.add.collider(player, obs, () => {
           setFinalScore(scoreValue);
           gameStartedRef.current = false;
           setGameStarted(false);
         });
       }
-      return obstacle;
+      return obs;
     }
 
-    // Clean up the Phaser game when the component unmounts
-    return () => {
-      game.destroy(true);
-    };
+    return () => game.destroy(true);
   }, []);
 
   return (
@@ -234,17 +203,16 @@ export default function PhaserGame() {
         ref={gameContainerRef}
         style={{
           position: 'fixed',
-          left: '0',
-          top: '0',
+          left: 0,
+          top: 0,
           width: '100vw',
           height: '200px',
           zIndex: 9999,
           background: 'transparent',
         }}
       >
-        {/* Render the start/restart button only if the game hasn't started */}
         {!gameStarted && (
-          <div>
+          <>
             <button
               className="start_game_button"
               onClick={handleStart}
@@ -277,7 +245,7 @@ export default function PhaserGame() {
             >
               Hide game
             </button>
-          </div>
+          </>
         )}
       </div>
     )
