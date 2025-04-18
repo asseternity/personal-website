@@ -2,6 +2,7 @@ import { useState } from 'react';
 import portrait from '/portrait.jpg';
 import logo_gh from '/github-svgrepo-com.svg';
 import logo_li from '/linkedin-svgrepo-com.svg';
+import logo_cv from '/cv-file-interface-symbol-svgrepo-com.svg';
 import Project1 from './components/project1';
 import Project2 from './components/project2';
 import Project3 from './components/project3';
@@ -45,7 +46,7 @@ export default function App() {
             problem-solving ability, and project management experience to
             full-stack development.
           </p>
-          <p>
+          <p style={{ textAlign: 'left' }}>
             Contact me at:{' '}
             <span className="green_highlight">nakupovasset@protonmail.com</span>
           </p>
@@ -65,6 +66,14 @@ export default function App() {
           >
             <button>
               <img src={logo_li} />
+            </button>
+          </a>
+          <a
+            href="/personal-website/[CV 2025] - Asset Nakupov - ENG.pdf"
+            download
+          >
+            <button>
+              <img src={logo_cv} />
             </button>
           </a>
         </div>
@@ -111,6 +120,14 @@ export default function App() {
         >
           <button>
             <img src={logo_li} />
+          </button>
+        </a>
+        <a
+          href="/personal-website/[CV 2025] - Asset Nakupov - ENG.pdf"
+          download
+        >
+          <button>
+            <img src={logo_cv} />
           </button>
         </a>
       </div>
