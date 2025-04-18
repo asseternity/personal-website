@@ -50,32 +50,41 @@ export default function App() {
             Contact me at:{' '}
             <span className="green_highlight">nakupovasset@protonmail.com</span>
           </p>
-          <a
-            href="https://github.com/asseternity"
-            target="_blank"
-            rel="noopener noreferrer"
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'start',
+            }}
           >
-            <button>
-              <img src={logo_gh} />
-            </button>
-          </a>
-          <a
-            href="http://linkedin.com/in/asset-nakupov-b705bab7"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button>
-              <img src={logo_li} />
-            </button>
-          </a>
-          <a
-            href="/personal-website/[CV 2025] - Asset Nakupov - ENG.pdf"
-            download
-          >
-            <button>
-              <img src={logo_cv} />
-            </button>
-          </a>
+            <a
+              href="https://github.com/asseternity"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button>
+                <img src={logo_gh} />
+              </button>
+            </a>
+            <a
+              href="http://linkedin.com/in/asset-nakupov-b705bab7"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button>
+                <img src={logo_li} />
+              </button>
+            </a>
+            <a
+              href="/personal-website/[CV 2025] - Asset Nakupov - ENG.pdf"
+              download
+            >
+              <button>
+                <img src={logo_cv} />
+              </button>
+            </a>
+          </div>
         </div>
         <div className="top_right">
           <img src={portrait} />
