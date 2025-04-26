@@ -7,6 +7,7 @@ export default function PhaserGame() {
   const [gameHidden, setGameHidden] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
+  const [highScores, setHighScores] = useState([]);
   const gameContainerRef = useRef(null);
   const gameStartedRef = useRef(false);
   const phaserSceneRef = useRef(null);
@@ -197,6 +198,34 @@ export default function PhaserGame() {
     return () => game.destroy(true);
   }, []);
 
+  useEffect(() => {
+    const fetchScores = async () => {
+      try {
+        const response = await fetch(
+          'https://personal-website-backend-production-c5a6.up.railway.app/api/scores',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ score: finalScore, username: 'test' }),
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setHighScores(data.scores);
+        } else {
+          console.error('Failed to fetch scores:', response.statusText);
+        }
+      } catch (err) {
+        console.error('Error fetching scores:', err);
+      }
+    };
+    if (gameContainerRef.current) {
+      fetchScores();
+    }
+  }, [finalScore]);
+
   return (
     !gameHidden && (
       <div
@@ -213,6 +242,17 @@ export default function PhaserGame() {
       >
         {!gameStarted && (
           <>
+            <div className="high_scores">
+              <ul className="high_scores_list">
+                {highScores.map((score) => {
+                  return (
+                    <li key={score.id} className="high_scores_item">
+                      {score.score} by {score.username}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
             <button
               className="start_game_button"
               onClick={handleStart}
