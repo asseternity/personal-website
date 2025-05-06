@@ -213,7 +213,7 @@ export default function PhaserGame() {
         );
         if (response.ok) {
           const data = await response.json();
-          setHighScores(data.scores);
+          setHighScores(data?.scores || []);
         } else {
           console.error('Failed to fetch scores:', response.statusText);
         }
