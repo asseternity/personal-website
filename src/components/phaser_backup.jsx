@@ -1,30 +1,35 @@
 import { useEffect, useRef, useState } from 'react';
 import Phaser from 'phaser';
-import PhaserButtonContent from './phaser_button_content';
 import bird from '/bird.png';
 import cloud from '/cloud.png';
 
 export default function PhaserGame() {
   const [gameHidden, setGameHidden] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
-  const [finalScore, setFinalScore] = useState(-1);
+  const [finalScore, setFinalScore] = useState(0);
   const [highScores, setHighScores] = useState([]);
-  const [nameWriting, setNameWriting] = useState(false);
   const gameContainerRef = useRef(null);
   const gameStartedRef = useRef(false);
   const phaserSceneRef = useRef(null);
 
+  // Persistent game state
+  let scoreValue = 0;
+  let player;
+  let scoreText;
+  let framesSinceLastObstacle = 0;
+  let obstaclesQueue = [];
+
   const handleStart = () => {
     if (phaserSceneRef.current) {
-      // Restart the Phaser scene
       phaserSceneRef.current.scene.restart();
     }
-    // Reset React state
-    setNameWriting(false);
+    // reset the Phaser closure state
+    scoreValue = 0;
+    framesSinceLastObstacle = 0;
+    obstaclesQueue = [];
     setFinalScore(0);
     gameStartedRef.current = true;
     setGameStarted(true);
-    setHighScores([]);
   };
 
   useEffect(() => {
@@ -42,9 +47,6 @@ export default function PhaserGame() {
         default: 'arcade',
         arcade: { gravity: { y: 0 }, debug: false },
       },
-      audio: {
-        noAudio: true,
-      },
       scene: { preload, create, update },
     };
 
@@ -56,46 +58,49 @@ export default function PhaserGame() {
     }
 
     function create() {
+      // store scene ref
       phaserSceneRef.current = this;
 
-      // Initialize scene-scoped state
-      this.scoreValue = 0;
-      this.framesSinceLastObstacle = 0;
-      this.obstaclesQueue = [];
-
-      // Resize to container
+      // initial resize to match container dimensions
       const rect = gameContainerRef.current.getBoundingClientRect();
       this.scale.resize(rect.width, rect.height);
       this.physics.world.setBounds(0, 0, rect.width, rect.height);
-      window.addEventListener('scroll', onScroll, { passive: true });
-      this.events.once('shutdown', () =>
-        window.removeEventListener('scroll', onScroll)
-      );
 
-      // World bounds
+      // update on scroll to keep Phaser's input mapping in sync
+      const onScroll = () => {
+        const r = gameContainerRef.current.getBoundingClientRect();
+        this.scale.resize(r.width, r.height);
+        this.physics.world.setBounds(0, 0, r.width, r.height);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      this.events.once('shutdown', () => {
+        window.removeEventListener('scroll', onScroll);
+      });
+
+      // world bounds
       const width = this.scale.width;
       const height = this.scale.height;
       this.physics.world.setBounds(0, 0, width, height);
 
-      // Player setup
-      this.player = this.physics.add.image(50, 50, 'bird').setScale(0.65);
-      this.player.setCollideWorldBounds(true);
+      // player setup
+      player = this.physics.add.image(50, 50, 'bird').setScale(0.65);
+      player.setCollideWorldBounds(true);
 
-      // Score text
-      this.scoreText = this.add
+      // score text
+      scoreText = this.add
         .text(width / 2, 20, 'Score: 0', {
           fontFamily: 'Arial',
           fontSize: '16px',
           color: '#cccccc',
         })
         .setOrigin(0.5, 0);
-      if (firstGameStart) this.scoreText.setAlpha(0);
+      if (firstGameStart) scoreText.setAlpha(0);
 
-      // Keyboard controls
+      // keyboard controls
       this.wKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
       this.sKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 
-      // First-time tooltips
+      // first-time tooltips
       if (firstGameStart && gameStartedRef.current) {
         const style = {
           fontFamily: 'Arial',
@@ -106,17 +111,12 @@ export default function PhaserGame() {
           strokeThickness: 2,
         };
         const t1 = this.add
-          .text(
-            this.player.x + 60,
-            this.player.y - 20,
-            'Press W/S to fly up/down',
-            style
-          )
+          .text(player.x + 60, player.y - 20, 'Press W/S to fly up/down', style)
           .setOrigin(0, 0.5);
         const t2 = this.add
           .text(
-            this.player.x + 60,
-            this.player.y + 5,
+            player.x + 60,
+            player.y + 5,
             'Tap above or below the bird to glide',
             style
           )
@@ -131,41 +131,29 @@ export default function PhaserGame() {
           onComplete: () => {
             t1.destroy();
             t2.destroy();
-            this.tweens.add({
-              targets: this.scoreText,
-              alpha: 1,
-              duration: 1000,
-            });
+            this.tweens.add({ targets: scoreText, alpha: 1, duration: 1000 });
           },
         });
         firstGameStart = false;
       }
 
-      // Pointer controls
+      // pointer controls
       this.input.on('pointerdown', (pointer) => {
         if (!gameStartedRef.current) return;
-        this.player.setVelocityY(pointer.y < this.player.y ? -230 : 230);
+        if (pointer.y < player.y) player.setVelocityY(-230);
+        else player.setVelocityY(230);
       });
-
-      function onScroll() {
-        const r = gameContainerRef.current.getBoundingClientRect();
-        this.scale.resize(r.width, r.height);
-        this.physics.world.setBounds(0, 0, r.width, r.height);
-      }
     }
 
     function update() {
-      if (!gameStartedRef.current) return;
-
-      // Spawn obstacles
-      this.framesSinceLastObstacle++;
-      if (this.framesSinceLastObstacle >= 180) {
-        this.obstaclesQueue.push(addObstacle(this));
-        this.framesSinceLastObstacle = 0;
+      // obstacle spawning
+      if (framesSinceLastObstacle++ >= 180) {
+        obstaclesQueue.push(addObstacle(this));
+        framesSinceLastObstacle = 0;
       }
 
-      // Cleanup off-screen
-      this.obstaclesQueue = this.obstaclesQueue.filter((obs) => {
+      // cleanup off-screen
+      obstaclesQueue = obstaclesQueue.filter((obs) => {
         if (obs.x + obs.displayWidth < 0) {
           obs.destroy();
           return false;
@@ -173,18 +161,17 @@ export default function PhaserGame() {
         return true;
       });
 
-      // Keyboard movement
-      if (this.wKey.isDown) this.player.setVelocityY(-230);
-      else if (this.sKey.isDown) this.player.setVelocityY(230);
+      if (!gameStartedRef.current) return;
 
-      // Update score
-      while (
-        this.obstaclesQueue.length &&
-        this.player.x >= this.obstaclesQueue[0].x
-      ) {
-        this.obstaclesQueue.shift();
-        this.scoreValue++;
-        this.scoreText.setText(`Score: ${this.scoreValue}`);
+      // keyboard movement
+      if (this.wKey.isDown) player.setVelocityY(-230);
+      else if (this.sKey.isDown) player.setVelocityY(230);
+
+      // update score when passing obstacles
+      while (obstaclesQueue.length && player.x >= obstaclesQueue[0].x) {
+        obstaclesQueue.shift();
+        scoreValue++;
+        scoreText.setText(`Score: ${scoreValue}`);
       }
     }
 
@@ -195,10 +182,11 @@ export default function PhaserGame() {
         .sprite(x, y, 'cloud')
         .setScale(Phaser.Math.FloatBetween(0.5, 1.8));
       obs.body.setImmovable(true);
+      obs.body.setSize(obs.width * 0.5, obs.height * 0.5);
       obs.setVelocityX(-400);
       if (gameStartedRef.current) {
-        scene.physics.add.collider(scene.player, obs, () => {
-          setFinalScore(scene.scoreValue);
+        scene.physics.add.collider(player, obs, () => {
+          setFinalScore(scoreValue);
           gameStartedRef.current = false;
           setGameStarted(false);
         });
@@ -209,15 +197,17 @@ export default function PhaserGame() {
     return () => game.destroy(true);
   }, []);
 
-  // initial Fetch high scores when website loads
   useEffect(() => {
     const fetchScores = async () => {
       try {
         const response = await fetch(
           'https://personal-website-backend-production-c5a6.up.railway.app/api/scores',
           {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ score: finalScore, username: 'test' }),
           }
         );
         if (response.ok) {
@@ -230,28 +220,9 @@ export default function PhaserGame() {
         console.error('Error fetching scores:', err);
       }
     };
-
-    fetchScores();
-  }, []);
-
-  // when the game is over, we grab the final score and check if it's top five
-  useEffect(() => {
-    const fetchCheck = async () => {
-      const response = await fetch(
-        'https://personal-website-backend-production-c5a6.up.railway.app/api/scores/check',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ score: finalScore }),
-        }
-      );
-      if (response.ok) {
-        const data = await response.json();
-        if ((data.topFive = true)) {
-          setNameWriting(true);
-        }
-      }
-    };
+    if (gameContainerRef.current) {
+      fetchScores();
+    }
   }, [finalScore]);
 
   return (
@@ -269,13 +240,51 @@ export default function PhaserGame() {
         }}
       >
         {!gameStarted && (
-          <PhaserButtonContent
-            scoreToDisplay={finalScore}
-            highScoresArray={highScores}
-            startGameCallback={handleStart}
-            hideGameCallback={() => setGameHidden(true)}
-            nameWriting={nameWriting}
-          />
+          <>
+            <div className="high_scores">
+              <ul className="high_scores_list">
+                {highScores.map((score) => {
+                  return (
+                    <li key={score.id} className="high_scores_item">
+                      {score.score} by {score.username}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <button
+              className="start_game_button"
+              onClick={handleStart}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                zIndex: 10000,
+                padding: '10px 20px',
+                fontSize: '16px',
+                cursor: 'pointer',
+              }}
+            >
+              {finalScore > 0
+                ? `Your score = ${finalScore}. Restart`
+                : 'Start Game'}
+            </button>
+            <button
+              className="hide_game_button"
+              onClick={() => setGameHidden(true)}
+              style={{
+                position: 'absolute',
+                top: '73%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                zIndex: 10000,
+                cursor: 'pointer',
+              }}
+            >
+              Hide game
+            </button>
+          </>
         )}
       </div>
     )
