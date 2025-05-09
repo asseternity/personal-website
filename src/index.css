@@ -324,13 +324,44 @@ button img {
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.pbc_nw_container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pbc_nw_container label {
+  color: white;
+}
+
+.pbc_nw_container input,
+.pbc_nw_container button {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.pbc_nw_container button {
+  cursor: pointer;
 }
 
 .pbc_hs_container {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pbc_hs_container ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -343,6 +374,40 @@ button img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.small_yellow_text {
+  color: yellow;
+  border: 1px solid yellow;
+  margin-left: 3px;
+  padding: 2px;
+  font-size: 9px;
+  border-radius: 5px;
+}
+
+.small_yellow_text:hover {
+  color: white;
+  border: 1px solid white;
+}
+
+/* Game layering */
+
+/* make every UI pane in PhaserButtonContent fill and sit on top */
+.pbc_container,
+.pbc_nw_container,
+.pbc_hs_container,
+.pbc_buttons_container {
+  position: absolute;
+  z-index: 10000; /* > 9999 so it always wins */
+  pointer-events: auto; /* so your buttons remain clickable */
+}
+
+/* ensure the underlying Phaser canvas stays behind */
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
 /* Responsive Design */
@@ -366,4 +431,10 @@ button img {
   .bottom {
     text-align: left;
   }
+}
+
+/* override */
+button.no_margin_button {
+  margin-right: 0px !important;
+  margin-top: 5px;
 }

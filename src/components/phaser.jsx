@@ -24,7 +24,6 @@ export default function PhaserGame() {
     setFinalScore(0);
     gameStartedRef.current = true;
     setGameStarted(true);
-    setHighScores([]);
   };
 
   useEffect(() => {
@@ -236,6 +235,7 @@ export default function PhaserGame() {
 
   // when the game is over, we grab the final score and check if it's top five
   useEffect(() => {
+    if (finalScore < 0) return;
     const fetchCheck = async () => {
       const response = await fetch(
         'https://personal-website-backend-production-c5a6.up.railway.app/api/scores/check',
@@ -247,11 +247,13 @@ export default function PhaserGame() {
       );
       if (response.ok) {
         const data = await response.json();
-        if ((data.topFive = true)) {
+        if (data.topFive == true) {
           setNameWriting(true);
         }
       }
     };
+
+    fetchCheck();
   }, [finalScore]);
 
   return (

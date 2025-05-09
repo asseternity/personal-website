@@ -10,6 +10,7 @@ export default function PhaserButtonContent({
   const [showHighScoresTab, setShowHighScoresTab] = useState(false);
   const [username, setUsername] = useState('');
   const [localHighScores, setLocalHighScores] = useState(highScoresArray);
+  const [localNameWriting, setLocalNameWriting] = useState(nameWriting);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
@@ -18,9 +19,14 @@ export default function PhaserButtonContent({
     setLocalHighScores(highScoresArray);
   }, [highScoresArray]);
 
+  useEffect(() => {
+    setLocalNameWriting(nameWriting);
+  }, [nameWriting]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username) return;
+    setLocalNameWriting(false);
     setSubmitting(true);
     setError(null);
 
@@ -50,7 +56,7 @@ export default function PhaserButtonContent({
     <>
       {showHighScoresTab ? (
         <div className="pbc_container">
-          {nameWriting ? (
+          {localNameWriting ? (
             <div className="pbc_nw_container">
               <form onSubmit={handleSubmit} style={{ textAlign: 'center' }}>
                 <label
@@ -71,7 +77,6 @@ export default function PhaserButtonContent({
                   style={{
                     fontSize: '12px',
                     padding: '4px',
-                    marginRight: '6px',
                   }}
                   disabled={submitting}
                 />
@@ -86,6 +91,17 @@ export default function PhaserButtonContent({
                   <p style={{ color: 'red', fontSize: '11px' }}>{error}</p>
                 )}
               </form>
+              <button
+                className="start_game_button no_margin_button"
+                onClick={() => setShowHighScoresTab(false)}
+                style={{
+                  fontSize: '11px',
+                  marginRight: '0px',
+                  marginTop: '5px',
+                }}
+              >
+                Back
+              </button>
             </div>
           ) : (
             <div className="pbc_hs_container">
@@ -112,15 +128,19 @@ export default function PhaserButtonContent({
                   </li>
                 ))}
               </ul>
+              <button
+                className="start_game_button no_margin_button"
+                onClick={() => setShowHighScoresTab(false)}
+                style={{
+                  fontSize: '11px',
+                  marginRight: '0px',
+                  marginTop: '5px',
+                }}
+              >
+                Back
+              </button>
             </div>
           )}
-          <button
-            className="start_game_button"
-            onClick={() => setShowHighScoresTab(false)}
-            style={{ fontSize: '11px' }}
-          >
-            Back
-          </button>
         </div>
       ) : (
         <div className="pbc_buttons_container">
@@ -170,7 +190,7 @@ export default function PhaserButtonContent({
               style={{ cursor: 'pointer' }}
             >
               Top 5 ever
-              {nameWriting && (
+              {localNameWriting && (
                 <span className="small_yellow_text"> Add your score!</span>
               )}
             </button>
