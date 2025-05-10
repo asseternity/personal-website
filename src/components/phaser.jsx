@@ -256,6 +256,26 @@ export default function PhaserGame() {
     fetchCheck();
   }, [finalScore]);
 
+  // temporarily unbind Phaser’s capture of W and S when showing the name‐entry UI
+  useEffect(() => {
+    const scene = phaserSceneRef.current;
+    if (!scene) return;
+
+    if (nameWriting) {
+      // stop preventing default on W/S so the input sees them
+      scene.input.keyboard.removeCapture([
+        Phaser.Input.Keyboard.KeyCodes.W,
+        Phaser.Input.Keyboard.KeyCodes.S,
+      ]);
+    } else {
+      // when we go back to gameplay, re-capture W/S for Phaser
+      scene.input.keyboard.addCapture([
+        Phaser.Input.Keyboard.KeyCodes.W,
+        Phaser.Input.Keyboard.KeyCodes.S,
+      ]);
+    }
+  }, [nameWriting]);
+
   return (
     !gameHidden && (
       <div

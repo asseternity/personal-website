@@ -70,6 +70,7 @@ export default function PhaserButtonContent({
                   Enter your name:
                 </label>
                 <input
+                  autoFocus
                   id="username"
                   type="text"
                   value={username}
