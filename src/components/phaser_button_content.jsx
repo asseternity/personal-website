@@ -59,18 +59,9 @@ export default function PhaserButtonContent({
           {localNameWriting ? (
             <div className="pbc_nw_container">
               <form onSubmit={handleSubmit} style={{ textAlign: 'center' }}>
-                <label
-                  htmlFor="username"
-                  style={{
-                    fontSize: '10px',
-                    display: 'block',
-                    marginBottom: '4px',
-                  }}
-                >
-                  Enter your name:
-                </label>
                 <input
                   autoFocus
+                  placeholder="Enter your username..."
                   id="username"
                   type="text"
                   value={username}
