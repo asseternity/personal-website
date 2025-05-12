@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import portrait from '/portrait.jpg';
 import logo_gh from '/github-svgrepo-com.svg';
 import logo_li from '/linkedin-svgrepo-com.svg';
@@ -13,6 +12,39 @@ import TechStack from './components/tech_stack';
 import { Time } from 'phaser';
 
 export default function App() {
+  const LIincrement = async () => {
+    const res = await fetch(
+      'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/li',
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+  };
+
+  const GHincrement = async () => {
+    const res = await fetch(
+      'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/gh',
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+  };
+
+  const CVincrement = async () => {
+    const res = await fetch(
+      'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/cv',
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+  };
+
   return (
     <div className="root">
       <PhaserGame />
@@ -63,7 +95,7 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button>
+              <button onClick={GHincrement}>
                 <img src={logo_gh} />
               </button>
             </a>
@@ -72,7 +104,7 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button>
+              <button onClick={LIincrement}>
                 <img src={logo_li} />
               </button>
             </a>
@@ -80,7 +112,7 @@ export default function App() {
               href="/personal-website/[CV 2025] - Asset Nakupov - ENG.pdf"
               download
             >
-              <button>
+              <button onClick={CVincrement}>
                 <img src={logo_cv} />
               </button>
             </a>
@@ -118,7 +150,7 @@ export default function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <button>
+          <button onClick={GHincrement}>
             <img src={logo_gh} />
           </button>
         </a>
@@ -127,7 +159,7 @@ export default function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <button>
+          <button onClick={LIincrement}>
             <img src={logo_li} />
           </button>
         </a>
@@ -135,7 +167,7 @@ export default function App() {
           href="/personal-website/[CV 2025] - Asset Nakupov - ENG.pdf"
           download
         >
-          <button>
+          <button onClick={CVincrement}>
             <img src={logo_cv} />
           </button>
         </a>
