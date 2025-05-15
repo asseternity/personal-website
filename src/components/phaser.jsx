@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Phaser from 'phaser';
 import PhaserButtonContent from './phaser_button_content';
+import dragon from '/dragon.png';
 import bird from '/bird.png';
 import cloud from '/cloud.png';
 
@@ -52,6 +53,10 @@ export default function PhaserGame() {
     function preload() {
       this.load.image('cloud', cloud);
       this.load.image('bird', bird);
+      this.load.spritesheet('dragon', dragon, {
+        frameWidth: 191,
+        frameHeight: 161,
+      });
     }
 
     function create() {
@@ -60,6 +65,7 @@ export default function PhaserGame() {
       // Initialize scene-scoped state
       this.scoreValue = 0;
       this.framesSinceLastObstacle = 0;
+      this.obstacleSpeedUpModifier = 0;
       this.obstaclesQueue = [];
 
       // Resize to container
@@ -76,9 +82,25 @@ export default function PhaserGame() {
       const height = this.scale.height;
       this.physics.world.setBounds(0, 0, width, height);
 
+      // create animation
+      this.anims.create({
+        key: 'fly',
+        frames: this.anims.generateFrameNumbers('dragon', { start: 3, end: 5 }),
+        frameRate: 6,
+        repeat: -1,
+      });
+
       // Player setup
-      this.player = this.physics.add.image(50, 50, 'bird').setScale(0.65);
+      this.player = this.physics.add
+        .sprite(50, 50, 'dragon')
+        .setScale(0.65)
+        .play('fly');
       this.player.setCollideWorldBounds(true);
+
+      // now override the body size and offset
+      // (the numbers below are in *physics* pixels, before scale)
+      this.player.body.setSize(40, 60); // width, height of the hitbox
+      this.player.body.setOffset(20, 50); // x‑ and y‑offset from the top‑left of the sprite
 
       // Score text
       this.scoreText = this.add
@@ -156,9 +178,17 @@ export default function PhaserGame() {
     function update() {
       if (!gameStartedRef.current) return;
 
+      // increase speed of obstacles spawning
+      let s = this.scoreValue;
+      if (s < 5) this.obstacleSpeedUpModifier = 0;
+      else if (s >= 5 && s < 10) this.obstacleSpeedUpModifier = 50;
+      else if (s >= 10 && s < 15) this.obstacleSpeedUpModifier = 75;
+      else if (s >= 15 && s < 25) this.obstacleSpeedUpModifier = 100;
+      else /* s >= 25 */ this.obstacleSpeedUpModifier = 120;
+
       // Spawn obstacles
       this.framesSinceLastObstacle++;
-      if (this.framesSinceLastObstacle >= 180) {
+      if (this.framesSinceLastObstacle >= 180 - this.obstacleSpeedUpModifier) {
         this.obstaclesQueue.push(addObstacle(this));
         this.framesSinceLastObstacle = 0;
       }
