@@ -251,6 +251,13 @@ button img {
 }
 
 /* Cards inside */
+.card_screenshot {
+  width: 100%;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .card_para {
   text-align: justify;
   padding-bottom: 10px;

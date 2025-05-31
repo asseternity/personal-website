@@ -1,8 +1,14 @@
+import screenshot from '/map_quiz.png';
+
 export default function ProjectCard4() {
   return (
     <div className="card_container">
       <h2>Map Quiz</h2>
       <div className="card_inner">
+        <div
+          className="card_screenshot"
+          style={{ backgroundImage: `url(${screenshot})` }}
+        ></div>
         <div className="card_para">
           <span className="green_highlight">Overview:</span> Full-stack
           interactive map quiz game where players explore the fantasy continent

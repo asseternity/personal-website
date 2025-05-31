@@ -1,8 +1,14 @@
+import screenshot from '/what_makes_you_live.png';
+
 export default function ProjectCard3() {
   return (
     <div className="card_container">
       <h2>WHAT MAKES YOU LIVE?</h2>
       <div className="card_inner">
+        <div
+          className="card_screenshot"
+          style={{ backgroundImage: `url(${screenshot})` }}
+        ></div>
         <div className="card_para">
           <span className="green_highlight">Overview:</span> Browser-based text
           RPG set in a Victorian-era fantasy realm, offering immersive narrative

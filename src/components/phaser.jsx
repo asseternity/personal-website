@@ -4,6 +4,10 @@ import PhaserButtonContent from './phaser_button_content';
 import dragon from '/dragon.png';
 import bird from '/bird.png';
 import cloud from '/cloud.png';
+import bolt1 from '/bolt.png';
+import bolt2 from '/bolt2.png';
+import bolt3 from '/bolt3.png';
+import bolt4 from '/bolt4.png';
 
 export default function PhaserGame() {
   const [gameHidden, setGameHidden] = useState(false);
@@ -52,6 +56,10 @@ export default function PhaserGame() {
 
     function preload() {
       this.load.image('cloud', cloud);
+      this.load.image('bolt1', bolt1);
+      this.load.image('bolt2', bolt2);
+      this.load.image('bolt3', bolt3);
+      this.load.image('bolt4', bolt4);
       this.load.image('bird', bird);
       this.load.spritesheet('dragon', dragon, {
         frameWidth: 191,
@@ -165,7 +173,13 @@ export default function PhaserGame() {
       // Pointer controls
       this.input.on('pointerdown', (pointer) => {
         if (!gameStartedRef.current) return;
-        this.player.setVelocityY(pointer.y < this.player.y ? -230 : 230);
+        // 1) Figure out where the Phaser canvas sits on screen:
+        const rect = gameContainerRef.current.getBoundingClientRect();
+        // 2) pointer.event.clientY is the mouse/touch Y relative to the viewport.
+        //    Subtract rect.top to get Y relative to top of the canvas itself.
+        const localY = pointer.event.clientY - rect.top;
+        // 3) Now compare “localY inside the canvas” against the dragon’s Y:
+        this.player.setVelocityY(localY < this.player.y ? -230 : 230);
       });
 
       function onScroll() {
@@ -180,11 +194,11 @@ export default function PhaserGame() {
 
       // increase speed of obstacles spawning
       let s = this.scoreValue;
-      if (s < 5) this.obstacleSpeedUpModifier = 0;
-      else if (s >= 5 && s < 10) this.obstacleSpeedUpModifier = 50;
-      else if (s >= 10 && s < 15) this.obstacleSpeedUpModifier = 75;
-      else if (s >= 15 && s < 25) this.obstacleSpeedUpModifier = 100;
-      else /* s >= 25 */ this.obstacleSpeedUpModifier = 120;
+      if (s < 5) this.obstacleSpeedUpModifier = 20;
+      else if (s >= 5 && s < 10) this.obstacleSpeedUpModifier = 70;
+      else if (s >= 10 && s < 15) this.obstacleSpeedUpModifier = 95;
+      else if (s >= 15 && s < 25) this.obstacleSpeedUpModifier = 120;
+      else /* s >= 25 */ this.obstacleSpeedUpModifier = 150;
 
       // Spawn obstacles
       this.framesSinceLastObstacle++;
@@ -220,9 +234,19 @@ export default function PhaserGame() {
     function addObstacle(scene) {
       const x = scene.scale.width + 50;
       const y = Phaser.Math.Between(20, scene.scale.height - 20);
+
+      // choose sprite based on speed
+      let s = scene.scoreValue;
+      let correctSprite = 'bolt1';
+      if (s < 5) correctSprite = 'bolt1';
+      else if (s >= 5 && s < 10) correctSprite = 'bolt2';
+      else if (s >= 10 && s < 15) correctSprite = 'bolt3';
+      else if (s >= 15 && s < 25) correctSprite = 'bolt4';
+      else /* s >= 25 */ correctSprite = 'bolt1';
+
       const obs = scene.physics.add
-        .sprite(x, y, 'cloud')
-        .setScale(Phaser.Math.FloatBetween(0.5, 1.8));
+        .sprite(x, y, correctSprite)
+        .setScale(Phaser.Math.FloatBetween(0.05, 0.3));
       obs.body.setImmovable(true);
       obs.setVelocityX(-400);
       if (gameStartedRef.current) {

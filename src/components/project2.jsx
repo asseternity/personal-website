@@ -1,8 +1,14 @@
+import screenshot from '/newsletter.png';
+
 export default function ProjectCard2() {
   return (
     <div className="card_container">
       <h2>Blog / Newsletter</h2>
       <div className="card_inner">
+        <div
+          className="card_screenshot"
+          style={{ backgroundImage: `url(${screenshot})` }}
+        ></div>
         <div className="card_para">
           <span className="green_highlight">Overview:</span> Full-stack blog and
           newsletter platform featuring separate frontends for public content

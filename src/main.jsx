@@ -42,7 +42,13 @@ createRoot(document.getElementById('root')).render(
 // [v] have the clouds spawn by default before game starts, but not kill the bird for visual interest
 // [v] fix mobile pointers in phaser
 // [v] backend for the game!
-// [_] high score frontend
-// [_] send metrics
-// [_] add screenshots of the projects
+// [v] high score frontend
+// [v] same bug again - start game scrolled up then scroll down bug
+// [v] change the obstacle sprite to lightning bolts
+// [v] change the obstacle color based on stage
+// [v] send metrics
+// [v] add screenshots of the projects
+// [_] tons of scrolling errors
 // [_] add a "loading" for the tagging game
+// [_] browser tab title for what makes you live
+// [_] push everything
