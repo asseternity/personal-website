@@ -48,7 +48,7 @@ createRoot(document.getElementById('root')).render(
 // [v] change the obstacle color based on stage
 // [v] send metrics
 // [v] add screenshots of the projects
-// [_] tons of scrolling errors
+// [v] tons of scrolling errors
+// [_] push personal website
 // [_] add a "loading" for the tagging game
 // [_] browser tab title for what makes you live
-// [_] push everything

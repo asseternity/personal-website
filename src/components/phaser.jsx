@@ -183,9 +183,11 @@ export default function PhaserGame() {
       });
 
       function onScroll() {
-        const r = gameContainerRef.current.getBoundingClientRect();
-        this.scale.resize(r.width, r.height);
-        this.physics.world.setBounds(0, 0, r.width, r.height);
+        try {
+          const r = gameContainerRef.current.getBoundingClientRect();
+          this.scale.resize(r.width, r.height);
+          this.physics.world.setBounds(0, 0, r.width, r.height);
+        } catch (err) {}
       }
     }
 
