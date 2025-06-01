@@ -390,6 +390,7 @@ button img {
   padding: 2px;
   font-size: 9px;
   border-radius: 5px;
+  margin: 2px;
 }
 
 .small_yellow_text:hover {

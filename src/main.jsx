@@ -49,6 +49,9 @@ createRoot(document.getElementById('root')).render(
 // [v] send metrics
 // [v] add screenshots of the projects
 // [v] tons of scrolling errors
-// [_] push personal website
+// [v] push personal website
+// [v] "add your score" should follow a line break
+// [v] add two buttons, up and down, on the left, over the dragon that fade in when "game start" is clicked
+// [_] fix github readme for PW frontend
 // [_] add a "loading" for the tagging game
 // [_] browser tab title for what makes you live

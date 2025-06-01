@@ -15,18 +15,18 @@ export default function PhaserGame() {
   const [finalScore, setFinalScore] = useState(-1);
   const [highScores, setHighScores] = useState([]);
   const [nameWriting, setNameWriting] = useState(false);
-  const [direction, setDirection] = useState(null); // 'up' or 'down'
   const gameContainerRef = useRef(null);
   const gameStartedRef = useRef(false);
   const phaserSceneRef = useRef(null);
 
   const handleStart = () => {
     if (phaserSceneRef.current) {
+      // Restart the Phaser scene
       phaserSceneRef.current.scene.restart();
     }
+    // Reset React state
     setNameWriting(false);
     setFinalScore(0);
-    setDirection(null);
     gameStartedRef.current = true;
     setGameStarted(true);
   };
@@ -46,7 +46,9 @@ export default function PhaserGame() {
         default: 'arcade',
         arcade: { gravity: { y: 0 }, debug: false },
       },
-      audio: { noAudio: true },
+      audio: {
+        noAudio: true,
+      },
       scene: { preload, create, update },
     };
 
@@ -67,11 +69,14 @@ export default function PhaserGame() {
 
     function create() {
       phaserSceneRef.current = this;
+
+      // Initialize scene-scoped state
       this.scoreValue = 0;
       this.framesSinceLastObstacle = 0;
       this.obstacleSpeedUpModifier = 0;
       this.obstaclesQueue = [];
 
+      // Resize to container
       const rect = gameContainerRef.current.getBoundingClientRect();
       this.scale.resize(rect.width, rect.height);
       this.physics.world.setBounds(0, 0, rect.width, rect.height);
@@ -80,10 +85,12 @@ export default function PhaserGame() {
         window.removeEventListener('scroll', onScroll)
       );
 
+      // World bounds
       const width = this.scale.width;
       const height = this.scale.height;
       this.physics.world.setBounds(0, 0, width, height);
 
+      // create animation
       this.anims.create({
         key: 'fly',
         frames: this.anims.generateFrameNumbers('dragon', { start: 3, end: 5 }),
@@ -91,14 +98,19 @@ export default function PhaserGame() {
         repeat: -1,
       });
 
+      // Player setup
       this.player = this.physics.add
         .sprite(50, 50, 'dragon')
         .setScale(0.65)
         .play('fly');
       this.player.setCollideWorldBounds(true);
-      this.player.body.setSize(40, 60);
-      this.player.body.setOffset(20, 50);
 
+      // now override the body size and offset
+      // (the numbers below are in *physics* pixels, before scale)
+      this.player.body.setSize(40, 60); // width, height of the hitbox
+      this.player.body.setOffset(20, 50); // x‑ and y‑offset from the top‑left of the sprite
+
+      // Score text
       this.scoreText = this.add
         .text(width / 2, 20, 'Score: 0', {
           fontFamily: 'Arial',
@@ -108,9 +120,11 @@ export default function PhaserGame() {
         .setOrigin(0.5, 0);
       if (firstGameStart) this.scoreText.setAlpha(0);
 
+      // Keyboard controls
       this.wKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
       this.sKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 
+      // First-time tooltips
       if (firstGameStart && gameStartedRef.current) {
         const style = {
           fontFamily: 'Arial',
@@ -124,12 +138,17 @@ export default function PhaserGame() {
           .text(
             this.player.x + 60,
             this.player.y - 20,
-            'Press W/S or use buttons',
+            'Press W/S to fly up/down',
             style
           )
           .setOrigin(0, 0.5);
         const t2 = this.add
-          .text(this.player.x + 60, this.player.y + 5, 'Avoid obstacles', style)
+          .text(
+            this.player.x + 60,
+            this.player.y + 5,
+            'Tap above or below the bird to glide',
+            style
+          )
           .setOrigin(0, 0.5);
         this.tweens.add({
           targets: [t1, t2],
@@ -151,6 +170,18 @@ export default function PhaserGame() {
         firstGameStart = false;
       }
 
+      // Pointer controls
+      this.input.on('pointerdown', (pointer) => {
+        if (!gameStartedRef.current) return;
+        // 1) Figure out where the Phaser canvas sits on screen:
+        const rect = gameContainerRef.current.getBoundingClientRect();
+        // 2) pointer.event.clientY is the mouse/touch Y relative to the viewport.
+        //    Subtract rect.top to get Y relative to top of the canvas itself.
+        const localY = pointer.event.clientY - rect.top;
+        // 3) Now compare “localY inside the canvas” against the dragon’s Y:
+        this.player.setVelocityY(localY < this.player.y ? -230 : 230);
+      });
+
       function onScroll() {
         try {
           const r = gameContainerRef.current.getBoundingClientRect();
@@ -162,19 +193,23 @@ export default function PhaserGame() {
 
     function update() {
       if (!gameStartedRef.current) return;
+
+      // increase speed of obstacles spawning
       let s = this.scoreValue;
       if (s < 5) this.obstacleSpeedUpModifier = 20;
-      else if (s < 10) this.obstacleSpeedUpModifier = 70;
-      else if (s < 15) this.obstacleSpeedUpModifier = 95;
-      else if (s < 25) this.obstacleSpeedUpModifier = 120;
-      else this.obstacleSpeedUpModifier = 150;
+      else if (s >= 5 && s < 10) this.obstacleSpeedUpModifier = 70;
+      else if (s >= 10 && s < 15) this.obstacleSpeedUpModifier = 95;
+      else if (s >= 15 && s < 25) this.obstacleSpeedUpModifier = 120;
+      else /* s >= 25 */ this.obstacleSpeedUpModifier = 150;
 
+      // Spawn obstacles
       this.framesSinceLastObstacle++;
       if (this.framesSinceLastObstacle >= 180 - this.obstacleSpeedUpModifier) {
         this.obstaclesQueue.push(addObstacle(this));
         this.framesSinceLastObstacle = 0;
       }
 
+      // Cleanup off-screen
       this.obstaclesQueue = this.obstaclesQueue.filter((obs) => {
         if (obs.x + obs.displayWidth < 0) {
           obs.destroy();
@@ -183,9 +218,11 @@ export default function PhaserGame() {
         return true;
       });
 
+      // Keyboard movement
       if (this.wKey.isDown) this.player.setVelocityY(-230);
       else if (this.sKey.isDown) this.player.setVelocityY(230);
 
+      // Update score
       while (
         this.obstaclesQueue.length &&
         this.player.x >= this.obstaclesQueue[0].x
@@ -199,13 +236,15 @@ export default function PhaserGame() {
     function addObstacle(scene) {
       const x = scene.scale.width + 50;
       const y = Phaser.Math.Between(20, scene.scale.height - 20);
+
+      // choose sprite based on speed
       let s = scene.scoreValue;
       let correctSprite = 'bolt1';
       if (s < 5) correctSprite = 'bolt1';
-      else if (s < 10) correctSprite = 'bolt2';
-      else if (s < 15) correctSprite = 'bolt3';
-      else if (s < 25) correctSprite = 'bolt4';
-      else correctSprite = 'bolt1';
+      else if (s >= 5 && s < 10) correctSprite = 'bolt2';
+      else if (s >= 10 && s < 15) correctSprite = 'bolt3';
+      else if (s >= 15 && s < 25) correctSprite = 'bolt4';
+      else /* s >= 25 */ correctSprite = 'bolt1';
 
       const obs = scene.physics.add
         .sprite(x, y, correctSprite)
@@ -225,12 +264,16 @@ export default function PhaserGame() {
     return () => game.destroy(true);
   }, []);
 
+  // initial Fetch high scores when website loads
   useEffect(() => {
     const fetchScores = async () => {
       try {
         const response = await fetch(
           'https://personal-website-backend-production-c5a6.up.railway.app/api/scores',
-          { method: 'GET', headers: { 'Content-Type': 'application/json' } }
+          {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+          }
         );
         if (response.ok) {
           const data = await response.json();
@@ -242,9 +285,11 @@ export default function PhaserGame() {
         console.error('Error fetching scores:', err);
       }
     };
+
     fetchScores();
   }, []);
 
+  // when the game is over, we grab the final score and check if it's top five
   useEffect(() => {
     if (finalScore < 0) return;
     const fetchCheck = async () => {
@@ -258,40 +303,34 @@ export default function PhaserGame() {
       );
       if (response.ok) {
         const data = await response.json();
-        if (data.topFive) setNameWriting(true);
+        if (data.topFive == true) {
+          setNameWriting(true);
+        }
       }
     };
+
     fetchCheck();
   }, [finalScore]);
 
+  // temporarily unbind Phaser’s capture of W and S when showing the name‐entry UI
   useEffect(() => {
     const scene = phaserSceneRef.current;
     if (!scene) return;
+
     if (nameWriting) {
+      // stop preventing default on W/S so the input sees them
       scene.input.keyboard.removeCapture([
         Phaser.Input.Keyboard.KeyCodes.W,
         Phaser.Input.Keyboard.KeyCodes.S,
       ]);
     } else {
+      // when we go back to gameplay, re-capture W/S for Phaser
       scene.input.keyboard.addCapture([
         Phaser.Input.Keyboard.KeyCodes.W,
         Phaser.Input.Keyboard.KeyCodes.S,
       ]);
     }
   }, [nameWriting]);
-
-  const handleUpClick = () => {
-    if (phaserSceneRef.current) {
-      phaserSceneRef.current.player.setVelocityY(-230);
-      setDirection('up');
-    }
-  };
-  const handleDownClick = () => {
-    if (phaserSceneRef.current) {
-      phaserSceneRef.current.player.setVelocityY(230);
-      setDirection('down');
-    }
-  };
 
   return (
     !gameHidden && (
@@ -315,62 +354,6 @@ export default function PhaserGame() {
             hideGameCallback={() => setGameHidden(true)}
             nameWriting={nameWriting}
           />
-        )}
-        {gameStarted && (
-          <>
-            <button
-              onClick={handleUpClick}
-              style={{
-                position: 'absolute',
-                left: '10px',
-                top: '10px',
-                opacity: gameStarted ? 1 : 0,
-                transition: 'opacity 0.5s',
-                padding: '8px',
-                background:
-                  direction === 'up'
-                    ? 'rgba(255, 255, 255, 0.2)'
-                    : 'transparent',
-                color: '#fff',
-                border: '1px solid rgba(255, 255, 255, 0.5)',
-                borderRadius: '50%',
-                width: '40px',
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-              }}
-            >
-              ▲
-            </button>
-            <button
-              onClick={handleDownClick}
-              style={{
-                position: 'absolute',
-                left: '10px',
-                bottom: '10px',
-                opacity: gameStarted ? 1 : 0,
-                transition: 'opacity 0.5s',
-                padding: '8px',
-                background:
-                  direction === 'down'
-                    ? 'rgba(255, 255, 255, 0.2)'
-                    : 'transparent',
-                color: '#fff',
-                border: '1px solid rgba(255, 255, 255, 0.5)',
-                borderRadius: '50%',
-                width: '40px',
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-              }}
-            >
-              ▼
-            </button>
-          </>
         )}
       </div>
     )

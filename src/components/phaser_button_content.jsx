@@ -183,7 +183,7 @@ export default function PhaserButtonContent({
             >
               Top 5 ever
               {localNameWriting && (
-                <span className="small_yellow_text"> Add your score!</span>
+                <p className="small_yellow_text"> Add your score!</p>
               )}
             </button>
           </div>
