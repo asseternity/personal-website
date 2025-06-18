@@ -1,6 +1,6 @@
 import screenshot from '/what_makes_you_live.png';
 
-export default function ProjectCard3() {
+export default function ProjectCard3({ onClickCallback }) {
   return (
     <div className="card_container">
       <h2>WHAT MAKES YOU LIVE?</h2>
@@ -30,7 +30,7 @@ export default function ProjectCard3() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <button>Live Demo</button>
+        <button onClick={onClickCallback}>Live Demo</button>
       </a>
     </div>
   );

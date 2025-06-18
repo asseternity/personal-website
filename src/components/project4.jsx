@@ -1,6 +1,6 @@
 import screenshot from '/map_quiz.png';
 
-export default function ProjectCard4() {
+export default function ProjectCard4({ onClickCallback }) {
   return (
     <div className="card_container">
       <h2>Map Quiz</h2>
@@ -30,7 +30,7 @@ export default function ProjectCard4() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <button>Live Demo</button>
+        <button onClick={onClickCallback}>Live Demo</button>
       </a>
     </div>
   );

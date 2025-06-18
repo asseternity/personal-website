@@ -52,6 +52,15 @@ createRoot(document.getElementById('root')).render(
 // [v] push personal website
 // [v] "add your score" should follow a line break
 // [v] add two buttons, up and down, on the left, over the dragon that fade in when "game start" is clicked
-// [_] fix github readme for PW frontend
+// [v] fix github readme for PW frontend
+
+// improve portfolio website:
+// [v] track how many times each project is clicked - migrate railway db
+// [v] track how many times each project is clicked - set up backend routes
+// [v] track how many times each project is clicked - hook up frontend routes
+// [_] test in npm run dev
+
+// projects:
 // [_] add a "loading" for the tagging game
 // [_] browser tab title for what makes you live
+// [_] finish game studio website

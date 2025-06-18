@@ -1,6 +1,6 @@
 import screenshot from '/newsletter.png';
 
-export default function ProjectCard2() {
+export default function ProjectCard2({ onClickCallback }) {
   return (
     <div className="card_container">
       <h2>Blog / Newsletter</h2>
@@ -30,7 +30,7 @@ export default function ProjectCard2() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <button>Live Demo</button>
+        <button onClick={onClickCallback}>Live Demo</button>
       </a>
     </div>
   );

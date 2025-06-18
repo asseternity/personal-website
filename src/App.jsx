@@ -45,6 +45,50 @@ export default function App() {
     if (!res.ok) throw new Error(`Server error: ${res.status}`);
   };
 
+  const LoungeIncrement = async () => {
+    const res = await fetch(
+      'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/lounge',
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+  };
+
+  const VivaIncrement = async () => {
+    const res = await fetch(
+      'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/viva',
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+  };
+
+  const TextRPGIncrement = async () => {
+    const res = await fetch(
+      'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/textRPG',
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+  };
+
+  const MapQuizIncrement = async () => {
+    const res = await fetch(
+      'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/mapQuiz',
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+  };
+
   return (
     <div className="root">
       <PhaserGame />
@@ -128,16 +172,16 @@ export default function App() {
         <h3>Projects</h3>
         <div className="projects_cards">
           <div className="projects_card">
-            <Project1 />
+            <Project1 onClickCallback={LoungeIncrement} />
           </div>
           <div className="projects_card">
-            <Project2 />
+            <Project2 onClickCallback={VivaIncrement} />
           </div>
           <div className="projects_card">
-            <Project3 />
+            <Project3 onClickCallback={TextRPGIncrement} />
           </div>
           <div className="projects_card">
-            <Project4 />
+            <Project4 onClickCallback={MapQuizIncrement} />
           </div>
         </div>
       </div>

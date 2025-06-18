@@ -1,6 +1,6 @@
 import screenshot from '/social_media.png';
 
-export default function ProjectCard1() {
+export default function ProjectCard1({ onClickCallback }) {
   return (
     <div className="card_container">
       <h2>Full-Stack Social Media Platform</h2>
@@ -28,7 +28,7 @@ export default function ProjectCard1() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <button>Live Demo</button>
+        <button onClick={onClickCallback}>Live Demo</button>
       </a>
     </div>
   );
