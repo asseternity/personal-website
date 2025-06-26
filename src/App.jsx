@@ -6,6 +6,7 @@ import Project1 from './components/project1';
 import Project2 from './components/project2';
 import Project3 from './components/project3';
 import Project4 from './components/project4';
+import Project5 from './components/project5';
 import PhaserGame from './components/phaser';
 import Timeline from './components/timeline';
 import TechStack from './components/tech_stack';
@@ -81,6 +82,17 @@ export default function App() {
   const MapQuizIncrement = async () => {
     const res = await fetch(
       'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/mapQuiz',
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+  };
+
+  const ShopIncrement = async () => {
+    const res = await fetch(
+      'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/shop',
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -167,7 +179,6 @@ export default function App() {
         </div>
       </div>
       <TechStack />
-      <Timeline />
       <div className="projects">
         <h3>Projects</h3>
         <div className="projects_cards">
@@ -183,8 +194,12 @@ export default function App() {
           <div className="projects_card">
             <Project4 onClickCallback={MapQuizIncrement} />
           </div>
+          <div className="projects_card">
+            <Project5 onClickCallback={ShopIncrement} />
+          </div>
         </div>
       </div>
+      <Timeline />
       <div className="bottom">
         <h3>Let’s Connect</h3>
         <p>nakupovasset@protonmail.com</p>

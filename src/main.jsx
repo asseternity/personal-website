@@ -59,6 +59,9 @@ createRoot(document.getElementById('root')).render(
 // [v] track how many times each project is clicked - set up backend routes
 // [v] track how many times each project is clicked - hook up frontend routes
 // [v] test in npm run dev and publish
+// [v] add the shop project to portfolio
+// [_] custom domain
+// [_] custom email!!!
 
 // projects:
 // [_] add a "loading" for the tagging game
