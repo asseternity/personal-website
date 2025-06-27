@@ -49,7 +49,7 @@ export default function Blog() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            postId: e.target[0].value, // postId is the first input in the form
+            postId: post.id,
             author: commentAuthor,
             email: commentEmail,
             content: commentContent,
