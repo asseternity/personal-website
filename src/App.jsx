@@ -11,6 +11,7 @@ import PhaserGame from './components/phaser';
 import Timeline from './components/timeline';
 import TechStack from './components/tech_stack';
 import { Time } from 'phaser';
+import { useNavigate } from 'react-router-dom';
 
 export default function App() {
   const LIincrement = async () => {

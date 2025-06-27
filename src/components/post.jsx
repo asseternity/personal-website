@@ -1,0 +1,65 @@
+import { useEffect, useRef, useState } from 'react';
+
+export default function Post({ post, writeCommentCallback }) {
+  const [commentAuthor, setCommentAuthor] = useState('');
+  const [commentEmail, setCommentEmail] = useState('');
+  const [commentContent, setCommentContent] = useState('');
+
+  return (
+    <div key={`post_${post.id}`} className="blog_post">
+      <h2>{post.title}</h2>
+      <p>{post.content}</p>
+      <div className="post_comments">
+        {post.comments.map((comment) => (
+          <div key={`comment_${comment.id}`} className="comment">
+            <h3>{comment.author}</h3>
+            <p>{comment.content}</p>
+          </div>
+        ))}
+      </div>
+      <div className="writing_comment">
+        <form>
+          <input type="hidden" value={post.id} />
+          <input
+            placeholder="Username"
+            type="text"
+            required
+            value={commentAuthor}
+            onChange={(e) => setCommentAuthor(e.target.value)}
+          />
+          <input
+            placeholder="Email"
+            type="email"
+            required
+            value={commentEmail}
+            onChange={(e) => setCommentEmail(e.target.value)}
+          />
+          <input
+            placeholder="Comment"
+            type="text"
+            required
+            value={commentContent}
+            onChange={(e) => setCommentContent(e.target.value)}
+          />
+          <button
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+              writeCommentCallback(
+                post,
+                commentAuthor,
+                commentEmail,
+                commentContent
+              );
+              setCommentAuthor('');
+              setCommentEmail('');
+              setCommentContent('');
+            }}
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}

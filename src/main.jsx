@@ -1,11 +1,12 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
 import './index.css';
-import App from './App.jsx';
+import routes from './routes.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={routes} />
   </StrictMode>
 );
 
@@ -61,6 +62,8 @@ createRoot(document.getElementById('root')).render(
 // [v] test in npm run dev and publish
 // [v] add the shop project to portfolio
 // [v] custom domain
+// [_] add a blog feature
+// [_] figure out how to write a new post without exposing it to the frontend
 
 // projects:
 // [_] add a "loading" for the tagging game
