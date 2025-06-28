@@ -32,7 +32,7 @@ export default function Blog() {
 
   // function to write a comment
   const writeComment = async (
-    post,
+    postId,
     commentAuthor,
     commentEmail,
     commentContent
@@ -50,7 +50,7 @@ export default function Blog() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            postId: post.id,
+            postId: postId,
             author: commentAuthor,
             email: commentEmail,
             content: commentContent,
@@ -59,16 +59,17 @@ export default function Blog() {
       );
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
       const data = await res.json();
-      for (let i = 0; i < blogPosts.length; i++) {
-        let updatedBlogPosts = [...blogPosts];
-        if (updatedBlogPosts[i].id === data.postId) {
-          // add the new comment to the post's comments array
-          updatedBlogPosts[i].comments.push({
-            id: data.comment.id,
-          });
-        }
-        setBlogPosts(updatedBlogPosts);
-      }
+      setBlogPosts((prevPosts) =>
+        prevPosts.map((post) => {
+          if (post.id === data.comment.blogPostId) {
+            return {
+              ...post,
+              comments: [data.comment, ...post.comments],
+            };
+          }
+          return post;
+        })
+      );
     } catch (err) {
       console.error('Error creating comment:', err);
     }

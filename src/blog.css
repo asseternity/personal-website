@@ -15,6 +15,7 @@
   border: 2px solid #2bb0ff;
   border-radius: 12px;
   padding-left: 10px;
+  margin-bottom: 20px;
 }
 
 .blog_post h2 {
@@ -22,11 +23,36 @@
   font-family: 'Coding';
 }
 
+.leave_comment {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  text-align: left;
+  width: 100%;
+}
+
+.post_comments h3 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #71cc74;
+  font-family: 'Coding';
+  font-size: 13px;
+}
+
+.post_comments p {
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.comment {
+  border-top: 1px solid #2bb0ff;
+}
+
 .writing_comment {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
 }
 
 .writing_comment form {

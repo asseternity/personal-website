@@ -10,6 +10,7 @@ export default function Post({ post, writeCommentCallback }) {
       <h2>{post.title}</h2>
       <p>{post.content}</p>
       <div className="post_comments">
+        <p className="leave_comment">Leave a comment</p>
         {post.comments.map((comment) => (
           <div key={`comment_${comment.id}`} className="comment">
             <h3>{comment.author}</h3>
@@ -53,7 +54,7 @@ export default function Post({ post, writeCommentCallback }) {
               onClick={(e) => {
                 e.preventDefault();
                 writeCommentCallback(
-                  post,
+                  post.id,
                   commentAuthor,
                   commentEmail,
                   commentContent

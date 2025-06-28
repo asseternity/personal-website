@@ -62,7 +62,12 @@ createRoot(document.getElementById('root')).render(
 // [v] test in npm run dev and publish
 // [v] add the shop project to portfolio
 // [v] custom domain
-// [_] add a blog feature
+// [v] add a blog feature
+// [_] comments don't automatically update
+// [_] show dates of posts and comments
+// [_] animate and hide the comment section
+// [_] some way to delete your old comments or something?
+// [_] navigation to and back from the blog section
 // [_] figure out how to write a new post without exposing it to the frontend
 
 // projects:
