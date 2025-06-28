@@ -6,7 +6,7 @@ export default function Post({ post, writeCommentCallback }) {
   const [commentContent, setCommentContent] = useState('');
 
   return (
-    <div key={`post_${post.id}`} className="blog_post">
+    <div className="blog_post">
       <h2>{post.title}</h2>
       <p>{post.content}</p>
       <div className="post_comments">
@@ -19,45 +19,53 @@ export default function Post({ post, writeCommentCallback }) {
       </div>
       <div className="writing_comment">
         <form>
-          <input type="hidden" value={post.id} />
-          <input
-            placeholder="Username"
-            type="text"
-            required
-            value={commentAuthor}
-            onChange={(e) => setCommentAuthor(e.target.value)}
-          />
-          <input
-            placeholder="Email"
-            type="email"
-            required
-            value={commentEmail}
-            onChange={(e) => setCommentEmail(e.target.value)}
-          />
-          <input
-            placeholder="Comment"
-            type="text"
-            required
-            value={commentContent}
-            onChange={(e) => setCommentContent(e.target.value)}
-          />
-          <button
-            type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              writeCommentCallback(
-                post,
-                commentAuthor,
-                commentEmail,
-                commentContent
-              );
-              setCommentAuthor('');
-              setCommentEmail('');
-              setCommentContent('');
-            }}
-          >
-            Submit
-          </button>
+          <div className="writing_comment_divider">
+            <input type="hidden" value={post.id} />
+            <input
+              className="comment_author"
+              placeholder="Username"
+              type="text"
+              required
+              value={commentAuthor}
+              onChange={(e) => setCommentAuthor(e.target.value)}
+            />
+            <input
+              className="comment_email"
+              placeholder="Email"
+              type="email"
+              required
+              value={commentEmail}
+              onChange={(e) => setCommentEmail(e.target.value)}
+            />
+          </div>
+          <div className="writing_comment_divider">
+            <input
+              placeholder="Comment"
+              className="comment_content"
+              type="text"
+              required
+              value={commentContent}
+              onChange={(e) => setCommentContent(e.target.value)}
+            />
+            <button
+              className="comment_submit"
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                writeCommentCallback(
+                  post,
+                  commentAuthor,
+                  commentEmail,
+                  commentContent
+                );
+                setCommentAuthor('');
+                setCommentEmail('');
+                setCommentContent('');
+              }}
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Post from './components/post.jsx';
+import './blog.css';
 
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -80,7 +81,11 @@ export default function Blog() {
       {!loading && (
         <div className="blog_posts">
           {blogPosts.map((post) => (
-            <Post post={post} writeCommentCallback={writeComment} />
+            <Post
+              key={`post_component_${post.id}`}
+              post={post}
+              writeCommentCallback={writeComment}
+            />
           ))}
         </div>
       )}
