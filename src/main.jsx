@@ -63,7 +63,7 @@ createRoot(document.getElementById('root')).render(
 // [v] add the shop project to portfolio
 // [v] custom domain
 // [v] add a blog feature
-// [_] comments don't automatically update
+// [v] comments don't automatically update
 // [_] show dates of posts and comments
 // [_] animate and hide the comment section
 // [_] some way to delete your old comments or something?

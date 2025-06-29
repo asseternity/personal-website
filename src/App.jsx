@@ -165,10 +165,7 @@ export default function App() {
                 <img src={logo_li} />
               </button>
             </a>
-            <a
-              href="/personal-website/[CV 2025] - Asset Nakupov - ENG.pdf"
-              download
-            >
+            <a href="/[CV 2025] - Asset Nakupov - ENG.pdf" download>
               <button onClick={CVincrement}>
                 <img src={logo_cv} />
               </button>
@@ -223,10 +220,7 @@ export default function App() {
             <img src={logo_li} />
           </button>
         </a>
-        <a
-          href="/personal-website/[CV 2025] - Asset Nakupov - ENG.pdf"
-          download
-        >
+        <a href="/[CV 2025] - Asset Nakupov - ENG.pdf" download>
           <button onClick={CVincrement}>
             <img src={logo_cv} />
           </button>
