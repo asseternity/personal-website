@@ -25,11 +25,12 @@
 
 .leave_comment {
   font-size: 12px;
-  color: #aaaaaa;
+  color: #2bb0ff;
   margin-top: 15px;
   margin-bottom: 10px;
   text-align: left;
   width: 100%;
+  font-style: italic;
 }
 
 .post_comments h3 {
@@ -100,4 +101,15 @@
   margin-left: 10px;
   margin-bottom: 10px;
   margin-right: 10px;
+}
+
+.toggle_post_button {
+  font-size: 0.8em;
+  background-color: transparent;
+  border: #2bb0ff 1px solid;
+  border-radius: 12px;
+  padding: 10px;
+  color: white;
+  margin-bottom: 10px;
+  cursor: pointer;
 }

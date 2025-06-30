@@ -1,0 +1,13 @@
+.post_date_text {
+  font-size: 0.9em;
+  font-family: 'Coding';
+  color: #aaa;
+  margin-top: 10px;
+}
+
+.comment_date_text {
+  font-size: 0.7em;
+  font-family: 'Coding';
+  color: #666;
+  margin-top: 5px;
+}

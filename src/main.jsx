@@ -64,7 +64,7 @@ createRoot(document.getElementById('root')).render(
 // [v] custom domain
 // [v] add a blog feature
 // [v] comments don't automatically update
-// [_] show dates of posts and comments
+// [v] show dates of posts and comments
 // [_] animate and hide the comment section
 // [_] some way to delete your old comments or something?
 // [_] navigation to and back from the blog section
