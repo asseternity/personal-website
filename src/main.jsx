@@ -65,10 +65,12 @@ createRoot(document.getElementById('root')).render(
 // [v] add a blog feature
 // [v] comments don't automatically update
 // [v] show dates of posts and comments
-// [_] animate and hide the comment section
-// [_] some way to delete your old comments or something?
+// [v] animate expand posts
+// [v] figure out how to write a new post without exposing it to the frontend
+// [v] line breaks in blog posts
+// [v] animation bug: when expanding a post, preview and full are overlapping for a second
 // [_] navigation to and back from the blog section
-// [_] figure out how to write a new post without exposing it to the frontend
+// [_] your own ErrorBoundary or errorElement prop on your route
 
 // projects:
 // [_] add a "loading" for the tagging game
