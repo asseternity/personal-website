@@ -12,6 +12,9 @@ import unity from '/tech stack icons/unity-svgrepo-com.svg';
 import sql from '/tech stack icons/database-svgrepo-com.svg';
 import postgresql from '/tech stack icons/postgresql-svgrepo-com.svg';
 import prismaORM from '/tech stack icons/db-file-format-symbol-svgrepo-com.svg';
+import solid from '/tech stack icons/solid.svg';
+import agile from '/tech stack icons/agile.svg';
+import oop from '/tech stack icons/oop.svg';
 import TechStackCard from './tech_stack_card';
 
 export default function TechStack() {
@@ -40,6 +43,12 @@ export default function TechStack() {
         <TechStackCard image={sql} text={'SQL'} />
         <TechStackCard image={postgresql} text={'PostgreSQL'} />
         <TechStackCard image={prismaORM} text={'Prisma ORM'} />
+      </div>
+      <h4>Design Principles:</h4>
+      <div className="tech_stack_grid">
+        <TechStackCard image={solid} text={'SOLID'} />
+        <TechStackCard image={agile} text={'Agile'} />
+        <TechStackCard image={oop} text={'OOP'} />
       </div>
     </div>
   );
