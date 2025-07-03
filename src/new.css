@@ -1,0 +1,72 @@
+.new {
+  padding: 20px;
+  background-color: brown;
+  margin: 10px;
+}
+
+.new_container {
+  display: flex;
+  flex-direction: row;
+}
+
+.new_left {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.new_left_carousel {
+  padding: 20px;
+  margin: 10px;
+}
+
+.new_right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.new_right_pic img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* or 'contain' */
+}
+
+.carousel_content {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel_track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel_slide {
+  min-width: 100%; /* or width: 100%; */
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* horizontal */
+  justify-content: center; /* vertical */
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+/* NEW: dark overlay to dull the pic */
+.carousel_slide::before {
+  content: '';
+  position: absolute;
+  inset: 0; /* cover whole slide */
+  background: rgba(0, 0, 0, 0.45); /* 0.45 = 45 % darkness, tweak as you like */
+  z-index: 0; /* underneath the text */
+}
+
+/* keep text above overlay */
+.carousel_slide > * {
+  position: relative;
+  z-index: 1;
+}
