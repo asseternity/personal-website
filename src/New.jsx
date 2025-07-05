@@ -25,58 +25,140 @@ export default function New() {
       <div className="new_left">
         <div className="new new_left_intro">
           <h1>Hi, I'm Asset</h1>
-          <p>I create stuff & and get the shit done</p>
           <p>
-            Developer & data engineer, fully self-taught and practice oriented
+            <span className="new_top">
+              I create end-to-end apps: fast and with structured thinking.
+            </span>
           </p>
-          <p>Former big 5 law Senior Associate</p>
+          <p>
+            <span className="new_top">
+              Node.JS fullstack developer, fully self-taught, self-motivated,
+              learning and practice-oriented
+            </span>
+          </p>
+          <p>
+            <span className="new_top">
+              Former Senior Associate at a Top 5 Global Law Firm
+            </span>
+          </p>
         </div>
         <div className="new new_left_main">
-          <p>I WANT TO TRANSITION INTO DATA:</p>
+          <h2>Competence is Node.js Backend Development</h2>
           <ul>
             <li>
-              Python & Pandas: analyzing, presenting and parsing data through
-              Python: 5 core skills, . Example: analysis of transitions from law
-              to tech, 10k entries and what does it mean (facts and data)
+              <span className="new_key">Scalable REST APIs:</span> Developed
+              robust RESTful APIs with Node.js and Express, enabling seamless
+              content delivery for real-time-like front-end updates in social
+              and blog platforms.
             </li>
             <li>
-              SQL & PostgreSQL: incorporated relational data bases, performed
-              data migrations on hosted websites: 5 core skills and what it
-              resulted in
+              <span className="new_key">Database Optimization:</span>{' '}
+              Architected and optimized PostgreSQL schemas with Prisma ORM,
+              managing complex data structures (posts, comments, user
+              interactions).
             </li>
-            <li>PrismaQRM</li>
+            <li>
+              <span className="new_key">Authentication & Security:</span> Built
+              secure authentication workflows leveraging JWT, Passport.js, and
+              bcrypt.
+            </li>
+            <li>
+              <span className="new_key">CI/CD and Testing (TDD):</span>{' '}
+              Engineered automated deployment pipelines through Netlify and
+              followed TDD practices with Jest, achieving maintainability across
+              full-stack Node.js applications.
+            </li>
+            <li>
+              <span className="new_key">Design principles:</span> Committed to
+              SOLID principles, Object-Oriented Programming (OOP), and Agile
+              methodologies, ensuring codebases are modular, extendable and
+              readable.
+            </li>
           </ul>
-          <p>
-            Design principles you know: Agile, team organization, apps you know
-            -- RELEVANT TO DATA
-          </p>
-          <button>Link to project</button>
         </div>
-        <div className="new new_left_secondary">
-          <h2>BUT I AM ALSO GOOD IN BACKEND:</h2>
-          <p>
-            Back-end with deep knowledge of front-end - highlight backend stuff
-            with understanding of principles
-          </p>
-          <p>ACHIEVEMENTS AND PROJECTS</p>
-          <p>Additional stuff: 1-2 lines - Odin project</p>
+        <div className="new new_left_additional_competence">
+          <h2>Additional competence in Frontend Development & Data Science</h2>
+          <ul>
+            <li>
+              <span className="new_key">Odin Project Graduate:</span> Completed
+              the intensive Full-Stack JavaScript Path, mastering end-to-end app
+              development, structured problem-solving, and modern
+              frontend/backend best practices.
+            </li>
+            <li>
+              <span className="new_key">Advanced React UX/UI:</span> Built
+              dynamic feed, chat, and profile systems in React
+              (Styled-Components, Vite), with intuitive multi-mode inputs
+              (text/image), editable posts/comments, pagination, and live UI
+              state syncing.
+            </li>
+            <li>
+              <span className="new_key">Python and Data Engineering:</span>{' '}
+              Designed data pipelines and insights using Python, Pandas,
+              pandasql, and matplotlib—cleaning multi-table datasets, executing
+              custom SQL analysis, and building visuals showing distributions
+              and breakdowns.
+            </li>
+          </ul>
         </div>
-        <div className="new new_left_lawyer">
-          <h2>
-            Hotshot lawyer stuff and soft skills: - здесь хайлайт факты и KPI
-          </h2>
-          <p>I did this: </p>
-          <p>3 accomplishments in law</p>
+        <div className="new new_left_professional_track_record">
+          <h2>Proven Professional Track Record in Law</h2>
+          <ul>
+            <li>
+              <span className="new_key">$100M+ Deal Experience:</span> Managed
+              high-stakes M&A, joint ventures, and multi-property real estate
+              deals across Kazakhstan’s energy, transport, and finance sectors.
+              Represented Compass Group PLC on acquisitions and labor law
+              matters.
+            </li>
+            <li>
+              <span className="new_key">Complex Dispute Resolution:</span> Led a
+              non-commercial organization to victory in 7 court cases, defeating
+              attempts to seize a land plot and securing government construction
+              permits.
+            </li>
+            <li>
+              <span className="new_key">Global Strategic Transactions:</span>{' '}
+              Issued legal opinions on aircraft leases for Air Astana with
+              Western lessors. Helped establish a subsidiary of a major
+              international bank in Kazakhstan.
+            </li>
+            <li>
+              <span className="new_key">
+                Clients Consistently Recognize. Legal 500 EMEA:
+              </span>{' '}
+              "Asset provided excellent product and legal service and practical
+              advice; his vast knowledge of current legislation and considerable
+              experience deserve special mention."
+            </li>
+          </ul>
+        </div>
+        <div className="new new_left_but">
+          <h2>BUT</h2>
           <p>
-            What it taught me: soft skills -- worked with international clients,
-            understand the management and team work, get the shit done, can
-            grind for many hours and fully self-sufficient
+            Law taught me to navigate complexity. But I craved building things
+            from zero — software lets me create and launch ideas globally. I
+            self-taught full-stack development and data engineering, applied my
+            legal precision to debugging and architecture, and built a growing
+            suite of production-grade apps. Law, business, code, architecture —
+            they all demand the same thing: a mind that brings order to
+            complexity. Pair that with an instinct to create, and you get what
+            drives me every day.
           </p>
-          <h3>BUT</h3>
+        </div>
+        <div className="new new_left_tech_stack">
+          <h2>Tech Stack & Skills</h2>
           <p>
-            I wanted to create stuff, so I transitioned to IT and self-taught
-            myself: github, organized learning and etc. One key insight from
-            that
+            Tech: Node.js, Express, PostgreSQL (Prisma), React
+            (Styled-Components, Vite), Python (Pandas, matplotlib), JWT, Jest,
+            CI/CD, Git, Railway, Netlify
+          </p>
+          <p>Practices: REST API design, auth flows, TDD, SOLID, OOP, Agile</p>
+          <p>Bonus: Unity, Blender | Data engineering & viz | IELTS 8.5</p>
+          <p>Connect: nakupovasset@protonmail.com | assetn.dev</p>
+          <p>
+            Based in Tbilisi, Georgia | Open to relocation, remote & hybrid
+            roles globally
           </p>
         </div>
         <div className="new_left_carousel">
@@ -103,6 +185,17 @@ export default function New() {
   );
 }
 
-// [_] make link to project reference the main project
-// [_] show 3 projects in carousel side by side
-// [_] stretch the left part to the right where the right ends
+// [V] feed chatgpt with data from 10 nodejs postings
+// [v] rewrite for nodejs
+// [v] css
+// [v] bold or highlight key words
+// [_] add highlights to tech stack and but
+// [_] add links, email me, principles, additional accomplishments
+// [_] left part stretch to the right where the right ends
+// [_] carousel buttons
+// [_] carousel 3 projects side by side
+// [_] cute button to start the dragon game
+// [_] main project link in "main competence"
+// [_] responsive
+// [_] same for cv
+// [_] same for linkedin
