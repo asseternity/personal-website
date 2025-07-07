@@ -1,6 +1,7 @@
 import './new.css';
 import portrait from '/portrait.jpg';
 import Carousel from './components/carousel';
+import PreviewProjects from './components/preview_projects';
 import TechStack from './components/tech_stack';
 import screenshot1 from '/social_media.png';
 import screenshot2 from '/newsletter.png';
@@ -244,9 +245,6 @@ export default function New() {
             roles globally
           </p>
         </div>
-        <div className="new_left_carousel">
-          <Carousel slides={slides} />
-        </div>
       </div>
       <div className="new_right">
         <div className="new new_right_pic">
@@ -308,6 +306,10 @@ export default function New() {
             <li>100% university scholarship winner</li>
           </ul>
         </div>
+        <div className="new_right_carousel">
+          <h1>Portfolio Projects</h1>
+          <PreviewProjects projects={slides} />
+        </div>
       </div>
     </div>
   );
@@ -329,7 +331,7 @@ export default function New() {
 // [v] css again
 // [v] carousel buttons
 // [v] link buttons
-// [_] left part stretch to the right where the right ends
+// [v] left part stretch to the right where the right ends
 // [_] carousel 3 projects side by side
 // [_] cute button to start the dragon game
 // [_] main project link in "main competence"
