@@ -1,11 +1,103 @@
 import './new.css';
 import portrait from '/portrait.jpg';
 import Carousel from './components/carousel';
+import TechStack from './components/tech_stack';
 import screenshot1 from '/social_media.png';
 import screenshot2 from '/newsletter.png';
 import screenshot3 from '/what_makes_you_live.png';
 import screenshot4 from '/map_quiz.png';
 import screenshot5 from '/shop.png';
+import logo_gh from '/github-svgrepo-com.svg';
+import logo_li from '/linkedin-svgrepo-com.svg';
+import logo_cv from '/cv-file-interface-symbol-svgrepo-com.svg';
+
+const LIincrement = async () => {
+  const res = await fetch(
+    'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/li',
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  if (!res.ok) throw new Error(`Server error: ${res.status}`);
+};
+
+const GHincrement = async () => {
+  const res = await fetch(
+    'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/gh',
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  if (!res.ok) throw new Error(`Server error: ${res.status}`);
+};
+
+const CVincrement = async () => {
+  const res = await fetch(
+    'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/cv',
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  if (!res.ok) throw new Error(`Server error: ${res.status}`);
+};
+
+const LoungeIncrement = async () => {
+  const res = await fetch(
+    'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/lounge',
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  if (!res.ok) throw new Error(`Server error: ${res.status}`);
+};
+
+const VivaIncrement = async () => {
+  const res = await fetch(
+    'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/viva',
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  if (!res.ok) throw new Error(`Server error: ${res.status}`);
+};
+
+const TextRPGIncrement = async () => {
+  const res = await fetch(
+    'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/textRPG',
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  if (!res.ok) throw new Error(`Server error: ${res.status}`);
+};
+
+const MapQuizIncrement = async () => {
+  const res = await fetch(
+    'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/mapQuiz',
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  if (!res.ok) throw new Error(`Server error: ${res.status}`);
+};
+
+const ShopIncrement = async () => {
+  const res = await fetch(
+    'https://personal-website-backend-production-c5a6.up.railway.app/api/metrics/shop',
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  if (!res.ok) throw new Error(`Server error: ${res.status}`);
+};
 
 const slides = [
   {
@@ -133,29 +225,20 @@ export default function New() {
             </li>
           </ul>
         </div>
-        <div className="new new_left_but">
-          <h2>BUT</h2>
-          <p>
-            Law taught me to navigate complexity. But I craved building things
-            from zero — software lets me create and launch ideas globally. I
-            self-taught full-stack development and data engineering, applied my
-            legal precision to debugging and architecture, and built a growing
-            suite of production-grade apps. Law, business, code, architecture —
-            they all demand the same thing: a mind that brings order to
-            complexity. Pair that with an instinct to create, and you get what
-            drives me every day.
-          </p>
-        </div>
         <div className="new new_left_tech_stack">
           <h2>Tech Stack & Skills</h2>
+          <TechStack />
           <p>
-            Tech: Node.js, Express, PostgreSQL (Prisma), React
-            (Styled-Components, Vite), Python (Pandas, matplotlib), JWT, Jest,
-            CI/CD, Git, Railway, Netlify
+            Bonus: <span className="new_top">Unity</span>,{' '}
+            <span className="new_top">Blender</span> |{' '}
+            <span className="new_top">Data engineering & viz</span> |{' '}
+            <span className="new_top">IELTS 8.5</span>
           </p>
-          <p>Practices: REST API design, auth flows, TDD, SOLID, OOP, Agile</p>
-          <p>Bonus: Unity, Blender | Data engineering & viz | IELTS 8.5</p>
-          <p>Connect: nakupovasset@protonmail.com | assetn.dev</p>
+          <p>
+            Connect:{' '}
+            <span className="new_key">nakupovasset@protonmail.com</span> |{' '}
+            <span className="new_key">assetn.dev</span>
+          </p>
           <p>
             Based in Tbilisi, Georgia | Open to relocation, remote & hybrid
             roles globally
@@ -169,16 +252,61 @@ export default function New() {
         <div className="new new_right_pic">
           <img src={portrait} />
         </div>
-        <div className="new new_right_links">Links</div>
-        <div className="new new_right_email">Email me</div>
+        <div className="new new_right_links">
+          <a
+            href="https://github.com/asseternity"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button onClick={GHincrement}>
+              <img src={logo_gh} />
+            </button>
+          </a>
+          <a
+            href="http://linkedin.com/in/asset-nakupov-b705bab7"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button onClick={LIincrement}>
+              <img src={logo_li} />
+            </button>
+          </a>
+          <a href="/[CV 2025] - Asset Nakupov - ENG.pdf" download>
+            <button onClick={CVincrement}>
+              <img src={logo_cv} />
+            </button>
+          </a>
+        </div>
+        <div className="new new_right_email">
+          <p>Email me:</p>
+          <span className="new_key">nakupovasset@protonmail.com</span>
+        </div>
         <div className="new new_right_principles">
-          <h4>
-            Your principles in IT and learning it -- how your skills and
-            analytical thinking helped transition into IT:
-          </h4>
+          <p>
+            Law taught me to navigate{' '}
+            <span className="new_top">complexity</span>. But I craved{' '}
+            <span className="new_top">building things from zero</span> —
+            software lets me create and launch ideas globally. I self-taught
+            full-stack development and data engineering, applied my legal
+            precision to debugging and architecture, and built a growing suite
+            of production-grade apps. Law, business, code, architecture — they
+            all demand the same thing:{' '}
+            <span className="new_top">
+              a mind that brings order to complexity
+            </span>
+            . Pair that with an instinct to create, and you get what drives me
+            every day.
+          </p>
         </div>
         <div className="new new_right_additional_accomplishments">
-          Additional accomplishments
+          <h2>Additional accomplishments</h2>
+          <ul>
+            <li>Game developer with Articy, Unity, Blender</li>
+            <li>Creator, self-motivated, organized thinker</li>
+            <li>Won a historic land dispute litigation campaign</li>
+            <li>Top of the class GPA graduate</li>
+            <li>100% university scholarship winner</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -189,13 +317,23 @@ export default function New() {
 // [v] rewrite for nodejs
 // [v] css
 // [v] bold or highlight key words
-// [_] add highlights to tech stack and but
-// [_] add links, email me, principles, additional accomplishments
+// [v] add highlights to tech stack and but
+// [v] git
+// [v] CI/CD
+// [v] Railway/Netlify
+// [v] JWT
+// [v] auth flows
+// [v] TDD
+// [v] Pandas
+// [v] add links, email me, principles, additional accomplishments
+// [v] css again
+// [v] carousel buttons
+// [v] link buttons
 // [_] left part stretch to the right where the right ends
-// [_] carousel buttons
 // [_] carousel 3 projects side by side
 // [_] cute button to start the dragon game
 // [_] main project link in "main competence"
 // [_] responsive
 // [_] same for cv
+// [_] button for multiple formats cv
 // [_] same for linkedin

@@ -15,12 +15,19 @@ import prismaORM from '/tech stack icons/db-file-format-symbol-svgrepo-com.svg';
 import solid from '/tech stack icons/solid.svg';
 import agile from '/tech stack icons/agile.svg';
 import oop from '/tech stack icons/oop.svg';
+import auth from '/new svgs/auth-face-svgrepo-com.svg';
+import cdci from '/new svgs/ci-cd-svgrepo-com.svg';
+import git from '/new svgs/github-svgrepo-com.svg';
+import token from '/new svgs/gift-2-svgrepo-com.svg';
+import netlify from '/new svgs/netlify-svgrepo-com.svg';
+import tdd from '/new svgs/test-tube-svgrepo-com.svg';
+import pandas from '/new svgs/pandas-svgrepo-com.svg';
 import TechStackCard from './tech_stack_card';
+import TechStackCardLong from './tech_stack_card_long';
 
 export default function TechStack() {
   return (
     <div>
-      <h1>Tech Stack</h1>
       <h4>Frontend:</h4>
       <div className="tech_stack_grid">
         <TechStackCard image={html} text={'HTML'} />
@@ -33,7 +40,14 @@ export default function TechStack() {
       <div className="tech_stack_grid">
         <TechStackCard image={node} text={'Node.JS'} />
         <TechStackCard image={express} text={'Express.JS'} />
+        <TechStackCard image={token} text={'JWT'} />
+        <TechStackCardLong
+          image={netlify}
+          text1={'Netlify'}
+          text2={'Railway'}
+        />
         <TechStackCard image={python} text={'Python'} />
+        <TechStackCard image={pandas} text={'Pandas'} />
         <TechStackCard image={csharp} text={'C#'} />
         <TechStackCard image={restapi} text={'Rest API'} />
         <TechStackCard image={unity} text={'Unity'} />
@@ -46,7 +60,11 @@ export default function TechStack() {
       </div>
       <h4>Design Principles:</h4>
       <div className="tech_stack_grid">
+        <TechStackCard image={git} text={'Git'} />
+        <TechStackCard image={tdd} text={'TDD'} />
         <TechStackCard image={solid} text={'SOLID'} />
+        <TechStackCard image={auth} text={'Auth Flows'} />
+        <TechStackCard image={cdci} text={'CI/CD'} />
         <TechStackCard image={agile} text={'Agile'} />
         <TechStackCard image={oop} text={'OOP'} />
       </div>

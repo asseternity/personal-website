@@ -202,6 +202,15 @@ body::before {
   align-items: center;
 }
 
+.tech_stack_card_right_long {
+  height: 100%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: right;
+}
+
 /* Buttons */
 button {
   background-color: #ffffff;
