@@ -9,7 +9,7 @@ import bolt2 from '/bolt2.png';
 import bolt3 from '/bolt3.png';
 import bolt4 from '/bolt4.png';
 
-export default function PhaserGame() {
+export default function PhaserGame({ onHideGame }) {
   const [gameHidden, setGameHidden] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [finalScore, setFinalScore] = useState(-1);
@@ -312,7 +312,10 @@ export default function PhaserGame() {
             scoreToDisplay={finalScore}
             highScoresArray={highScores}
             startGameCallback={handleStart}
-            hideGameCallback={() => setGameHidden(true)}
+            hideGameCallback={() => {
+              setGameHidden(true);
+              if (typeof onHideGame === 'function') onHideGame();
+            }}
             nameWriting={nameWriting}
           />
         )}

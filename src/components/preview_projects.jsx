@@ -1,11 +1,49 @@
 import { useEffect, useState } from 'react';
 
-export default function PreviewProjects({ projects }) {
-  const [shownProjectSetIndex, setShownProjectSetIndex] = useState(0);
-  const [projectsShown, setProjectsShown] = useState([
-    projects[0],
-    projects[1],
-  ]);
+const style = {
+  fontSize: '18px',
+  color: '#ffa940',
+  fontWeight: 900,
+  padding: '0.2em 0.5em',
+  borderRadius: '0.5em',
+  textShadow: `
+    -1px -1px 0 black,
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black,
+    0    -1px 0 black,
+    -1px  0   0 black,
+     1px  0   0 black,
+    0     1px 0 black
+  `,
+};
+
+const style2 = {
+  fontSize: '12px',
+  color: '#ffa940',
+  fontWeight: 900,
+  padding: '0.2em 0.5em',
+  borderRadius: '0.5em',
+  textShadow: `
+    -1px -1px 0 black,
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black,
+    0    -1px 0 black,
+    -1px  0   0 black,
+     1px  0   0 black,
+    0     1px 0 black
+  `,
+};
+
+export default function PreviewProjects({
+  projects,
+  shownProjectSetIndex,
+  setShownProjectSetIndex,
+}) {
+  const [projectsShown, setProjectsShown] = useState(
+    projects.slice(shownProjectSetIndex * 2, shownProjectSetIndex * 2 + 2)
+  );
   const [leftProjects, setLeftProjects] = useState([]);
   const [rightProjects, setRightProjects] = useState([]);
 
@@ -36,7 +74,9 @@ export default function PreviewProjects({ projects }) {
       rightStartIndex + 2
     );
     setRightProjects(rightProjectsArray);
-  }, [shownProjectSetIndex, projectsShown, projects]);
+    const startIndex = shownProjectSetIndex * 2;
+    setProjectsShown(projects.slice(startIndex, startIndex + 2));
+  }, [shownProjectSetIndex, projects]);
 
   const handleArrowButton = (direction) => {
     const totalProjectSets = Math.ceil(projects.length / 2);
@@ -63,7 +103,6 @@ export default function PreviewProjects({ projects }) {
 
   return (
     <div className="preview_projects_content">
-      <h2>Projects</h2>
       <div className="preview_projects_track">
         <div className="preview_projects_cards">
           {leftProjects.map((projectObject, index) => (
@@ -72,7 +111,8 @@ export default function PreviewProjects({ projects }) {
               className="preview_project"
               style={{ backgroundImage: `url(${projectObject.image})` }}
             >
-              {projectObject.title}
+              <span style={style}>{projectObject.title}</span>
+              <span style={style2}>{projectObject.subtitle}</span>
             </div>
           ))}
         </div>
@@ -83,7 +123,8 @@ export default function PreviewProjects({ projects }) {
               className="preview_project"
               style={{ backgroundImage: `url(${projectObject.image})` }}
             >
-              {projectObject.title}
+              <span style={style}>{projectObject.title}</span>
+              <span style={style2}>{projectObject.subtitle}</span>
             </div>
           ))}
         </div>
@@ -94,7 +135,8 @@ export default function PreviewProjects({ projects }) {
               className="preview_project"
               style={{ backgroundImage: `url(${projectObject.image})` }}
             >
-              {projectObject.title}
+              <span style={style}>{projectObject.title}</span>
+              <span style={style2}>{projectObject.subtitle}</span>
             </div>
           ))}
         </div>

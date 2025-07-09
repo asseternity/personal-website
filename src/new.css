@@ -111,6 +111,7 @@ a:hover {
   border-radius: 0.5em;
   font-weight: 700;
 }
+
 .new_top {
   border-bottom: 2px solid rgba(255, 169, 64, 0.3);
   font-weight: 700;
@@ -204,9 +205,11 @@ a:hover {
   align-items: flex-start;
   transition: transform 0.5s ease;
   height: 100%;
+  width: 100%;
 }
 
 .preview_projects_cards {
+  flex: 1;
   height: 100%;
   min-width: 100%;
   display: flex;
@@ -217,12 +220,17 @@ a:hover {
 }
 
 .preview_project {
-  height: 100px;
-  border-radius: 8px;
-  color: white;
+  height: 180px;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  text-shadow: 0 1px 2px black;
-  box-shadow: 5px 5px 5px var(--main);
+  border-radius: 8px;
 }
 
 .preview_projects_buttons button {
@@ -234,10 +242,75 @@ a:hover {
   color: white;
 }
 
+.preview_projects_buttons {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .preview_projects_buttons button:hover {
   background: rgba(255, 169, 64, 0.15);
   border-color: var(--accent);
   transform: scale(1.1);
+}
+
+/* GAME START BUTTON */
+.start-game-button {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 0, 0, 0.7) 0%,
+    rgba(255, 0, 0, 0.4) 50%,
+    transparent 70%
+  );
+  border: 2px solid red;
+  border-radius: 12px;
+  box-shadow:
+    0 0 10px red,
+    0 0 20px red,
+    0 0 30px red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 auto 20px auto;
+  transition:
+    transform 0.2s,
+    box-shadow 0.3s;
+}
+
+.start-game-button:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 0 20px red,
+    0 0 40px red,
+    0 0 60px red;
+}
+
+.start-game-button img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+.new_left_game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.new_left_game_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  margin-left: 20px;
 }
 
 /* RESPONSIVE */

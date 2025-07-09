@@ -1,8 +1,10 @@
 import './new.css';
-import portrait from '/portrait.jpg';
-import Carousel from './components/carousel';
+import { useState, useRef } from 'react';
+import PhaserGame from './components/phaser';
 import PreviewProjects from './components/preview_projects';
 import TechStack from './components/tech_stack';
+import portrait from '/portrait.jpg';
+import dragon from '/dragon.png';
 import screenshot1 from '/social_media.png';
 import screenshot2 from '/newsletter.png';
 import screenshot3 from '/what_makes_you_live.png';
@@ -103,19 +105,61 @@ const ShopIncrement = async () => {
 const slides = [
   {
     title: 'Full-Stack Social Media Platform',
-    subtitle: '123',
+    subtitle:
+      'Full-stack app featuring JWT authentication, messaging, and content management',
     image: screenshot1,
   },
-  { title: 'Blog / Newsletter', subtitle: '123', image: screenshot2 },
-  { title: 'WHAT MAKES YOU LIVE?', subtitle: '123', image: screenshot3 },
-  { title: 'Map Quiz', subtitle: '123', image: screenshot4 },
-  { title: 'Online Store', subtitle: '123', image: screenshot5 },
+  {
+    title: 'Blog / Newsletter',
+    subtitle:
+      'Full-stack blog and newsletter platform featuring separate frontends for public content display and admin content management',
+    image: screenshot2,
+  },
+  {
+    title: 'WHAT MAKES YOU LIVE?',
+    subtitle:
+      'Browser-based text RPG with immersive narrative choices and turn-based combat',
+    image: screenshot3,
+  },
+  {
+    title: 'Map Quiz',
+    subtitle:
+      'Full-stack interactive map quiz game where players explore the fantasy continent of Leordis to locate hidden spots based on given tasks',
+    image: screenshot4,
+  },
+  {
+    title: 'Online Store',
+    subtitle:
+      'Users can browse the home page, products, add them to the cart which calculates the number of products and the total price.',
+    image: screenshot5,
+  },
 ];
 
 export default function New() {
+  const [showGame, setShowGame] = useState(false);
+  const [shownProjectSetIndex, setShownProjectSetIndex] = useState(1);
+  const projectRef = useRef(null);
+
+  const scrollToProjects = () => {
+    if (projectRef.current) {
+      projectRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+    setShownProjectSetIndex(1); // Ensure it shows the first slide (Social Media App)
+  };
+
   return (
     <div className="new_container">
       <div className="new_left">
+        <div className="new new_left_game">
+          <div className="start-game-button" onClick={() => setShowGame(true)}>
+            <img src={dragon} alt="Start Game" />
+          </div>
+          <div className="new_left_game_text">
+            <span className="new_top">Play a game while you're here!</span>
+            <span className="new_top">(I keep track of top 5 scores)</span>
+          </div>
+          {showGame && <PhaserGame onHideGame={() => setShowGame(false)} />}
+        </div>
         <div className="new new_left_intro">
           <h1>Hi, I'm Asset</h1>
           <p>
@@ -136,7 +180,7 @@ export default function New() {
           </p>
         </div>
         <div className="new new_left_main">
-          <h2>Competence is Node.js Backend Development</h2>
+          <h2>Main: Node.js Backend Development</h2>
           <ul>
             <li>
               <span className="new_key">Scalable REST APIs:</span> Developed
@@ -168,6 +212,19 @@ export default function New() {
               readable.
             </li>
           </ul>
+          <p>
+            I built a full-stack social media platform featuring JWT
+            authentication, user profiles, direct/group chats, posts with
+            likes/comments, and notifications. Check it out{' '}
+            <span
+              className="new_key"
+              style={{ cursor: 'pointer', color: '#1890ff' }}
+              onClick={scrollToProjects}
+            >
+              here
+            </span>
+            .
+          </p>
         </div>
         <div className="new new_left_additional_competence">
           <h2>Additional competence in Frontend Development & Data Science</h2>
@@ -306,9 +363,13 @@ export default function New() {
             <li>100% university scholarship winner</li>
           </ul>
         </div>
-        <div className="new_right_carousel">
+        <div ref={projectRef} className="new_right_carousel">
           <h1>Portfolio Projects</h1>
-          <PreviewProjects projects={slides} />
+          <PreviewProjects
+            projects={slides}
+            shownProjectSetIndex={shownProjectSetIndex}
+            setShownProjectSetIndex={setShownProjectSetIndex}
+          />
         </div>
       </div>
     </div>
@@ -332,9 +393,10 @@ export default function New() {
 // [v] carousel buttons
 // [v] link buttons
 // [v] left part stretch to the right where the right ends
-// [_] carousel 3 projects side by side
-// [_] cute button to start the dragon game
-// [_] main project link in "main competence"
+// [v] carousel 3 projects side by side
+// [v] cute button to start the dragon game
+// [v] main project link in "main competence"
+// [_] hook up the increments to project clicks
 // [_] responsive
 // [_] same for cv
 // [_] button for multiple formats cv
