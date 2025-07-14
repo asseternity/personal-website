@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 const style = {
-  fontSize: '18px',
-  color: '#ffa940',
+  fontSize: '23px',
+  color: '#ffba51',
   fontWeight: 900,
   padding: '0.2em 0.5em',
   borderRadius: '0.5em',
@@ -19,8 +19,8 @@ const style = {
 };
 
 const style2 = {
-  fontSize: '12px',
-  color: '#ffa940',
+  fontSize: '14px',
+  color: '#ffba51',
   fontWeight: 900,
   padding: '0.2em 0.5em',
   borderRadius: '0.5em',
@@ -42,46 +42,41 @@ export default function PreviewProjects({
   setShownProjectSetIndex,
 }) {
   const [projectsShown, setProjectsShown] = useState(
-    projects.slice(shownProjectSetIndex * 2, shownProjectSetIndex * 2 + 2)
+    projects.slice(shownProjectSetIndex * 3, shownProjectSetIndex * 3 + 3)
   );
   const [leftProjects, setLeftProjects] = useState([]);
   const [rightProjects, setRightProjects] = useState([]);
 
   useEffect(() => {
-    const totalProjectSets = Math.ceil(projects.length / 2);
+    const totalProjectSets = Math.ceil(projects.length / 3);
     const lastProjectSetIndex = totalProjectSets - 1;
-    // is there a project set to the left of current?
-    // if not, set it to the last one
-    let leftProjectSetIndex =
+
+    // left context set
+    const leftProjectSetIndex =
       shownProjectSetIndex === 0
         ? lastProjectSetIndex
         : shownProjectSetIndex - 1;
-    const leftStartIndex = leftProjectSetIndex * 2;
-    const leftProjectsArray = projects.slice(
-      leftStartIndex,
-      leftStartIndex + 2
-    );
-    setLeftProjects(leftProjectsArray);
-    // is there a project set to the right of current?
-    // if not, set it to the first one
-    let rightProjectSetIndex =
+    const leftStartIndex = leftProjectSetIndex * 3;
+    setLeftProjects(projects.slice(leftStartIndex, leftStartIndex + 3));
+
+    // right context set
+    const rightProjectSetIndex =
       shownProjectSetIndex === lastProjectSetIndex
         ? 0
         : shownProjectSetIndex + 1;
-    const rightStartIndex = rightProjectSetIndex * 2;
-    const rightProjectsArray = projects.slice(
-      rightStartIndex,
-      rightStartIndex + 2
-    );
-    setRightProjects(rightProjectsArray);
-    const startIndex = shownProjectSetIndex * 2;
-    setProjectsShown(projects.slice(startIndex, startIndex + 2));
+    const rightStartIndex = rightProjectSetIndex * 3;
+    setRightProjects(projects.slice(rightStartIndex, rightStartIndex + 3));
+
+    // current set
+    const currentStartIndex = shownProjectSetIndex * 3;
+    setProjectsShown(projects.slice(currentStartIndex, currentStartIndex + 3));
   }, [shownProjectSetIndex, projects]);
 
   const handleArrowButton = (direction) => {
-    const totalProjectSets = Math.ceil(projects.length / 2);
+    const totalProjectSets = Math.ceil(projects.length / 3);
     const lastProjectSetIndex = totalProjectSets - 1;
     let newSetIndex = shownProjectSetIndex;
+
     if (direction === 'left') {
       newSetIndex =
         shownProjectSetIndex === 0
@@ -95,48 +90,67 @@ export default function PreviewProjects({
     }
 
     setShownProjectSetIndex(newSetIndex);
-
-    const startIndex = newSetIndex * 2;
-    const newProjectsArray = projects.slice(startIndex, startIndex + 2);
-    setProjectsShown(newProjectsArray);
+    const startIndex = newSetIndex * 3;
+    setProjectsShown(projects.slice(startIndex, startIndex + 3));
   };
 
   return (
     <div className="preview_projects_content">
       <div className="preview_projects_track">
         <div className="preview_projects_cards">
-          {leftProjects.map((projectObject, index) => (
+          {leftProjects.map((project, index) => (
             <div
               key={index}
               className="preview_project"
-              style={{ backgroundImage: `url(${projectObject.image})` }}
+              style={{ backgroundImage: `url(${project.image})` }}
             >
-              <span style={style}>{projectObject.title}</span>
-              <span style={style2}>{projectObject.subtitle}</span>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={project.incrementCallback}
+              >
+                <span style={style}>{project.title}</span>
+                <span style={style2}>{project.subtitle}</span>
+              </a>
             </div>
           ))}
         </div>
         <div className="preview_projects_cards">
-          {projectsShown.map((projectObject, index) => (
+          {projectsShown.map((project, index) => (
             <div
               key={index}
               className="preview_project"
-              style={{ backgroundImage: `url(${projectObject.image})` }}
+              style={{ backgroundImage: `url(${project.image})` }}
             >
-              <span style={style}>{projectObject.title}</span>
-              <span style={style2}>{projectObject.subtitle}</span>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={project.incrementCallback}
+              >
+                <span style={style}>{project.title}</span>
+                <span style={style2}>{project.subtitle}</span>{' '}
+              </a>
             </div>
           ))}
         </div>
         <div className="preview_projects_cards">
-          {rightProjects.map((projectObject, index) => (
+          {rightProjects.map((project, index) => (
             <div
               key={index}
               className="preview_project"
-              style={{ backgroundImage: `url(${projectObject.image})` }}
+              style={{ backgroundImage: `url(${project.image})` }}
             >
-              <span style={style}>{projectObject.title}</span>
-              <span style={style2}>{projectObject.subtitle}</span>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={project.incrementCallback}
+              >
+                <span style={style}>{project.title}</span>
+                <span style={style2}>{project.subtitle}</span>
+              </a>
             </div>
           ))}
         </div>

@@ -108,30 +108,40 @@ const slides = [
     subtitle:
       'Full-stack app featuring JWT authentication, messaging, and content management',
     image: screenshot1,
+    url: 'https://asseternity.github.io/messenger-frontend/',
+    incrementCallback: LoungeIncrement,
   },
   {
     title: 'Blog / Newsletter',
     subtitle:
       'Full-stack blog and newsletter platform featuring separate frontends for public content display and admin content management',
     image: screenshot2,
+    url: 'https://asseternity.github.io/c5-personal-react/',
+    incrementCallback: VivaIncrement,
   },
   {
     title: 'WHAT MAKES YOU LIVE?',
     subtitle:
       'Browser-based text RPG with immersive narrative choices and turn-based combat',
     image: screenshot3,
+    url: 'https://asseternity.github.io/browser-text-rpg-wp/',
+    incrementCallback: TextRPGIncrement,
   },
   {
     title: 'Map Quiz',
     subtitle:
       'Full-stack interactive map quiz game where players explore the fantasy continent of Leordis to locate hidden spots based on given tasks',
     image: screenshot4,
+    url: 'https://asseternity.github.io/tagging-game/',
+    incrementCallback: MapQuizIncrement,
   },
   {
     title: 'Online Store',
     subtitle:
       'Users can browse the home page, products, add them to the cart which calculates the number of products and the total price.',
     image: screenshot5,
+    url: 'https://asseternity-shop.netlify.app/',
+    incrementCallback: ShopIncrement,
   },
 ];
 
@@ -155,8 +165,9 @@ export default function New() {
             <img src={dragon} alt="Start Game" />
           </div>
           <div className="new_left_game_text">
-            <span className="new_top">Play a game while you're here!</span>
-            <span className="new_top">(I keep track of top 5 scores)</span>
+            <p className="hint_game">
+              Play a game while you're here! (I keep track of top 5 scores)
+            </p>
           </div>
           {showGame && <PhaserGame onHideGame={() => setShowGame(false)} />}
         </div>
@@ -217,11 +228,18 @@ export default function New() {
             authentication, user profiles, direct/group chats, posts with
             likes/comments, and notifications. Check it out{' '}
             <span
-              className="new_key"
+              className="new_key main_project_link"
               style={{ cursor: 'pointer', color: '#1890ff' }}
               onClick={scrollToProjects}
             >
-              here
+              <a
+                href="https://asseternity.github.io/messenger-frontend/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={LoungeIncrement}
+              >
+                here
+              </a>
             </span>
             .
           </p>
@@ -340,31 +358,37 @@ export default function New() {
           <p>
             Law taught me to navigate{' '}
             <span className="new_top">complexity</span>. But I craved{' '}
-            <span className="new_top">building things from zero</span> —
-            software lets me create and launch ideas globally. I self-taught
-            full-stack development and data engineering, applied my legal
-            precision to debugging and architecture, and built a growing suite
-            of production-grade apps. Law, business, code, architecture — they
-            all demand the same thing:{' '}
-            <span className="new_top">
-              a mind that brings order to complexity
-            </span>
-            . Pair that with an instinct to create, and you get what drives me
-            every day.
+            <span className="new_top">building things from zero</span>. I
+            self-taught full-stack development and data engineering, applied my
+            legal precision to debugging and architecture, and built a growing
+            suite of production-grade apps because software lets me create and
+            launch ideas globally. Law, business, code, architecture — they all
+            demand the same thing:{' '}
+            <span className="new_top">structured thinking</span>.
           </p>
         </div>
         <div className="new new_right_additional_accomplishments">
           <h2>Additional accomplishments</h2>
           <ul>
-            <li>Game developer with Articy, Unity, Blender</li>
-            <li>Creator, self-motivated, organized thinker</li>
-            <li>Won a historic land dispute litigation campaign</li>
-            <li>Top of the class GPA graduate</li>
-            <li>100% university scholarship winner</li>
+            <li className="new_key">
+              Game developer with Articy, Unity, Blender
+            </li>
+            <li className="new_key">
+              Creator, self-motivated, organized thinker
+            </li>
+            <li className="new_key">
+              Won a historic land dispute litigation campaign
+            </li>
+            <li className="new_key">Top of the class GPA graduate</li>
+            <li className="new_key">100% university scholarship winner</li>
           </ul>
         </div>
         <div ref={projectRef} className="new_right_carousel">
           <h1>Portfolio Projects</h1>
+          <p className="hint_text">
+            Scroll through projects with the buttons below or click on a project
+            for a live demo!
+          </p>
           <PreviewProjects
             projects={slides}
             shownProjectSetIndex={shownProjectSetIndex}
@@ -396,7 +420,9 @@ export default function New() {
 // [v] carousel 3 projects side by side
 // [v] cute button to start the dragon game
 // [v] main project link in "main competence"
-// [_] hook up the increments to project clicks
+// [v] link main project link to a demo
+// [v] hook up the increments to project clicks
+// [v] glow for preview project
 // [_] responsive
 // [_] same for cv
 // [_] button for multiple formats cv
