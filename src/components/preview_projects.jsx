@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 const style = {
-  fontSize: '23px',
   color: '#ffba51',
   fontWeight: 900,
   padding: '0.2em 0.5em',
@@ -19,7 +18,6 @@ const style = {
 };
 
 const style2 = {
-  fontSize: '14px',
   color: '#ffba51',
   fontWeight: 900,
   padding: '0.2em 0.5em',
@@ -96,6 +94,10 @@ export default function PreviewProjects({
 
   return (
     <div className="preview_projects_content">
+      <div className="preview_projects_buttons">
+        <button onClick={() => handleArrowButton('left')}>{'<<'}</button>
+        <button onClick={() => handleArrowButton('right')}>{'>>'}</button>
+      </div>
       <div className="preview_projects_track">
         <div className="preview_projects_cards">
           {leftProjects.map((project, index) => (
@@ -109,9 +111,21 @@ export default function PreviewProjects({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={project.incrementCallback}
+                style={{
+                  height: '100%',
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
               >
-                <span style={style}>{project.title}</span>
-                <span style={style2}>{project.subtitle}</span>
+                <span className="preview_heading" style={style}>
+                  {project.title}
+                </span>
+                <span className="preview_subtitle" style={style2}>
+                  {project.subtitle}
+                </span>
               </a>
             </div>
           ))}
@@ -128,6 +142,14 @@ export default function PreviewProjects({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={project.incrementCallback}
+                style={{
+                  height: '100%',
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
               >
                 <span style={style}>{project.title}</span>
                 <span style={style2}>{project.subtitle}</span>{' '}
@@ -147,6 +169,14 @@ export default function PreviewProjects({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={project.incrementCallback}
+                style={{
+                  height: '100%',
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
               >
                 <span style={style}>{project.title}</span>
                 <span style={style2}>{project.subtitle}</span>
@@ -154,10 +184,6 @@ export default function PreviewProjects({
             </div>
           ))}
         </div>
-      </div>
-      <div className="preview_projects_buttons">
-        <button onClick={() => handleArrowButton('left')}>{'<<'}</button>
-        <button onClick={() => handleArrowButton('right')}>{'>>'}</button>
       </div>
     </div>
   );

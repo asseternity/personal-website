@@ -229,7 +229,7 @@ export default function New() {
             likes/comments, and notifications. Check it out{' '}
             <span
               className="new_key main_project_link"
-              style={{ cursor: 'pointer', color: '#1890ff' }}
+              style={{ cursor: 'pointer' }}
               onClick={scrollToProjects}
             >
               <a
@@ -400,7 +400,7 @@ export default function New() {
   );
 }
 
-// [V] feed chatgpt with data from 10 nodejs postings
+// [v] feed chatgpt with data from 10 nodejs postings
 // [v] rewrite for nodejs
 // [v] css
 // [v] bold or highlight key words
@@ -423,6 +423,7 @@ export default function New() {
 // [v] link main project link to a demo
 // [v] hook up the increments to project clicks
 // [v] glow for preview project
+// [v] ensure links work
 // [_] responsive
 // [_] same for cv
 // [_] button for multiple formats cv

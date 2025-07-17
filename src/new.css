@@ -146,6 +146,11 @@ a:hover {
 }
 
 /* IMAGE ON RIGHT */
+.new_right_pic {
+  justify-content: center;
+  align-items: center;
+}
+
 .new_right_pic img {
   width: 100%;
   border-radius: var(--radius-lg);
@@ -283,6 +288,14 @@ a:hover {
   transform: scale(1.1);
 }
 
+.preview_heading {
+  font-size: 23px;
+}
+
+.preview_subtitle {
+  font-size: 14px;
+}
+
 /* GAME START BUTTON */
 .start-game-button {
   width: 80px;
@@ -304,7 +317,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin: 0 auto 20px auto;
+  margin: 0;
   transition:
     transform 0.2s,
     box-shadow 0.3s;
@@ -343,6 +356,7 @@ a:hover {
 /* EXTRA & EXTRA TEXT */
 .hint_game {
   font-size: 20px;
+  margin: 0;
 }
 
 .hint_text {
@@ -364,20 +378,59 @@ a:hover {
 }
 
 .main_project_link {
-  background-color: white;
+  background-color: var(--accent);
+}
+
+.main_project_link a {
   color: black;
 }
 
-/* RESPONSIVE */
-@media (max-width: 800) {
-  .new_container {
-    flex-direction: column;
-    gap: 1.6rem;
-  }
+.main_project_link:hover {
+  background-color: black;
 }
+
+.main_project_link:hover a {
+  color: var(--accent);
+}
+
+/* RESPONSIVE */
 @media (max-width: 700px) {
+  .new_right_additional_accomplishments h2 {
+    font-size: 13px;
+  }
+  .new_right_links {
+    gap: 0.4em;
+  }
+  .new_right_links button {
+    padding: 0.5em;
+  }
+  .new_right_links img {
+    width: 20px;
+    height: 20px;
+  }
+  .start-game-button {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+  }
+  .hint_game {
+    font-size: 12px;
+  }
+  .new_container {
+    font-size: 85%;
+  }
+  .new_left {
+    min-width: 160px;
+  }
+  .new_right {
+    min-width: 160px;
+  }
   .new {
     padding: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+  .new_right_pic {
+    padding: 0;
   }
   h1 {
     font-size: 1.9rem;
@@ -385,12 +438,23 @@ a:hover {
   h2 {
     font-size: 1.3rem;
   }
-}
-@media (max-width: 500px) {
-  .new_right_links {
-    gap: 0.8em;
+  .new_right_additional_accomplishments ul {
+    list-style-type: none;
+    padding: 0;
   }
-  .new_right_links button {
-    padding: 0.5em;
+  .preview_heading {
+    font-size: 19px;
+  }
+  .preview_subtitle {
+    font-size: 12px;
+  }
+  .new_right_email {
+    padding: 10px;
+  }
+  .new_right_email span {
+    font-size: 8px;
+  }
+  .preview_project {
+    height: 600px;
   }
 }
