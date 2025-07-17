@@ -186,6 +186,10 @@ a:hover {
 
 /* EMAIL */
 .new_right_email {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 15px;
 }
 
@@ -452,9 +456,12 @@ a:hover {
     padding: 10px;
   }
   .new_right_email span {
-    font-size: 8px;
+    font-size: 11px;
   }
   .preview_project {
     height: 600px;
+  }
+  .connect_details {
+    font-size: 12px;
   }
 }

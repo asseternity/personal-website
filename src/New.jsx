@@ -166,7 +166,8 @@ export default function New() {
           </div>
           <div className="new_left_game_text">
             <p className="hint_game">
-              Play a game while you're here! (I keep track of top 5 scores)
+              Why not play a game while you're here? I keep track of top 5
+              scores. Click the red icon!
             </p>
           </div>
           {showGame && <PhaserGame onHideGame={() => setShowGame(false)} />}
@@ -310,9 +311,8 @@ export default function New() {
             <span className="new_top">Data engineering & viz</span> |{' '}
             <span className="new_top">IELTS 8.5</span>
           </p>
-          <p>
-            Connect:{' '}
-            <span className="new_key">nakupovasset@protonmail.com</span> |{' '}
+          <p className="connect_details">
+            Connect: <span className="new_key">asset_n@proton.me</span> |{' '}
             <span className="new_key">assetn.dev</span>
           </p>
           <p>
@@ -352,7 +352,7 @@ export default function New() {
         </div>
         <div className="new new_right_email">
           <p>Email me:</p>
-          <span className="new_key">nakupovasset@protonmail.com</span>
+          <span className="new_key">asset_n@proton.me</span>
         </div>
         <div className="new new_right_principles">
           <p>
@@ -424,8 +424,10 @@ export default function New() {
 // [v] hook up the increments to project clicks
 // [v] glow for preview project
 // [v] ensure links work
-// [_] responsive
+// [v] responsive
+// [v] a bit of a background for the game
+// [v] bottom email
 // [_] popup for multiple formats cv
 // [_] same for cv
 // [_] same for linkedin
-// [_] apply / read & finish personal docs / game
+// [_] apply / read & finish personal docs / data science cred & version of website / game

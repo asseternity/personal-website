@@ -304,7 +304,7 @@ export default function PhaserGame({ onHideGame }) {
           width: '100vw',
           height: '200px',
           zIndex: 9999,
-          background: 'transparent',
+          background: 'rgba(0, 0, 0, 0.65)',
         }}
       >
         {!gameStarted && (
