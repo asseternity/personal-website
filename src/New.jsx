@@ -425,6 +425,7 @@ export default function New() {
 // [v] glow for preview project
 // [v] ensure links work
 // [_] responsive
+// [_] popup for multiple formats cv
 // [_] same for cv
-// [_] button for multiple formats cv
 // [_] same for linkedin
+// [_] apply / read & finish personal docs / game

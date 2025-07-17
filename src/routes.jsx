@@ -6,15 +6,15 @@ import New from './New.jsx';
 const routes = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <New />,
   },
   {
     path: '/blog',
     element: <Blog />,
   },
   {
-    path: '/new',
-    element: <New />,
+    path: '/old',
+    element: <App />,
   },
 ]);
 
