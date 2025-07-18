@@ -397,6 +397,61 @@ a:hover {
   color: var(--accent);
 }
 
+/* POPUP */
+.cv_formats_popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.cv_formats_close_div {
+  width: 250px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+
+.cv_formats_close_div h2 {
+  font-size: 25px;
+}
+
+.cv_formats_close_div button {
+  background-color: transparent;
+  color: white;
+}
+
+.cv_formats_close_div button:hover {
+  background-color: transparent;
+  color: #4c365b;
+}
+
+.cv_formats_popup_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.cv_formats_popup_buttons button {
+  background-color: #4c365b;
+  color: white;
+  font-size: 20px;
+}
+
+.cv_formats_popup_buttons button:hover {
+  background-color: white;
+  color: #4c365b;
+}
+
 /* RESPONSIVE */
 @media (max-width: 700px) {
   .new_right_additional_accomplishments h2 {

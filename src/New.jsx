@@ -147,6 +147,7 @@ const slides = [
 
 export default function New() {
   const [showGame, setShowGame] = useState(false);
+  const [showCVFormats, setShowCVFormats] = useState(false);
   const [shownProjectSetIndex, setShownProjectSetIndex] = useState(1);
   const projectRef = useRef(null);
 
@@ -157,8 +158,23 @@ export default function New() {
     setShownProjectSetIndex(1); // Ensure it shows the first slide (Social Media App)
   };
 
+  const openCVFormats = () => setShowCVFormats(true);
+  const closeCVFormats = () => setShowCVFormats(false);
+
   return (
     <div className="new_container">
+      {showCVFormats && (
+        <div className="cv_formats_popup">
+          <div className="cv_formats_close_div">
+            <button onClick={closeCVFormats}>X</button>
+          </div>
+          <h2>Download CV in:</h2>
+          <div className="cv_formats_popup_buttons">
+            <button>PDF</button>
+            <button>WORD</button>
+          </div>
+        </div>
+      )}
       <div className="new_left">
         <div className="new new_left_game">
           <div className="start-game-button" onClick={() => setShowGame(true)}>
@@ -344,8 +360,9 @@ export default function New() {
               <img src={logo_li} />
             </button>
           </a>
-          <a href="/[CV 2025] - Asset Nakupov - ENG.pdf" download>
-            <button onClick={CVincrement}>
+          {/* <a href="/[CV 2025] - Asset Nakupov - ENG.pdf" download> */}
+          <a>
+            <button onClick={openCVFormats}>
               <img src={logo_cv} />
             </button>
           </a>
@@ -427,7 +444,9 @@ export default function New() {
 // [v] responsive
 // [v] a bit of a background for the game
 // [v] bottom email
-// [_] popup for multiple formats cv
+// [v] popup for multiple formats cv
 // [_] same for cv
+// [_] hook up new cvs to linkedin
+// [_] hook up same button to
 // [_] same for linkedin
 // [_] apply / read & finish personal docs / data science cred & version of website / game
