@@ -170,8 +170,12 @@ export default function New() {
           </div>
           <h2>Download CV in:</h2>
           <div className="cv_formats_popup_buttons">
-            <button>PDF</button>
-            <button>WORD</button>
+            <a href="/[CV] - Asset Nakupov - ENG.pdf" download>
+              <button onClick={CVincrement}>PDF</button>
+            </a>
+            <a href="/[CV] - Asset Nakupov - ENG.docx" download>
+              <button onClick={CVincrement}>WORD</button>
+            </a>
           </div>
         </div>
       )}
@@ -192,12 +196,12 @@ export default function New() {
           <h1>Hi, I'm Asset</h1>
           <p>
             <span className="new_top">
-              I create end-to-end apps: fast and with structured thinking.
+              I create end-to-end apps fast and with structured thinking
             </span>
           </p>
           <p>
             <span className="new_top">
-              Node.JS fullstack developer, fully self-taught, self-motivated,
+              Fullstack JavaScript developer, fully self-taught, self-motivated,
               learning and practice-oriented
             </span>
           </p>
@@ -208,7 +212,7 @@ export default function New() {
           </p>
         </div>
         <div className="new new_left_main">
-          <h2>Main: Node.js Backend Development</h2>
+          <h2>Main: Node.js Full-Stack Development</h2>
           <ul>
             <li>
               <span className="new_key">Scalable REST APIs:</span> Developed
@@ -230,8 +234,8 @@ export default function New() {
             <li>
               <span className="new_key">CI/CD and Testing (TDD):</span>{' '}
               Engineered automated deployment pipelines through Netlify and
-              followed TDD practices with Jest, achieving maintainability across
-              full-stack Node.js applications.
+              Railway, followed TDD practices with Jest, achieving
+              maintainability across full-stack Node.js applications.
             </li>
             <li>
               <span className="new_key">Design principles:</span> Committed to
@@ -241,9 +245,10 @@ export default function New() {
             </li>
           </ul>
           <p>
-            I built a full-stack social media platform featuring JWT
-            authentication, user profiles, direct/group chats, posts with
-            likes/comments, and notifications. Check it out{' '}
+            I built several robust full-stack applications, including a
+            full-stack social media platform featuring JWT authentication, user
+            profiles, direct/group chats, posts with likes/comments, and
+            notifications. Check it out{' '}
             <span
               className="new_key main_project_link"
               style={{ cursor: 'pointer' }}
@@ -262,7 +267,9 @@ export default function New() {
           </p>
         </div>
         <div className="new new_left_additional_competence">
-          <h2>Additional competence in Frontend Development & Data Science</h2>
+          <h2>
+            Additional competence in Frontend Development & Data Engineering
+          </h2>
           <ul>
             <li>
               <span className="new_key">Odin Project Graduate:</span> Completed
@@ -293,8 +300,8 @@ export default function New() {
               <span className="new_key">$100M+ Deal Experience:</span> Managed
               high-stakes M&A, joint ventures, and multi-property real estate
               deals across Kazakhstan’s energy, transport, and finance sectors.
-              Represented Compass Group PLC on acquisitions and labor law
-              matters.
+              Represented international clients such as Compass Group PLC on
+              acquisitions and labor law matters.
             </li>
             <li>
               <span className="new_key">Complex Dispute Resolution:</span> Led a
@@ -360,7 +367,6 @@ export default function New() {
               <img src={logo_li} />
             </button>
           </a>
-          {/* <a href="/[CV 2025] - Asset Nakupov - ENG.pdf" download> */}
           <a>
             <button onClick={openCVFormats}>
               <img src={logo_cv} />
@@ -445,8 +451,6 @@ export default function New() {
 // [v] a bit of a background for the game
 // [v] bottom email
 // [v] popup for multiple formats cv
-// [_] same for cv
-// [_] hook up new cvs to linkedin
-// [_] hook up same button to
-// [_] same for linkedin
-// [_] apply / read & finish personal docs / data science cred & version of website / game
+// [v] same for cv
+// [v] hook up new cvs
+// [v] same for linkedin
