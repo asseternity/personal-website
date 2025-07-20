@@ -93,7 +93,7 @@ export default function PhaserGame({ onHideGame }) {
 
       this.player = this.physics.add
         .sprite(50, 50, 'dragon')
-        .setScale(0.65)
+        .setScale(0.45)
         .play('fly');
       this.player.setCollideWorldBounds(true);
       this.player.body.setSize(40, 60);
@@ -164,10 +164,10 @@ export default function PhaserGame({ onHideGame }) {
       if (!gameStartedRef.current) return;
       let s = this.scoreValue;
       if (s < 5) this.obstacleSpeedUpModifier = 20;
-      else if (s < 10) this.obstacleSpeedUpModifier = 70;
-      else if (s < 15) this.obstacleSpeedUpModifier = 95;
-      else if (s < 25) this.obstacleSpeedUpModifier = 120;
-      else this.obstacleSpeedUpModifier = 150;
+      else if (s < 10) this.obstacleSpeedUpModifier = 40;
+      else if (s < 15) this.obstacleSpeedUpModifier = 70;
+      else if (s < 25) this.obstacleSpeedUpModifier = 90;
+      else this.obstacleSpeedUpModifier = 100;
 
       this.framesSinceLastObstacle++;
       if (this.framesSinceLastObstacle >= 180 - this.obstacleSpeedUpModifier) {
@@ -282,13 +282,13 @@ export default function PhaserGame({ onHideGame }) {
 
   const handleUpClick = () => {
     if (phaserSceneRef.current) {
-      phaserSceneRef.current.player.setVelocityY(-230);
+      phaserSceneRef.current.player.setVelocityY(-280);
       setDirection('up');
     }
   };
   const handleDownClick = () => {
     if (phaserSceneRef.current) {
-      phaserSceneRef.current.player.setVelocityY(230);
+      phaserSceneRef.current.player.setVelocityY(280);
       setDirection('down');
     }
   };

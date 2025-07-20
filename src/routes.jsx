@@ -8,14 +8,6 @@ const routes = createBrowserRouter([
     path: '/',
     element: <New />,
   },
-  {
-    path: '/blog',
-    element: <Blog />,
-  },
-  {
-    path: '/old',
-    element: <App />,
-  },
 ]);
 
 export default routes;

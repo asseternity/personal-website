@@ -1,4 +1,4 @@
-import portrait from '/portrait.jpg';
+import portrait from '/portrait-compressed.jpg';
 import logo_gh from '/github-svgrepo-com.svg';
 import logo_li from '/linkedin-svgrepo-com.svg';
 import logo_cv from '/cv-file-interface-symbol-svgrepo-com.svg';

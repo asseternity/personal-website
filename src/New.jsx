@@ -3,13 +3,13 @@ import { useState, useRef } from 'react';
 import PhaserGame from './components/phaser';
 import PreviewProjects from './components/preview_projects';
 import TechStack from './components/tech_stack';
-import portrait from '/portrait.jpg';
-import dragon from '/dragon.png';
+import portrait from '/portrait-compressed.jpg';
 import screenshot1 from '/social_media.png';
 import screenshot2 from '/newsletter.png';
 import screenshot3 from '/what_makes_you_live.png';
 import screenshot4 from '/map_quiz.png';
 import screenshot5 from '/shop.png';
+import icon from '/dragon-svgrepo-com.svg';
 import logo_gh from '/github-svgrepo-com.svg';
 import logo_li from '/linkedin-svgrepo-com.svg';
 import logo_cv from '/cv-file-interface-symbol-svgrepo-com.svg';
@@ -180,36 +180,49 @@ export default function New() {
         </div>
       )}
       <div className="new_left">
-        <div className="new new_left_game">
-          <div className="start-game-button" onClick={() => setShowGame(true)}>
-            <img src={dragon} alt="Start Game" />
+        <div className="top_left_container">
+          <div className="new new_left_game">
+            <div
+              className="start-game-button"
+              onClick={() => setShowGame(true)}
+            >
+              <img src={icon} alt="Start Game" />
+            </div>
+            <div className="new_left_game_text">
+              <p className="hint_game">
+                Play a game while you’re here! I store the top 5 scores. Click
+                the green icon!
+              </p>
+            </div>
+            {showGame && <PhaserGame onHideGame={() => setShowGame(false)} />}
           </div>
-          <div className="new_left_game_text">
-            <p className="hint_game">
-              Why not play a game while you're here? I keep track of top 5
-              scores. Click the red icon!
+          <div className="new new_left_intro">
+            <h1>Hi, I'm Asset</h1>
+            <p>
+              <span className="new_top">
+                I create end-to-end apps fast and with structured thinking
+              </span>
             </p>
+            <p>
+              <span className="new_top">
+                Fullstack JavaScript developer, fully self-taught,
+                self-motivated, learning and practice-oriented
+              </span>
+            </p>
+            <p>
+              <span className="new_top">
+                Former Senior Associate at a Top 5 Global Law Firm
+              </span>
+            </p>
+            <div className="scroll_to_projects_wrapper">
+              <button
+                className="scroll_to_projects_btn"
+                onClick={scrollToProjects}
+              >
+                ↓ View Portfolio Projects ↓
+              </button>
+            </div>
           </div>
-          {showGame && <PhaserGame onHideGame={() => setShowGame(false)} />}
-        </div>
-        <div className="new new_left_intro">
-          <h1>Hi, I'm Asset</h1>
-          <p>
-            <span className="new_top">
-              I create end-to-end apps fast and with structured thinking
-            </span>
-          </p>
-          <p>
-            <span className="new_top">
-              Fullstack JavaScript developer, fully self-taught, self-motivated,
-              learning and practice-oriented
-            </span>
-          </p>
-          <p>
-            <span className="new_top">
-              Former Senior Associate at a Top 5 Global Law Firm
-            </span>
-          </p>
         </div>
         <div className="new new_left_main">
           <h2>Main: Node.js Full-Stack Development</h2>
@@ -454,3 +467,10 @@ export default function New() {
 // [v] same for cv
 // [v] hook up new cvs
 // [v] same for linkedin
+// [v] compress photo for faster loading
+// [v] make game easier, dragon smaller and move faster
+// [v] change icon to green
+// [v] new_left_game smaller, no BG
+// [v] opacity of the projects screenshots for text readability
+// [x] photo to EQUAL height of the hi, I'm Asset
+// [v] button to scroll to projects in hi, I'm Asset
