@@ -38,6 +38,7 @@ export default function PreviewProjects({
   projects,
   shownProjectSetIndex,
   setShownProjectSetIndex,
+  isPopup,
 }) {
   const [projectsShown, setProjectsShown] = useState(
     projects.slice(shownProjectSetIndex * 3, shownProjectSetIndex * 3 + 3)
@@ -93,17 +94,41 @@ export default function PreviewProjects({
   };
 
   return (
-    <div className="preview_projects_content">
-      <div className="preview_projects_buttons">
+    <div
+      className={
+        isPopup
+          ? 'preview_projects_content pp_content'
+          : 'preview_projects_content'
+      }
+    >
+      <div
+        className={
+          isPopup
+            ? 'preview_projects_buttons pp_buttons'
+            : 'preview_projects_buttons'
+        }
+      >
         <button onClick={() => handleArrowButton('left')}>{'<<'}</button>
         <button onClick={() => handleArrowButton('right')}>{'>>'}</button>
       </div>
-      <div className="preview_projects_track">
-        <div className="preview_projects_cards">
+      <div
+        className={
+          isPopup ? 'preview_projects_track pp_track' : 'preview_projects_track'
+        }
+      >
+        <div
+          className={
+            isPopup
+              ? 'preview_projects_cards pp_cards'
+              : 'preview_projects_cards'
+          }
+        >
           {leftProjects.map((project, index) => (
             <div
               key={index}
-              className="preview_project"
+              className={
+                isPopup ? 'preview_project pp_project' : 'preview_project'
+              }
               style={{ backgroundImage: `url(${project.image})` }}
             >
               <a
@@ -130,11 +155,19 @@ export default function PreviewProjects({
             </div>
           ))}
         </div>
-        <div className="preview_projects_cards">
+        <div
+          className={
+            isPopup
+              ? 'preview_projects_cards pp_cards'
+              : 'preview_projects_cards'
+          }
+        >
           {projectsShown.map((project, index) => (
             <div
               key={index}
-              className="preview_project"
+              className={
+                isPopup ? 'preview_project pp_project' : 'preview_project'
+              }
               style={{ backgroundImage: `url(${project.image})` }}
             >
               <a
@@ -157,11 +190,19 @@ export default function PreviewProjects({
             </div>
           ))}
         </div>
-        <div className="preview_projects_cards">
+        <div
+          className={
+            isPopup
+              ? 'preview_projects_cards pp_cards'
+              : 'preview_projects_cards'
+          }
+        >
           {rightProjects.map((project, index) => (
             <div
               key={index}
-              className="preview_project"
+              className={
+                isPopup ? 'preview_project pp_project' : 'preview_project'
+              }
               style={{ backgroundImage: `url(${project.image})` }}
             >
               <a

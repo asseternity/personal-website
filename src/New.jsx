@@ -185,6 +185,7 @@ export default function New() {
               projects={slides}
               shownProjectSetIndex={shownProjectSetIndex}
               setShownProjectSetIndex={setShownProjectSetIndex}
+              isPopup={true}
             />
           </div>
         </div>
@@ -455,6 +456,7 @@ export default function New() {
             projects={slides}
             shownProjectSetIndex={shownProjectSetIndex}
             setShownProjectSetIndex={setShownProjectSetIndex}
+            isPopup={false}
           />
         </div>
       </div>
@@ -501,3 +503,4 @@ export default function New() {
 // [x] photo to EQUAL height of the hi, I'm Asset
 // [v] button to scroll to projects in hi, I'm Asset
 // [v] change the "view portfolio projects" button to open a popup window
+// [v] fix projects popup mobile height
