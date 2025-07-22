@@ -148,6 +148,7 @@ const slides = [
 export default function New() {
   const [showGame, setShowGame] = useState(false);
   const [showCVFormats, setShowCVFormats] = useState(false);
+  const [showProjectsPopup, setShowProjectsPopup] = useState(false);
   const [shownProjectSetIndex, setShownProjectSetIndex] = useState(1);
   const projectRef = useRef(null);
 
@@ -158,11 +159,36 @@ export default function New() {
     setShownProjectSetIndex(1); // Ensure it shows the first slide (Social Media App)
   };
 
-  const openCVFormats = () => setShowCVFormats(true);
+  const openProjectsPopup = () => {
+    if (!showCVFormats) {
+      setShowProjectsPopup(true);
+    }
+  };
+  const closeProjectsPopup = () => setShowProjectsPopup(false);
+  const openCVFormats = () => {
+    if (!showProjectsPopup) {
+      setShowCVFormats(true);
+    }
+  };
   const closeCVFormats = () => setShowCVFormats(false);
 
   return (
     <div className="new_container">
+      {showProjectsPopup && (
+        <div className="cv_formats_popup">
+          <div className="projects_popup_inner">
+            <h2>Portfolio Projects</h2>
+            <div className="projects_popup_close_div">
+              <button onClick={closeProjectsPopup}>X</button>
+            </div>
+            <PreviewProjects
+              projects={slides}
+              shownProjectSetIndex={shownProjectSetIndex}
+              setShownProjectSetIndex={setShownProjectSetIndex}
+            />
+          </div>
+        </div>
+      )}
       {showCVFormats && (
         <div className="cv_formats_popup">
           <div className="cv_formats_close_div">
@@ -217,7 +243,7 @@ export default function New() {
             <div className="scroll_to_projects_wrapper">
               <button
                 className="scroll_to_projects_btn"
-                onClick={scrollToProjects}
+                onClick={openProjectsPopup}
               >
                 ↓ View Portfolio Projects ↓
               </button>
@@ -474,3 +500,4 @@ export default function New() {
 // [v] opacity of the projects screenshots for text readability
 // [x] photo to EQUAL height of the hi, I'm Asset
 // [v] button to scroll to projects in hi, I'm Asset
+// [v] change the "view portfolio projects" button to open a popup window
