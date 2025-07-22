@@ -246,7 +246,7 @@ export default function New() {
                 className="scroll_to_projects_btn"
                 onClick={openProjectsPopup}
               >
-                ↓ View Portfolio Projects ↓
+                View Portfolio Projects
               </button>
             </div>
           </div>
