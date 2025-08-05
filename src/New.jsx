@@ -9,6 +9,7 @@ import screenshot2 from '/newsletter.png';
 import screenshot3 from '/what_makes_you_live.png';
 import screenshot4 from '/map_quiz.png';
 import screenshot5 from '/shop.png';
+import screenshot6 from '/resume.png';
 import icon from '/dragon-svgrepo-com.svg';
 import logo_gh from '/github-svgrepo-com.svg';
 import logo_li from '/linkedin-svgrepo-com.svg';
@@ -141,6 +142,14 @@ const slides = [
       'Users can browse the home page, products, add them to the cart which calculates the number of products and the total price.',
     image: screenshot5,
     url: 'https://asseternity-shop.netlify.app/',
+    incrementCallback: ShopIncrement,
+  },
+  {
+    title: 'Data Science: Resume Dataset Analysis',
+    subtitle:
+      'I use custom SQL queries, pandas and seaborn, as well as a custom data cleaner module to research career transition trends.',
+    image: screenshot6,
+    url: 'https://www.kaggle.com/code/assetn/resume-dataset-analysis/',
     incrementCallback: ShopIncrement,
   },
 ];
