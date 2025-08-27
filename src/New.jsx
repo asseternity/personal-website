@@ -10,6 +10,7 @@ import screenshot3 from '/what_makes_you_live.png';
 import screenshot4 from '/map_quiz.png';
 import screenshot5 from '/shop.png';
 import screenshot6 from '/resume.png';
+import screenshot7 from '/reviews.png';
 import icon from '/dragon-svgrepo-com.svg';
 import logo_gh from '/github-svgrepo-com.svg';
 import logo_li from '/linkedin-svgrepo-com.svg';
@@ -152,6 +153,13 @@ const slides = [
     url: 'https://www.kaggle.com/code/assetn/resume-dataset-analysis/',
     incrementCallback: ShopIncrement,
   },
+  {
+    title: 'Machine Learning: Predicting Video Game Review Scores',
+    subtitle: 'Full pipeline to scrape, enrich, and analyze 6,600+ video game reviews, trained an XGBoost model with metadata to predict review scores.',
+    image: screenshot7,
+    url: 'https://www.kaggle.com/code/assetn/video-game-review-score-predictor',
+    incrementCallback: ShopIncrement,
+  }
 ];
 
 export default function New() {
