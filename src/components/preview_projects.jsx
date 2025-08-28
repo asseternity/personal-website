@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const style = {
-  color: '#ffba51',
+  color: 'var(--accent)',
   fontWeight: 900,
   padding: '0.2em 0.5em',
   borderRadius: '0.5em',
@@ -18,7 +18,7 @@ const style = {
 };
 
 const style2 = {
-  color: '#ffba51',
+  color: 'var(--accent)',
   fontWeight: 900,
   padding: '0.2em 0.5em',
   borderRadius: '0.5em',

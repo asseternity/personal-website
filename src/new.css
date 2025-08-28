@@ -1,22 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
 
+@font-face {
+  font-family: 'Geist';
+  src: url('/CabinetGrotesk-Variable.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
 :root {
-  --primary-bg: linear-gradient(135deg, #2d1f35 0%, #36213e 100%);
-  --accent: #ffa940;
-  --card-bg: rgba(30, 23, 40, 0.94);
-  --card-bg-glass: rgba(35, 26, 48, 0.93);
-  --border-color: #4c365b;
-  --text-main: #f4f2fc;
-  --text-soft: #b7a8c6;
-  --radius-lg: 1.6rem;
-  --radius: 1rem;
-  --shadow: 0 4px 22px rgba(30, 22, 38, 0.15);
-  --transition: 0.23s cubic-bezier(0.4, 0, 0.2, 1);
+  --primary-bg: linear-gradient(135deg, #f5f5dc 0%, #efe8d0 100%);
+  --accent: #7fa87a;
+  --button: #cbd8c1;
+  --card-bg: rgba(245, 245, 220, 0.95);
+  --card-bg-glass: rgba(239, 232, 208, 0.9);
+  --border-color: #d0c7b0;
+  --text-main: #3e4a38;
+  --text-soft: #819981;
+  --text-heading: #7d937f;
+  --radius-lg: 1.4rem;
+  --radius: 0.8rem;
+  --shadow: 0 4px 24px rgba(62, 74, 56, 0.25);
+  --transition: 0.3s ease-in-out;
 }
 
 body {
   background: var(--primary-bg);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Geist', sans-serif;
   color: var(--text-main);
   font-size: 16px;
   line-height: 1.6;
@@ -63,7 +72,7 @@ body {
 h1,
 h2,
 h3 {
-  color: #ffe8b9;
+  color: var(--text-heading);
   font-weight: 800;
   margin: 0 0 0.7em 0;
 }
@@ -105,15 +114,15 @@ a:hover {
 
 /* HIGHLIGHTS */
 .new_key {
-  background: rgba(255, 169, 64, 0.1);
-  color: var(--accent);
+  background: var(--text-heading);
+  color: var(--card-bg);
   padding: 0.2em 0.5em;
   border-radius: 0.5em;
   font-weight: 700;
 }
 
 .new_top {
-  border-bottom: 2px solid rgba(255, 169, 64, 0.3);
+  border-bottom: 2px solid var(--accent);
   font-weight: 700;
 }
 
@@ -122,7 +131,7 @@ a:hover {
   font-size: 0.96em;
   line-height: 1.7;
   border-left: 4px solid var(--accent);
-  background: rgba(35, 26, 48, 0.85);
+  background: var(--card-bg);
 }
 .new_right_principles p {
   margin: 0;
@@ -130,6 +139,10 @@ a:hover {
 
 /* SPECIAL: ADDITIONAL ACCOMPLISHMENTS INLINE BADGES */
 .new_right_additional_accomplishments ul {
+  margin: 0;
+  padding: 0;
+  padding-left: 0;
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 0.3em;
@@ -137,10 +150,12 @@ a:hover {
   margin: 0.4em 0;
 }
 .new_right_additional_accomplishments li {
+  margin: 0;
+  padding: 0;
   padding: 0.4em 0.7em;
   border-radius: 1.2em;
   font-size: 0.92em;
-  color: #ffe8b9;
+  color: var(--card-bg);
   font-weight: 600;
   margin-bottom: 0.2em;
 }
@@ -162,7 +177,7 @@ a:hover {
   height: 100%;
   width: 100%;
   border-radius: var(--radius-lg);
-  border: 3px solid rgba(255, 168, 64, 0.2);
+  border: 3px solid transparent;
   box-shadow: 0 2px 20px rgba(255, 168, 64, 0.12);
 }
 
@@ -174,6 +189,7 @@ a:hover {
   justify-content: center;
   gap: 1.2em;
   padding: 10px;
+  box-shadow: none;
 }
 .new_right_links:hover {
   box-shadow: none;
@@ -182,13 +198,13 @@ a:hover {
 }
 .new_right_links button {
   background: transparent;
-  border: 2px solid rgba(255, 169, 64, 0.4);
+  border: 2px solid var(--border-color);
   padding: 0.6em;
   border-radius: 50%;
   transition: all 0.25s;
 }
 .new_right_links button:hover {
-  background: rgba(255, 169, 64, 0.15);
+  background: var(--card-bg);
   border-color: var(--accent);
   transform: scale(1.1);
 }
@@ -200,10 +216,11 @@ a:hover {
 /* EMAIL */
 .new_right_email {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 15px;
+  gap: 10px;
+  padding: 10px;
 }
 
 .new_right_email span {
@@ -263,7 +280,7 @@ a:hover {
   text-align: center;
   border-radius: 8px;
   box-sizing: border-box;
-  border: 4px solid #4c365b;
+  border: 2px solid var(--accent);
   transition:
     transform 0.3s ease,
     border-color 0.3s ease;
@@ -273,7 +290,7 @@ a:hover {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6); /* dark semi-transparent overlay */
+  background-color: rgba(0, 0, 0, 0.3); /* dark semi-transparent overlay */
   z-index: 1;
 }
 
@@ -294,11 +311,11 @@ a:hover {
 
 .preview_projects_buttons button {
   background: transparent;
-  border: 2px solid rgba(255, 169, 64, 0.4);
+  border: 2px solid var(--accent);
   padding: 0.6em;
   border-radius: 50%;
   transition: all 0.25s;
-  color: white;
+  color: var(--accent);
 }
 
 .preview_projects_buttons {
@@ -375,6 +392,7 @@ a:hover {
   border: none;
   padding: 0;
   margin-bottom: 10px;
+  box-shadow: none;
 }
 
 .new_left_game:hover {
@@ -384,6 +402,7 @@ a:hover {
 }
 
 .new_left_game_text {
+  color: var(--text-heading);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -395,6 +414,17 @@ a:hover {
 /* EXTRA & EXTRA TEXT */
 .new_left_intro {
   flex-grow: 1;
+}
+
+.new_left_intro h1 {
+  margin: 0;
+}
+
+.new_left_intro_heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .hint_game {
@@ -525,33 +555,27 @@ a:hover {
 }
 
 /* SCROLL DOWN TO PROJECTS */
-.scroll_to_projects_wrapper {
-  display: flex;
-  justify-content: end;
-  margin-top: 1rem;
-}
-
 .scroll_to_projects_btn {
-  background: linear-gradient(135deg, #ffa940, #ff6e40);
+  background: var(--button);
   border: none;
   border-radius: var(--radius-lg);
-  padding: 0.8em 1.5em;
+  padding: 8px 15px;
   font-size: 1.1rem;
-  color: #1f132c;
+  color: var(--text-main);
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 18px rgba(255, 169, 64, 0.3);
+  box-shadow: 0 4px 18px var(--accent);
   transition: all 0.3s ease;
 }
 
 .scroll_to_projects_btn:hover {
-  background: linear-gradient(135deg, #ffb570, #ffa940);
-  box-shadow: 0 6px 24px rgba(255, 169, 64, 0.5);
+  background: var(--accent);
+  box-shadow: 0 6px 24px var(--accent);
   transform: translateY(-2px);
 }
 
 /* RESPONSIVE */
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .projects_popup_inner {
     width: 90%;
   }
@@ -631,12 +655,6 @@ a:hover {
   }
   .preview_subtitle {
     font-size: 12px;
-  }
-  .new_right_email {
-    padding: 10px;
-  }
-  .new_right_email span {
-    font-size: 11px;
   }
   .preview_project {
     height: 600px;

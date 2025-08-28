@@ -155,11 +155,12 @@ const slides = [
   },
   {
     title: 'Machine Learning: Predicting Video Game Review Scores',
-    subtitle: 'Full pipeline to scrape, enrich, and analyze 6,600+ video game reviews, trained an XGBoost model with metadata to predict review scores.',
+    subtitle:
+      'Full pipeline to scrape, enrich, and analyze 6,600+ video game reviews, trained an XGBoost model with metadata to predict review scores.',
     image: screenshot7,
     url: 'https://www.kaggle.com/code/assetn/video-game-review-score-predictor',
     incrementCallback: ShopIncrement,
-  }
+  },
 ];
 
 export default function New() {
@@ -241,7 +242,15 @@ export default function New() {
             {showGame && <PhaserGame onHideGame={() => setShowGame(false)} />}
           </div>
           <div className="new new_left_intro">
-            <h1>Hi, I'm Asset</h1>
+            <div className="new_left_intro_heading">
+              <h1>Hi, I'm Asset</h1>
+              <button
+                className="scroll_to_projects_btn"
+                onClick={openProjectsPopup}
+              >
+                MY WORK
+              </button>
+            </div>
             <p>
               <span className="new_top">
                 I create end-to-end apps fast and with structured thinking
@@ -258,14 +267,6 @@ export default function New() {
                 Former Senior Associate at a Top 5 Global Law Firm
               </span>
             </p>
-            <div className="scroll_to_projects_wrapper">
-              <button
-                className="scroll_to_projects_btn"
-                onClick={openProjectsPopup}
-              >
-                View Portfolio Projects
-              </button>
-            </div>
           </div>
         </div>
         <div className="new new_left_main">
@@ -430,10 +431,7 @@ export default function New() {
             </button>
           </a>
         </div>
-        <div className="new new_right_email">
-          <p>Email me:</p>
-          <span className="new_key">asset_n@proton.me</span>
-        </div>
+        <div className="new new_right_email">asset_n@proton.me</div>
         <div className="new new_right_principles">
           <p>
             Law taught me to navigate{' '}

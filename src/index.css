@@ -170,7 +170,7 @@ body::before {
 .tech_stack_card {
   height: 40px;
   width: 120px;
-  border: 2px solid #2bb0ff;
+  border: 2px solid var(--accent);
   border-radius: 12px;
   display: flex;
   flex-direction: row;
@@ -178,6 +178,8 @@ body::before {
   align-items: center;
   font-size: 11px;
   font-family: 'Coding';
+  background: var(--text-heading);
+  color: var(--card-bg);
 }
 
 .tech_stack_card_left {
