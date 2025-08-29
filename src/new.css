@@ -8,23 +8,33 @@
 }
 
 :root {
-  --primary-bg: linear-gradient(135deg, #f5f5dc 0%, #efe8d0 100%);
-  --accent: #7fa87a;
-  --button: #cbd8c1;
-  --card-bg: rgba(245, 245, 220, 0.95);
-  --card-bg-glass: rgba(239, 232, 208, 0.9);
-  --border-color: #d0c7b0;
-  --text-main: #3e4a38;
-  --text-soft: #819981;
-  --text-heading: #7d937f;
+  --primary-bg: linear-gradient(135deg, #f5f5dc 0%, #ece6d2 100%);
+  
+  /* Text & accents */
+  --accent: #6c8b6c;         /* Muted sage, readable on light bg */
+  --accent2: #3f6d4e;        /* Deeper green for buttons/CTAs */
+  
+  /* Surfaces */
+  --card-bg: rgba(250, 248, 240, 0.96);   /* Lighter, creamy card for strong contrast */
+  --card-bg-glass: rgba(239, 232, 208, 0.9); /* Subtle glass effect, slightly darker */
+  
+  /* Borders & structure */
+  --border-color: #cfc7b2;
+  
+  /* Text colors */
+  --text-main: #2f3b2e;      /* Dark olive for good readability */
+  --text-soft: #708670;      /* Softer muted green */
+  --text-heading: #557355;   /* Mid sage for headers */
+  
+  /* UI tokens */
   --radius-lg: 1.4rem;
   --radius: 0.8rem;
-  --shadow: 0 4px 24px rgba(62, 74, 56, 0.25);
+  --shadow: 0 4px 24px rgba(47, 59, 46, 0.2);
   --transition: 0.3s ease-in-out;
 }
 
 body {
-  background: var(--primary-bg);
+  background: linear-gradient(135deg, #2f2f2f 0%, #3a3a3a 100%);
   font-family: 'Geist', sans-serif;
   color: var(--text-main);
   font-size: 16px;
@@ -64,7 +74,7 @@ body {
 }
 
 .new:hover {
-  box-shadow: 0 6px 28px rgba(255, 169, 64, 0.25);
+  box-shadow: 0 6px 28px var(--card-bg-glass);
   border-color: var(--accent);
 }
 
@@ -187,7 +197,7 @@ a:hover {
   border: transparent;
   display: flex;
   justify-content: center;
-  gap: 1.2em;
+  gap: 1.0em;
   padding: 10px;
   box-shadow: none;
 }
@@ -204,7 +214,7 @@ a:hover {
   transition: all 0.25s;
 }
 .new_right_links button:hover {
-  background: var(--card-bg);
+  background: var(--accent2);
   border-color: var(--accent);
   transform: scale(1.1);
 }
@@ -220,17 +230,10 @@ a:hover {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding: 10px;
-}
-
-.new_right_email span {
+  padding: 6px;
   color: var(--accent);
   font-weight: 700;
-}
-
-.new_right_email p {
-  margin: 0;
-  padding: 0;
+  font-size: 22px;
 }
 
 /* PREVIEW PROJECTS */
@@ -347,18 +350,7 @@ a:hover {
   width: 50px;
   height: 50px;
   min-width: 50px;
-  background: radial-gradient(
-    circle at center,
-    rgba(0, 255, 0, 0.7) 0%,
-    rgba(0, 255, 0, 0.4) 50%,
-    transparent 70%
-  );
-  border: 2px solid green;
   border-radius: 12px;
-  box-shadow:
-    0 0 10px green,
-    0 0 20px green,
-    0 0 30px green;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -367,14 +359,25 @@ a:hover {
   transition:
     transform 0.2s,
     box-shadow 0.3s;
+  background: radial-gradient(
+    circle at center,
+    rgba(181, 199, 235, 0.9) 0%,   /* Misty Blue center */
+    rgba(181, 199, 235, 0.7) 60%, /* fade slightly outward */
+    rgba(181, 199, 235, 1) 100%   /* solid outer edge */
+  );
+  border: 2px solid #94AEE3; /* a complementary mid-muted blue */
+  box-shadow:
+    0 0 8px #94AEE3,
+    0 0 16px #A3D3D9,
+    0 0 24px #D1DFF6;
 }
 
 .start-game-button:hover {
   transform: scale(1.1);
   box-shadow:
-    0 0 20px green,
-    0 0 40px green,
-    0 0 60px green;
+    0 0 16px #94AEE3,
+    0 0 32px #A3D3D9,
+    0 0 48px #D1DFF6;
 }
 
 .start-game-button img {
@@ -406,7 +409,8 @@ a:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  padding-left: 10px;
   flex-grow: 1;
   margin-left: 20px;
 }
@@ -420,6 +424,11 @@ a:hover {
   margin: 0;
 }
 
+.new_left_intro p {
+  margin-top: 16px;
+  margin: 0;
+}
+
 .new_left_intro_heading {
   display: flex;
   flex-direction: row;
@@ -428,6 +437,7 @@ a:hover {
 }
 
 .hint_game {
+  color: var(--card-bg);
   font-size: 16px;
   margin: 0;
 }
@@ -556,12 +566,12 @@ a:hover {
 
 /* SCROLL DOWN TO PROJECTS */
 .scroll_to_projects_btn {
-  background: var(--button);
+  background: var(--accent2);
   border: none;
   border-radius: var(--radius-lg);
   padding: 8px 15px;
   font-size: 1.1rem;
-  color: var(--text-main);
+  color: white;
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 4px 18px var(--accent);
@@ -574,8 +584,16 @@ a:hover {
   transform: translateY(-2px);
 }
 
+.new_right_additional_accomplishments ul.aa_ul {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
+  .new_right_email {
+    font-size: 16px;
+    }
   .projects_popup_inner {
     width: 90%;
   }
@@ -630,7 +648,7 @@ a:hover {
     min-width: 160px;
   }
   .new_right {
-    min-width: 160px;
+    min-width: 130px;
   }
   .new {
     padding: 1.3rem;
@@ -661,5 +679,42 @@ a:hover {
   }
   .connect_details {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .new_right_links {
+    max-width: 120px;
+    gap: 0;
+    padding: 0;
+  }
+  .new_right_links a, img {
+    padding: 0;
+    margin: 0;
+  }
+  .new_right_links img {
+    width: 15px;
+    height: 15px;
+  }
+  .new_right_email {
+    font-size: 13px;
+  }
+  .new_left_intro_heading {
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+  }
+  .new_left_intro_heading button {
+    padding: 8px;
+    margin-bottom: 20px;
+  }
+  .new_left_intro p {
+    padding-top: 10px;
+  }
+  .new {
+    padding: 1.0rem;
+  }
+  .new_right_pic {
+  padding: 0;
   }
 }

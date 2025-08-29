@@ -226,7 +226,7 @@ export default function New() {
       )}
       <div className="new_left">
         <div className="top_left_container">
-          <div className="new new_left_game">
+          <div className="new_left_game">
             <div
               className="start-game-button"
               onClick={() => setShowGame(true)}
@@ -236,7 +236,7 @@ export default function New() {
             <div className="new_left_game_text">
               <p className="hint_game">
                 Play a game while you’re here! I store the top 5 scores. Click
-                the green icon!
+                the icon!
               </p>
             </div>
             {showGame && <PhaserGame onHideGame={() => setShowGame(false)} />}
@@ -285,7 +285,7 @@ export default function New() {
               interactions).
             </li>
             <li>
-              <span className="new_key">Authentication & Security:</span> Built
+              <span className="new_key">Auth & Security:</span> Built
               secure authentication workflows leveraging JWT, Passport.js, and
               bcrypt.
             </li>
@@ -447,12 +447,15 @@ export default function New() {
         </div>
         <div className="new new_right_additional_accomplishments">
           <h2>Additional accomplishments</h2>
-          <ul>
+          <ul className='aa_ul'>
             <li className="new_key">
-              Game developer with Articy, Unity, Blender
+              Game developer with Articy, Unity, Godot, Blender
             </li>
             <li className="new_key">
               Creator, self-motivated, organized thinker
+            </li>
+            <li className="new_key">
+              IELTS 8.5 (2025)
             </li>
             <li className="new_key">
               Won a historic land dispute litigation campaign
